@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>intergalacticMarket</defName> <!--Name of Def -->
+		<label>Intergalactic Market</label> <!--Lable of Def -->
+		<desc>From here, ships fly in and deposit their goods and replace their cargo before returning home. +40 tithe modifier, +15% basetax.</desc> <!-- Description of trait -->
+		<taxBaseRandomModifier>40</taxBaseRandomModifier>
+		<taxBasePercentage>15</taxBasePercentage>
+	</FactionColonies.FCTraitEffectDef>
+	
+	<FactionColonies.FCTraitEffectDef>
+		<defName>glitterworldResearchFacility</defName> <!--Name of Def -->
+		<label>Glitterworld Research Facility</label> <!--Lable of Def -->
+		<desc>From this building, researchers equipped with the highest-grade tools search for the answers of the universe. +50% Modifier to research production.</desc> <!-- Description of trait -->
+		<productionMultiplierResearch>1.5</productionMultiplierResearch>
+	</FactionColonies.FCTraitEffectDef>
+	
+	<FactionColonies.FCTraitEffectDef>
+		<defName>automatedDefenseSystems</defName> <!--Name of Def -->
+		<label>Automated Defense Systems</label> <!--Lable of Def -->
+		<desc>Androids roam the streets, keeping the colonists safe from external and internal harm. +2 military level.</desc> <!-- Description of trait -->
+		<militaryBaseLevel>2</militaryBaseLevel>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>FoodReconstruction</defName>
+		<!--Name of Def -->
+		<label>Food Reconstruction</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<productionMultiplierFood>1.5</productionMultiplierFood>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>MechSalvage</defName>
+		<!--Name of Def -->
+		<label>Mechanoid Salvage Shop</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<productionBaseWeapons>0.5</productionBaseWeapons>
+		<militaryMultiplierCombatEfficiency>1.05</militaryMultiplierCombatEfficiency>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>ClothingPrinters</defName>
+		<!--Name of Def -->
+		<label>Clothing Printers</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<productionMultiplierApparel>1.5</productionMultiplierApparel>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>SyntheticWoodFactory</defName>
+		<!--Name of Def -->
+		<label>Synthetic Wood Factory</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<productionBaseLogging>0.5</productionBaseLogging>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>AsteroidMagnet</defName>
+		<!--Name of Def -->
+		<label>Asteroid Magnet</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<productionMultiplierMining>1.2</productionMultiplierMining>
+		<happinessLostBase>0.5</happinessLostBase>
+		<unrestGainedBase>0.5</unrestGainedBase>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>WorkerBots</defName>
+		<!--Name of Def -->
+		<label>Worker Bots</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<workerBaseMax>10</workerBaseMax>
+		<workerBaseOverMax>7</workerBaseOverMax>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>SubliminalMessageCenter</defName>
+		<!--Name of Def -->
+		<label>Subliminal Message Center</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<loyaltyGainedBase>0.5</loyaltyGainedBase>
+		<unrestLostBase>0.5</unrestLostBase>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>CloningLab</defName>
+		<!--Name of Def -->
+		<label>Cloning Lab</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<productionMultiplierAnimals>1.2</productionMultiplierAnimals>
+		<productionBaseResearch>.25</productionBaseResearch>
+	</FactionColonies.FCTraitEffectDef>
+	
+</Defs>

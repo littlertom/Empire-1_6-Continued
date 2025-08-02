@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<!-- PatchNoteTypes: Undefined, Hotfix, Patch, Minor, Major -->
+	<FactionColonies.PatchNoteDef Name="EmpirePatchBase" Abstract="True">
+		<modId>saakra.empire</modId>
+
+		<links>
+			<li>https://discord.gg/f3zFQqA</li>
+			<li>https://steamcommunity.com/sharedfiles/filedetails/?id=2571437524</li>
+			<li>https://rimworld-empire-mod.fandom.com/wiki/Rimworld-_Empire_Mod_Wiki</li>
+		</links>
+
+		<linkButtonImagePaths>
+			<li>GUI/Buttons/discordlogo</li>
+			<li>GUI/Buttons/wikilogo</li>
+			<li>GUI/Buttons/nguilogo</li>
+		</linkButtonImagePaths>
+
+		<linkButtonToolTips>
+			<li>Join the Empire discord!</li>
+			<li>Check out the Empire Wiki!</li>
+			<li>The layout of this GUI was made using NesGUI, a tool for modders that helps with creating RimWorld GUI! Click to learn more.</li>
+		</linkButtonToolTips>
+
+		<authorStringBase>All of the code for this update has been developed by {0}.</authorStringBase>
+		<introStringBase>A new update for {0} has been released: v.{1}. The following changes have occurred:</introStringBase>
+	</FactionColonies.PatchNoteDef>
+
+	<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
+		<defName>0_42_2</defName>
+		<label>Bug Fixes and Settlements Defense Rebalance</label>
+		<description>Fixed some bugs related to Traits and rebalance the Automatic Defense system a bit to be more fair, would appreciate feedback on it</description>
+
+		<major>0</major>
+		<minor>42</minor>
+		<patch>2</patch>
+
+		<releaseDay>27</releaseDay>
+		<releaseMonth>8</releaseMonth>
+		<releaseYear>2023</releaseYear>
+
+		<patchNoteType>Patch</patchNoteType>
+
+		<patchNoteLines>
+			<li>We have a new member on the team! @AutumnLight has contributed to the mod first by fixing and optimizing the Trait Selection Screen!</li>
+		</patchNoteLines>
+
+		<additionalNotes>
+			<li>Code written by AutumnLight and TheSeaMoon</li>
+			<li>I have taken it upon myself to update this mod - TheSeaMoon</li>
+		</additionalNotes>
+
+		<authors>
+			<li>TheSeaMoon</li>
+		</authors>
+	</FactionColonies.PatchNoteDef>
+
+	<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
+		<defName>0_42_1</defName>
+		<label>Fixed Xenotype generation</label>
+		<description>Xenotype Generation is working now!</description>
+
+		<major>0</major>
+		<minor>42</minor>
+		<patch>1</patch>
+
+		<releaseDay>19</releaseDay>
+		<releaseMonth>8</releaseMonth>
+		<releaseYear>2023</releaseYear>
+
+		<patchNoteType>Patch</patchNoteType>
+
+		<patchNoteLines>
+			<li>With the help of the Talented pinedog, we have managed to fix the Xenotype Generation, so now Xenotypes Unit works Perfectly!</li>
+		</patchNoteLines>
+
+		<additionalNotes>
+			<li>Code written mostly by pinedog with some small tweaks of my own</li>
+			<li>I have taken it upon myself to update this mod - TheSeaMoon</li>
+		</additionalNotes>
+
+		<authors>
+			<li>TheSeaMoon</li>
+		</authors>
+	</FactionColonies.PatchNoteDef>
+	
+	<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
+		<defName>0_42_0</defName>
+		<label>Integrated Additional Building Addon</label>
+		<description>I integrated the Empire - Additional Buildings mod in the main version of Empire</description>
+
+		<major>0</major>
+		<minor>42</minor>
+		<patch>0</patch>
+
+		<releaseDay>14</releaseDay>
+		<releaseMonth>8</releaseMonth>
+		<releaseYear>2023</releaseYear>
+
+		<patchNoteType>Patch</patchNoteType>
+
+		<patchNoteLines>
+			<li>Buildings</li>
+		</patchNoteLines>
+
+		<additionalNotes>
+			<li>I</li>
+			<li>I have taken it upon myself to update this mod - TheSeaMoon</li>
+		</additionalNotes>
+
+		<authors>
+			<li>TheSeaMoon</li>
+		</authors>
+	</FactionColonies.PatchNoteDef>
+	
+	<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
+		<defName>0_41_0</defName>
+		<label>Added Xenotype Selection</label>
+		<description>I added a way to select Xenotype when creating a Military Unit, currently does not cost anything to change it.</description>
+
+		<major>0</major>
+		<minor>41</minor>
+		<patch>0</patch>
+
+		<releaseDay>13</releaseDay>
+		<releaseMonth>8</releaseMonth>
+		<releaseYear>2023</releaseYear>
+
+		<patchNoteType>Patch</patchNoteType>
+
+		<patchNoteLines>
+			<li>Xenotype</li>
+		</patchNoteLines>
+
+		<additionalNotes>
+			<li>I</li>
+			<li>I have taken it upon myself to update this mod - TheSeaMoon</li>
+		</additionalNotes>
+
+		<authors>
+			<li>TheSeaMoon</li>
+		</authors>
+	</FactionColonies.PatchNoteDef>
+	
+	<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
+		<defName>0_40_09</defName>
+		<label>Added a new Trait</label>
+		<description>I added a new Faction Trait, Slaver. It's more of a proof of Concept than anything</description>
+
+		<major>0</major>
+		<minor>40</minor>
+		<patch>9</patch>
+
+		<releaseDay>11</releaseDay>
+		<releaseMonth>8</releaseMonth>
+		<releaseYear>2023</releaseYear>
+
+		<patchNoteType>Patch</patchNoteType>
+
+		<patchNoteLines>
+			<li>New Trait</li>
+		</patchNoteLines>
+
+		<additionalNotes>
+			<li>I</li>
+			<li>I have taken it upon myself to update this mod - TheSeaMoon</li>
+		</additionalNotes>
+
+		<authors>
+			<li>TheSeaMoon</li>
+		</authors>
+	</FactionColonies.PatchNoteDef>
+	
+	<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
+		<defName>0_40_08</defName>
+		<label>Rebalanced Biomes</label>
+		<description>Biomes were Rebalanced in this Update, I have also added a few more buildings</description>
+
+		<major>0</major>
+		<minor>40</minor>
+		<patch>8</patch>
+
+		<releaseDay>10</releaseDay>
+		<releaseMonth>8</releaseMonth>
+		<releaseYear>2023</releaseYear>
+
+		<patchNoteType>Patch</patchNoteType>
+
+		<patchNoteLines>
+			<li>Rebalanced Biomes</li>
+		</patchNoteLines>
+
+		<additionalNotes>
+			<li>I</li>
+			<li>I have taken it upon myself to update this mod - TheSeaMoon</li>
+		</additionalNotes>
+
+		<authors>
+			<li>TheSeaMoon</li>
+		</authors>
+	</FactionColonies.PatchNoteDef>
+
+	<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
+		<defName>0_40_07</defName>
+		<label>Fixed Trait Newsletter</label>
+		<description>Fixed the Trait Newletter Appearing on load even though the trait were chosen</description>
+
+		<major>0</major>
+		<minor>40</minor>
+		<patch>7</patch>
+
+		<releaseDay>09</releaseDay>
+		<releaseMonth>8</releaseMonth>
+		<releaseYear>2023</releaseYear>
+
+		<patchNoteType>Patch</patchNoteType>
+
+		<patchNoteLines>
+			<li>Fixed Trait Newsletter</li>
+		</patchNoteLines>
+
+		<additionalNotes>
+			<li>I</li>
+			<li>I have taken it upon myself to update this mod - TheSeaMoon</li>
+		</additionalNotes>
+
+		<authors>
+			<li>TheSeaMoon</li>
+		</authors>
+	</FactionColonies.PatchNoteDef>
+	
+		<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
+	<defName>0_40_06</defName>
+	<label>Fixed Building</label>
+	<description>Fixed the Fur Hunter Camp building not working</description>
+
+	<major>0</major>
+	<minor>40</minor>
+	<patch>6</patch>
+
+	<releaseDay>09</releaseDay>
+	<releaseMonth>8</releaseMonth>
+	<releaseYear>2023</releaseYear>
+
+	<patchNoteType>Patch</patchNoteType>
+
+	<patchNoteLines>
+		<li>Fixed Building</li>
+	</patchNoteLines>
+
+	<additionalNotes>
+		<li>The Fur Hunter Camp building was not working because I forgot to set some stuff</li>
+		<li>I have taken it upon myself to update this mod - TheSeaMoon</li>
+	</additionalNotes>
+
+	<authors>
+		<li>TheSeaMoon</li>
+	</authors>
+	</FactionColonies.PatchNoteDef>
+
+	
+	<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
+	<defName>0_40_05</defName>
+	<label>Added Buildings</label>
+	<description>Added 2 new buildings</description>
+
+	<major>0</major>
+	<minor>40</minor>
+	<patch>5</patch>
+
+	<releaseDay>09</releaseDay>
+	<releaseMonth>8</releaseMonth>
+	<releaseYear>2023</releaseYear>
+
+	<patchNoteType>Patch</patchNoteType>
+
+	<patchNoteLines>
+		<li>Added 2 new Buildings</li>
+	</patchNoteLines>
+
+	<additionalNotes>
+		<li>I have added 2 new building for early era</li>
+		<li>I have taken it upon myself to update this mod</li>
+	</additionalNotes>
+
+	<authors>
+		<li>TheSeaMoon</li>
+		</authors>
+	</FactionColonies.PatchNoteDef>
+	
+</Defs>

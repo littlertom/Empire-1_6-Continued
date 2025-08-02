@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<FactionColonies.BuildingFCDef>
+		<defName>intergalacticMarket</defName> <!--Name of Def -->
+		<label>Intergalactic Market</label> <!--Lable of Def -->
+		<desc>From here, ships fly in and deposit their goods and replace their cargo before returning home. +40 tithe modifier, +15% basetax.</desc> <!-- Description of trait -->
+		<cost>4000</cost>
+		<techLevel>Spacer</techLevel>
+		<constructionDuration>300000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>intergalacticMarket</li>
+		</traits>
+		<iconPath>GUI/Buildings/IntergalacticMarket</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>glitterworldResearchFacility</defName> <!--Name of Def -->
+		<label>Glitterworld Research Facility</label> <!--Lable of Def -->
+		<desc>From this building, researchers equipped with the highest-grade tools search for the answers of the universe. +50% Modifier to research production.</desc> <!-- Description of trait -->
+		<cost>4000</cost>
+		<techLevel>Spacer</techLevel>
+		<constructionDuration>300000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>glitterworldResearchFacility</li>
+		</traits>
+		<upkeep>400</upkeep>
+		<iconPath>GUI/Buildings/GlitterworldResearchFacility</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>automatedDefenseSystems</defName> <!--Name of Def -->
+		<label>Automated Defense Systems</label> <!--Lable of Def -->
+		<desc>Androids roam the streets, keeping the colonists safe from external and internal harm. +2 military level. 400 Silver per tax period upkeep.</desc> <!-- Description of trait -->
+		<cost>4000</cost>
+		<techLevel>Spacer</techLevel>
+		<constructionDuration>300000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>automatedDefenseSystems</li>
+		</traits>
+		<upkeep>400</upkeep>
+		<iconPath>GUI/Buildings/AutomatedDefenseSystems</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>FoodReconstruction</defName>
+		<!--Name of Def -->
+		<label>Food Reconstruction</label>
+		<!--Lable of Def -->
+		<desc>Nobody likes nutrient paste, but with a little flavoring and cosmetic tweaks, it can look and taste like whatever you want it to! +50% food production. 400 silver per tax period upkeep.</desc>
+		<!-- Description of trait -->
+		<cost>4000</cost>
+		<techLevel>Spacer</techLevel>
+		<constructionDuration>300000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>FoodReconstruction</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>400</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/TastyPaste</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>MechSalvage</defName>
+		<!--Name of Def -->
+		<label>Mechanoid Salvage Shop</label>
+		<!--Lable of Def -->
+		<desc>With the right tools, you can do more than shred dead mechanoids, you can salvage their tech to use against them. +.5 base weapons production. +5% military conbat efficiency.</desc>
+		<!-- Description of trait -->
+		<cost>4000</cost>
+		<techLevel>Spacer</techLevel>
+		<constructionDuration>300000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>MechSalvage</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>0</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/MechSalvage</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>ClothingPrinters</defName>
+		<!--Name of Def -->
+		<label>Clothing Printers</label>
+		<!--Lable of Def -->
+		<desc>Remove the human element altogether! Dump raw materials in and watch as each article of clothing is printed as a single, seamless piece! +50% apparel production.</desc>
+		<!-- Description of trait -->
+		<cost>4000</cost>
+		<techLevel>Spacer</techLevel>
+		<constructionDuration>300000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>ClothingPrinters</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>0</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/Printer</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>SyntheticWoodFactory</defName>
+		<!--Name of Def -->
+		<label>Synthetic Wood Factory</label>
+		<!--Lable of Def -->
+		<desc>It's new! It's space-age! It's just as good as the real thing and it's definitely not vinyl, we swear! +.5 base logging production.</desc>
+		<!-- Description of trait -->
+		<cost>4000</cost>
+		<techLevel>Spacer</techLevel>
+		<constructionDuration>300000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>SyntheticWoodFactory</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>0</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/Vinyl</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>AsteroidMagnet</defName>
+		<!--Name of Def -->
+		<label>Asteroid Magnet</label>
+		<!--Lable of Def -->
+		<desc>People may not like it, but it's hard to deny the amount of resources gathered when you just pull the metals you want out of the sky. +20% mining production. -.5 happiness per day. +.5 unrest per day. </desc>
+		<!-- Description of trait -->
+		<cost>4000</cost>
+		<techLevel>Spacer</techLevel>
+		<constructionDuration>300000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>AsteroidMagnet</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>0</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/Magnet</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>WorkerBots</defName>
+		<!--Name of Def -->
+		<label>Worker Bots</label>
+		<!--Lable of Def -->
+		<desc>Put robots to work doing the more mundane tasks around the colony so the people can be put to work elsewhere. +10 max workers. +7 overmax workers. 400 silver per tax period upkeep. </desc>
+		<!-- Description of trait -->
+		<cost>4000</cost>
+		<techLevel>Spacer</techLevel>
+		<constructionDuration>300000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>WorkerBots</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>400</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/WorkerBots</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>SubliminalMessageCenter</defName>
+		<!--Name of Def -->
+		<label>Subliminal Message Center</label>
+		<!--Lable of Def -->
+		<desc>Weave subliminal messaging into the settlement's local broadcasts. +.5 loyalty per day. -.5 unrest per day. 400 silver per tax period upkeep. </desc>
+		<!-- Description of trait -->
+		<cost>4000</cost>
+		<techLevel>Spacer</techLevel>
+		<constructionDuration>300000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>SubliminalMessageCenter</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>400</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/TheyLive</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>CloningLab</defName>
+		<!--Name of Def -->
+		<label>Cloning Lab</label>
+		<!--Lable of Def -->
+		<desc>Why breed or capture animals when you can just grow them in vats? +.5 base animal production. +.25 base research. 400 silver per tax period upkeep. </desc>
+		<!-- Description of trait -->
+		<cost>4000</cost>
+		<techLevel>Spacer</techLevel>
+		<constructionDuration>300000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>CloningLab</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>400</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/CloningLab</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+</Defs>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>slavePlantation</defName> <!--Name of Def -->
+		<label>Slave Plantation</label> <!--Lable of Def -->
+		<desc>Slaves work the fields here. +20% food production.</desc> <!-- Description of trait -->
+		<cost>500</cost>
+		<techLevel>Medieval</techLevel>
+		<constructionDuration>60000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>slavePlantation</li>
+		</traits>
+		<iconPath>GUI/Buildings/SlavePlantation</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>adventurersGuild</defName> <!--Name of Def -->
+		<label>Adventurer's Guild</label> <!--Lable of Def -->
+		<desc>A place for traveling adventurers to meet up and spend a night. -15% production to food, weapons, and apparel. +5% basetax. +1 military level. 250 Silver per tax period upkeep.</desc> <!-- Description of trait -->
+		<cost>500</cost>
+		<techLevel>Medieval</techLevel>
+		<constructionDuration>60000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>adventurersGuild</li>
+		</traits>
+		<upkeep>250</upkeep>
+		<iconPath>GUI/Buildings/AdventurersGuild</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>publicMarket</defName> <!--Name of Def -->
+		<label>Public Market</label> <!--Lable of Def -->
+		<desc>A public market to exchange goods. +15 tithe modifer.</desc> <!-- Description of trait -->
+		<cost>500</cost>
+		<techLevel>Medieval</techLevel>
+		<constructionDuration>60000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>publicMarket</li>
+		</traits>
+		<iconPath>GUI/Buildings/PublicMarket</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>jailhouse</defName> <!--Name of Def -->
+		<label>Jailhouse</label> <!--Lable of Def -->
+		<desc>A place to store criminal scum. -25% unrest gain, -5% tax.</desc> <!-- Description of trait -->
+		<cost>500</cost>
+		<techLevel>Medieval</techLevel>
+		<constructionDuration>60000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>jailhouse</li>
+		</traits>
+		<iconPath>GUI/Buildings/JailHouse</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>wildernessGuild</defName> <!--Name of Def -->
+		<label>Wilderness Guild</label> <!--Lable of Def -->
+		<desc>A guild dedicated to taming the wilderness. +25% animal production.</desc> <!-- Description of trait -->
+		<cost>500</cost>
+		<techLevel>Medieval</techLevel>
+		<constructionDuration>60000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>wildernessGuild</li>
+		</traits>
+		<iconPath>GUI/Buildings/WildernessGuild</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>apparelSweatshop</defName> <!--Name of Def -->
+		<label>Apparel Sweatshop</label> <!--Lable of Def -->
+		<desc>A place to work slaves and colonists alike! +.5 apparel production.</desc> <!-- Description of trait -->
+		<cost>500</cost>
+		<techLevel>Medieval</techLevel>
+		<constructionDuration>60000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>apparelSweatshop</li>
+		</traits>
+		<iconPath>GUI/Buildings/ApparelSweatshop</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>loggingCamp</defName> <!--Name of Def -->
+		<label>Logging Camp</label> <!--Lable of Def -->
+		<desc>A camp dedicated to the logging industry. Includes a lumber mill and everything! +.5 logging production.</desc> <!-- Description of trait -->
+		<cost>500</cost>
+		<techLevel>Medieval</techLevel>
+		<constructionDuration>60000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>loggingCamp</li>
+		</traits>
+		<iconPath>GUI/Buildings/LoggingCamp</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>RedlightDistrict</defName>
+		<!--Name of Def -->
+		<label>Redlight District</label>
+		<!--Lable of Def -->
+		<desc>A place for Merchant and common people to spend a night with questionable people. +.25 Hapiness and +5% base tax</desc>
+		<!-- Description of trait -->
+		<cost>500</cost>
+		<techLevel>Medieval</techLevel>
+		<constructionDuration>30000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>RedlightDistrict</li>
+		</traits>
+		<upkeep>0</upkeep>
+		<iconPath>GUI/Buildings/AdventurersGuild</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>Smithy</defName>
+		<!--Name of Def -->
+		<label>Smithy</label>
+		<!--Lable of Def -->
+		<desc>A sturdy forge and sturdier anvil. Perfect for shaping metal into weapons and tools alike.  +.5 base weapons production. -5% mining production.</desc>
+		<!-- Description of trait -->
+		<cost>500</cost>
+		<techLevel>Medieval</techLevel>
+		<constructionDuration>60000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>Smithy</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>0</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/Smithy</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>UndergroundMine</defName>
+		<!--Name of Def -->
+		<label>Subterranean Mine</label>
+		<!--Lable of Def -->
+		<desc>Dig down into the planet's surface in search of those really valuable materials. Don't forget to build supports! +.5 base mining production. -5% logging production.</desc>
+		<!-- Description of trait -->
+		<cost>500</cost>
+		<techLevel>Medieval</techLevel>
+		<constructionDuration>60000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>UndergroundMine</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>0</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/UndergroundMine</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>Mills</defName>
+		<!--Name of Def -->
+		<label>Mills</label>
+		<!--Lable of Def -->
+		<desc>Mills! Wind or water, these are useful for a number of things! +.25 base power production. +5% food, weapons, apparel, and logging production. 300 silver per tax period upkeep.</desc>
+		<!-- Description of trait -->
+		<cost>500</cost>
+		<techLevel>Medieval</techLevel>
+		<constructionDuration>60000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>Mills</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>300</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/Mills</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>ServantHousing</defName>
+		<!--Name of Def -->
+		<label>Servant Housing</label>
+		<!--Lable of Def -->
+		<desc>Servants are a delight to have and more places to house them means you can hire more! +4 max workers. +4 overmax workers. +$5 worker cost. 250 silver per tax period upkeep.</desc>
+		<!-- Description of trait -->
+		<cost>3000</cost>
+		<techLevel>Medieval</techLevel>
+		<constructionDuration>60000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>ServantHousing</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>250</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/Servant</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	
+
+</Defs>

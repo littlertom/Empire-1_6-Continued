@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>researchLabs</defName> <!--Name of Def -->
+		<label>Research Labs</label> <!--Lable of Def -->
+		<desc>Scienctists spend their days researching here. +.5 base research production.</desc> <!-- Description of trait -->
+		<cost>1000</cost>
+		<techLevel>Industrial</techLevel>
+		<constructionDuration>120000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>researchLabs</li>
+		</traits>
+		<upkeep>150</upkeep>
+		<iconPath>GUI/Buildings/ResearchLab</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>indoorHydroponics</defName> <!--Name of Def -->
+		<label>Indoor Hydroponics</label> <!--Lable of Def -->
+		<desc>Food is produced indoors, protecting it from the harshes from the world. +.5 base food production.</desc> <!-- Description of trait -->
+		<cost>1000</cost>
+		<techLevel>Industrial</techLevel>
+		<constructionDuration>120000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>indoorHydroponics</li>
+		</traits>
+		<iconPath>GUI/Buildings/IndoorHydroponics</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>firearmsFactory</defName> <!--Name of Def -->
+		<label>Firearms Factory</label> <!--Lable of Def -->
+		<desc>A factory that produces mass quantities of firearms. +.5 base weapon production.</desc> <!-- Description of trait -->
+		<cost>1000</cost>
+		<techLevel>Industrial</techLevel>
+		<constructionDuration>120000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>firearmsFactory</li>
+		</traits>
+		<iconPath>GUI/Buildings/FirearmsFactory</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>rimazonWarehouse</defName> <!--Name of Def -->
+		<label>Rimazon Warehouse</label> <!--Lable of Def -->
+		<desc>A warehouse stocked full of goods marked to be shipped. +20 tithe modifier, +5% base tax.</desc> <!-- Description of trait -->
+		<cost>1000</cost>
+		<techLevel>Industrial</techLevel>
+		<constructionDuration>120000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>rimazonWarehouse</li>
+		</traits>
+		<iconPath>GUI/Buildings/RimazonWarehouse</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>inhouseMercCompany</defName> <!--Name of Def -->
+		<label>In-House Merc Company</label> <!--Lable of Def -->
+		<desc>Barracks for an in-house mercenary company. They will provide security for the colony. +1 military level, -10% tax. 200 Silver per tax period upkeep.</desc> <!-- Description of trait -->
+		<cost>1000</cost>
+		<techLevel>Industrial</techLevel>
+		<constructionDuration>120000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>inhouseMercCompany</li>
+		</traits>
+		<upkeep>200</upkeep>
+		<iconPath>GUI/Buildings/InHouseMercCompany</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>adultEntertainmentCentre</defName> <!--Name of Def -->
+		<label>Adult Entertainment Centre</label> <!--Lable of Def -->
+		<desc>A place for the local people to spend a dime and have a good time. +.5 base happiness a day.</desc> <!-- Description of trait -->
+		<cost>1000</cost>
+		<techLevel>Industrial</techLevel>
+		<constructionDuration>120000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>adultEntertainmentCentre</li>
+		</traits>
+		<iconPath>GUI/Buildings/AdultEntertainmentCentre</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>forcedWorkCamps</defName> <!--Name of Def -->
+		<label>Forced Work Camps</label> <!--Lable of Def -->
+		<desc>Put those prisoners to work and increase your production! +2 max workers, +.5 unrest a day, -25% unrest loss a day.</desc> <!-- Description of trait -->
+		<cost>1000</cost>
+		<techLevel>Industrial</techLevel>
+		<constructionDuration>120000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>forcedWorkCamps</li>
+		</traits>
+		<iconPath>GUI/Buildings/ForcedWorkCamps</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>artilleryOutpost</defName>
+		<label>Artillery Outpost</label>
+		<desc>When this building is built, an artillery strike can be called for a cost in the military menu. +1 Military Level. 300 silver per tax period upkeep.</desc>
+		<cost>2000</cost>
+		<techLevel>Industrial</techLevel>
+		<constructionDuration>120000</constructionDuration>
+		<traits>
+			<li>artilleryOutpost</li>
+		</traits>
+		<upkeep>300</upkeep>
+		<iconPath>GUI/Buildings/ArtilleryOutpost</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>JunkFoodFactory</defName>
+		<!--Name of Def -->
+		<label>Junk Food Factory</label>
+		<!--Lable of Def -->
+		<desc>It's quick, cheap, and unhealthy. The locals will complain about the lack of quality, but they'll be too unhealthy to do anything about it. +25% food production. -.5 base happiness per day. -.5 unrest per day. 400 silver per tax period upkeep.</desc>
+		<!-- Description of trait -->
+		<cost>1000</cost>
+		<techLevel>Industrial</techLevel>
+		<constructionDuration>120000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>JunkFoodFactory</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>400</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/JunkFood</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>TextileFactory</defName>
+		<!--Name of Def -->
+		<label>Textile Factory</label>
+		<!--Lable of Def -->
+		<desc>Making clothes is so much easier when machines do most of the work! +.5 base apparel production. 250 silver per tax period upkeep.</desc>
+		<!-- Description of trait -->
+		<cost>1000</cost>
+		<techLevel>Industrial</techLevel>
+		<constructionDuration>120000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>TextileFactory</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>250</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/TextileFactory</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>LocalZoo</defName>
+		<!--Name of Def -->
+		<label>Local Zoo</label>
+		<!--Lable of Def -->
+		<desc>A place for people to ogle various different animals as they pass through the settlement for fun and profit! +.5 base animal production. +.3 base happiness per day. 350 silver per tax period upkeep.</desc>
+		<!-- Description of trait -->
+		<cost>1000</cost>
+		<techLevel>Industrial</techLevel>
+		<constructionDuration>120000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>LocalZoo</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>350</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/Zoo</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<!-- Tree Farm -->
+	<FactionColonies.BuildingFCDef>
+		<defName>TreeFarm</defName>
+		<!--Name of Def -->
+		<label>Tree Farm</label>
+		<!--Lable of Def -->
+		<desc>Stop stripping forest of trees and just grow your own! +.5 base logging production. +5% total logging production.</desc>
+		<!-- Description of trait -->
+		<cost>1000</cost>
+		<techLevel>Industrial</techLevel>
+		<constructionDuration>120000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>TreeFarm</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>0</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/TreeFarm</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>IMED</defName>
+		<!--Name of Def -->
+		<label>Industrial Mining Equipment Depot</label>
+		<!--Lable of Def -->
+		<desc>Build a place to store and maintain big ugly machines that chew through rock like it's cardboard. +20% mining production. 550 silver per tax period upkeep.</desc>
+		<!-- Description of trait -->
+		<cost>1000</cost>
+		<techLevel>Industrial</techLevel>
+		<constructionDuration>120000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>IMED</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>550</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/IMED</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+</Defs>
