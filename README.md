@@ -1,5 +1,7 @@
 #For 1.6 Only
-I've put together a patch for this mod in hope to bring this over to 1.6. **Warning, this patch is <ins>UNSTABLE</ins>. Expect errors and unexpected behaviour.**
+I've put together a patch for this mod in hope to bring this over to 1.6. 
+
+**Warning, this patch is <ins>UNSTABLE</ins>. Expect errors and unexpected behaviour.**
 
 #Old Readme:
 
