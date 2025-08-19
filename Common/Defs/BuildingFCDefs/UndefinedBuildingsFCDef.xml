@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<FactionColonies.BuildingFCDef>
+		<defName>barracks</defName> <!--Name of Def -->
+		<label>Barracks</label> <!--Lable of Def -->
+		<desc>A buildings to house the local troops. +1 military level. 150 Silver per tax period upkeep.</desc> <!-- Description of trait -->
+		<cost>250</cost>
+		<techLevel>Undefined</techLevel>
+		<constructionDuration>60000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>barracks</li>
+		</traits>
+		<upkeep>150</upkeep>
+		<iconPath>GUI/Buildings/Barracks</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>tradingPost</defName> <!--Name of Def -->
+		<label>TradingPost</label> <!--Lable of Def -->
+		<desc>A small outpost that roving traders frequent. +10 tithe modifier.</desc> <!-- Description of trait -->
+		<cost>250</cost>
+		<techLevel>Undefined</techLevel>
+		<constructionDuration>60000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>tradingPost</li>
+		</traits>
+		<iconPath>GUI/Buildings/TradingPost</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>migrantHousing</defName> <!--Name of Def -->
+		<label>Migrant Housing</label> <!--Lable of Def -->
+		<desc>Local housing for traveling migrants to stay in. +2 Max worker, +2 Over Max worker.</desc> <!-- Description of trait -->
+		<cost>1500</cost>
+		<techLevel>Undefined</techLevel>
+		<constructionDuration>60000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>migrantHousing</li>
+		</traits>
+		<iconPath>GUI/Buildings/MigrantHousing</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>quarry</defName> <!--Name of Def -->
+		<label>Quarry</label> <!--Lable of Def -->
+		<desc>Torn up land being used to mine for valuable ore. +.5 to base mining production.</desc> <!-- Description of trait -->
+		<cost>250</cost>
+		<techLevel>Undefined</techLevel>
+		<constructionDuration>60000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>quarry</li>
+		</traits>
+		<iconPath>GUI/Buildings/Quarry</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.BuildingFCDef>
+		<defName>trainingYard</defName> <!--Name of Def -->
+		<label>Training Yard</label> <!--Lable of Def -->
+		<desc>A place for your soldiers to train. +15 combat efficiency.</desc> <!-- Description of trait -->
+		<cost>250</cost>
+		<techLevel>Undefined</techLevel>
+		<constructionDuration>60000</constructionDuration> <!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>trainingYard</li>
+		</traits>
+		<iconPath>GUI/Buildings/TrainingYard</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>FurHunterCamp</defName>
+		<!--Name of Def -->
+		<label>Fur Hunter Camp</label>
+		<!--Lable of Def -->
+		<desc>A camp for your Fur Hunter. +.5 Animal</desc>
+		<!-- Description of trait -->
+		<cost>250</cost>
+		<techLevel>Undefined</techLevel>
+		<constructionDuration>60000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>FurHunterCamp</li>
+		</traits>
+		<iconPath>GUI/Buildings/WildernessGuild</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>FlintStorage</defName>
+		<!--Name of Def -->
+		<label>Flint Storage</label>
+		<!--Lable of Def -->
+		<desc>A Storage for Flint. +.2 Mining</desc>
+		<!-- Description of trait -->
+		<cost>500</cost>
+		<techLevel>Undefined</techLevel>
+		<constructionDuration>60000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>FlintStorage</li>
+		</traits>
+		<iconPath>GUI/Buildings/Quarry</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>SlavePit</defName>
+		<!--Name of Def -->
+		<label>SlavePit</label>
+		<!--Lable of Def -->
+		<desc>A pit where Slaves goes to sleep. +2 base worker</desc>
+		<!-- Description of trait -->
+		<cost>500</cost>
+		<techLevel>Undefined</techLevel>
+		<constructionDuration>60000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<li>SlavePit</li>
+		</traits>
+		<iconPath>GUI/Buildings/ForcedWorkCamps</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>Farmland</defName>
+		<!--Name of Def -->
+		<label>Farmland</label>
+		<!--Lable of Def -->
+		<desc>A section of land deicated to growing edible plants. +.5 base food production.</desc>
+		<!-- Description of trait -->
+		<cost>250</cost>
+		<techLevel>Undefined</techLevel>
+		<constructionDuration>60000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>Farmland</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>0</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/Farmland</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>AmmunitionMines</defName>
+		<!--Name of Def -->
+		<label>Ammunition Mines</label>
+		<!--Lable of Def -->
+		<desc>From flint for arrows to the materials for bullets and gunpowder, these mines take up space that could be used for other resource mining. +15% weapons production. -15% mining production.</desc>
+		<!-- Description of trait -->
+		<cost>250</cost>
+		<techLevel>Undefined</techLevel>
+		<constructionDuration>60000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>AmmunitionMines</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>0</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/AmmoMines</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>TanningWorkshop</defName>
+		<!--Name of Def -->
+		<label>Tanning Workshop</label>
+		<!--Lable of Def -->
+		<desc>A workshop designed to turn animal hides into leather. +15% apparel production. -15% animal production.</desc>
+		<!-- Description of trait -->
+		<cost>250</cost>
+		<techLevel>Undefined</techLevel>
+		<constructionDuration>60000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>TanningWorkshop</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>0</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/Tanning</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>DrugDen</defName>
+		<!--Name of Def -->
+		<label>Psychedelic Drug Den</label>
+		<!--Lable of Def -->
+		<desc>It's amazing the discoveries people make while absurdly high. Sometimes those discoveries are even useful! +5% research production. +.3 happiness per day. -5% medicine production.</desc>
+		<!-- Description of trait -->
+		<cost>250</cost>
+		<techLevel>Undefined</techLevel>
+		<constructionDuration>60000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>DrugDen</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>0</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/DrugDen</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>HamsterWheel</defName>
+		<!--Name of Def -->
+		<label>Giant Hamster Wheel</label>
+		<!--Lable of Def -->
+		<desc>It's not much, but it's better than nothing! +.25 power production. -1 overmax worker.</desc>
+		<!-- Description of trait -->
+		<cost>250</cost>
+		<techLevel>Undefined</techLevel>
+		<constructionDuration>60000</constructionDuration>
+		<!-- Ticks it takes until construction is finished -->
+		<traits>
+			<!-- Put the traits they provide here -->
+			<li>HamsterWheel</li>
+		</traits>
+		<applicableBiomes>
+			<!-- If the building requires it to be in a biome, put it here-->
+
+		</applicableBiomes>
+		<upkeep>0</upkeep>
+		<!-- cost per week for the building -->
+		<iconPath>GUI/Buildings/HamsterWheel</iconPath>
+	</FactionColonies.BuildingFCDef>
+
+	
+</Defs>

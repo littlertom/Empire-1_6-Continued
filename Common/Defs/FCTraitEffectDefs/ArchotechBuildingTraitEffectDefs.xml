@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>LightConverter</defName>
+		<!--Name of Def -->
+		<label>Archotech Light Converter</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<productionMultiplierFood>1.75</productionMultiplierFood>
+		<productionMultiplierWeapons>1.75</productionMultiplierWeapons>
+		<productionMultiplierApparel>1.75</productionMultiplierApparel>
+		<productionMultiplierLogging>1.75</productionMultiplierLogging>
+		<productionMultiplierMining>1.75</productionMultiplierMining>
+		<productionMultiplierMedicine>1.75</productionMultiplierMedicine>
+		<militaryBaseLevel>-3</militaryBaseLevel>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>AnimalBeacon</defName>
+		<!--Name of Def -->
+		<label>Archotech Animal Beacon</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<productionMultiplierAnimals>2</productionMultiplierAnimals>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>TrappedAI</defName>
+		<!--Name of Def -->
+		<label>Trapped Archotech AI</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<productionMultiplierResearch>2</productionMultiplierResearch>
+		<unrestGainedBase>0.5</unrestGainedBase>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>UnionOffices</defName>
+		<!--Name of Def -->
+		<label>Union Offices</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<unrestLostBase>0.75</unrestLostBase>
+		<happinessGainedBase>0.75</happinessGainedBase>
+		<loyaltyGainedBase>0.75</loyaltyGainedBase>
+		<workerBaseCost>50</workerBaseCost>
+		<workerBaseMax>10</workerBaseMax>
+		<workerBaseOverMax>10</workerBaseOverMax>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>OrbitalSpaceLaser</defName>
+		<!--Name of Def -->
+		<label>Orbital Space Laser</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<militaryBaseLevel>2</militaryBaseLevel>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>TransdimensionalMarket</defName>
+		<!--Name of Def -->
+		<label>Transdimensional Market</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<taxBaseRandomModifier>80</taxBaseRandomModifier>
+		<taxBasePercentage>25</taxBasePercentage>
+	</FactionColonies.FCTraitEffectDef>
+	
+</Defs>

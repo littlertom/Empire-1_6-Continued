@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<FactionColonies.FCTraitEffectDef>
+		<defName>barracks</defName> <!--Name of Def -->
+		<label>Barracks</label> <!--Lable of Def -->
+		<desc>A buildings to house the local troops. +1 military level.</desc> <!-- Description of trait -->
+		<militaryBaseLevel>1</militaryBaseLevel>
+	</FactionColonies.FCTraitEffectDef>
+	
+	<FactionColonies.FCTraitEffectDef>
+		<defName>tradingPost</defName> <!--Name of Def -->
+		<label>TradingPost</label> <!--Lable of Def -->
+		<desc>A small outpost that roving traders frequent. +10 tithe modifier.</desc> <!-- Description of trait -->
+		<taxBaseRandomModifier>10</taxBaseRandomModifier>
+	</FactionColonies.FCTraitEffectDef>
+	
+	<FactionColonies.FCTraitEffectDef>
+		<defName>migrantHousing</defName> <!--Name of Def -->
+		<label>Migrant Housing</label> <!--Lable of Def -->
+		<desc>Local housing for traveling migrants to stay in. +2 Max worker, +2 Over Max worker.</desc> <!-- Description of trait -->
+		<workerBaseMax>2</workerBaseMax>
+		<workerBaseOverMax>2</workerBaseOverMax>
+	</FactionColonies.FCTraitEffectDef>
+	
+	<FactionColonies.FCTraitEffectDef>
+		<defName>quarry</defName> <!--Name of Def -->
+		<label>Quarry</label> <!--Lable of Def -->
+		<desc>Torn up land being used to mine for valuable ore. +.5 to base mining production.</desc> <!-- Description of trait -->
+		<productionBaseMining>.5</productionBaseMining>
+	</FactionColonies.FCTraitEffectDef>
+	
+	<FactionColonies.FCTraitEffectDef>
+		<defName>trainingYard</defName> <!--Name of Def -->
+		<label>Training Yard</label> <!--Lable of Def -->
+		<desc>A place for your soldiers to train. +10% combat efficiency.</desc> <!-- Description of trait -->
+		<militaryMultiplierCombatEfficiency>1.1</militaryMultiplierCombatEfficiency>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>FurHunterCamp</defName>
+		<!--Name of Def -->
+		<label>Fur Hunter Camp</label>
+		<!--Lable of Def -->
+		<desc>A camp for your Fur Hunter. +.5 Animal</desc>
+		<!-- Description of trait -->
+		<productionMultiplierAnimals>1.5</productionMultiplierAnimals>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>FlintStorage</defName>
+		<!--Name of Def -->
+		<label>Flint Storage</label>
+		<!--Lable of Def -->
+		<desc>A Storage for Flint. +.2 Mining</desc>
+		<!-- Description of trait -->
+		<productionBaseMining>1.2</productionBaseMining>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>SlavePit</defName>
+		<!--Name of Def -->
+		<label>Slave Pit</label>
+		<!--Lable of Def -->
+		<desc>A pit where Slaves goes to sleep. +2 base worker</desc>
+		<!-- Description of trait -->
+		<workerBaseMax>2</workerBaseMax>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>Farmland</defName>
+		<!--Name of Def -->
+		<label>Farmland</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<productionBaseFood>0.5</productionBaseFood>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>AmmunitionMines</defName>
+		<!--Name of Def -->
+		<label>Ammunition Mines</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<productionMultiplierWeapons>1.15</productionMultiplierWeapons>
+		<productionMultiplierMining>0.85</productionMultiplierMining>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>TanningWorkshop</defName>
+		<!--Name of Def -->
+		<label>Tanning Workshop</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<productionMultiplierApparel>1.15</productionMultiplierApparel>
+		<productionMultiplierAnimals>0.85</productionMultiplierAnimals>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>DrugDen</defName>
+		<!--Name of Def -->
+		<label>Psychedelic Drug Den</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<productionMultiplierResearch>1.05</productionMultiplierResearch>
+		<happinessGainedBase>0.3</happinessGainedBase>
+		<productionMultiplierMedicine>0.95</productionMultiplierMedicine>
+	</FactionColonies.FCTraitEffectDef>
+
+	<FactionColonies.FCTraitEffectDef>
+		<defName>HamsterWheel</defName>
+		<!--Name of Def -->
+		<label>Giant Hamster Wheel</label>
+		<!--Lable of Def -->
+		<desc></desc>
+		<productionBasePower>0.25</productionBasePower>
+		<workerBaseOverMax>-1</workerBaseOverMax>
+	</FactionColonies.FCTraitEffectDef>
+	
+</Defs>
