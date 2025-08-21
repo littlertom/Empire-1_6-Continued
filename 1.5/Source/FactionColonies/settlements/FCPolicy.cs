@@ -68,6 +68,11 @@ namespace FactionColonies
             Scribe_Values.Look(ref techLevelRequirement, "techLevelRequirement");
             Scribe_Values.Look(ref desc, "desc");
             Scribe_Values.Look(ref category, "category");
+            Scribe_Values.Look(ref cost, "cost");
+            Scribe_Values.Look(ref type, "type");
+            Scribe_Values.Look(ref techLevel, "techLevel");
+            Scribe_Values.Look(ref enactDuration, "enactDuration");
+            Scribe_Collections.Look(ref traits, "traits", LookMode.Value);
             Scribe_Collections.Look(ref positiveEffects, "positiveEffects", LookMode.Value);
             Scribe_Collections.Look(ref negativeEffects, "negativeEffects", LookMode.Value);
         }
@@ -78,6 +83,13 @@ namespace FactionColonies
         public int factionLevelRequirement;
         public List<string> positiveEffects;
         public List<string> negativeEffects;
+        
+        // Additional fields for XML compatibility
+        public int cost;
+        public string type;
+        public TechLevel techLevel = TechLevel.Undefined;
+        public int enactDuration;
+        public List<string> traits = new List<string>();
 
         public Texture2D IconLight
         {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-	<FactionColonies.PolicyFCDef>
+	<FactionColonies.FCPolicyDef>
 		<defName>heavyConscription</defName> <!--Name of Def -->
 		<label>Heavy Conscription</label> <!--Lable of Def -->
 		<desc>A large number of the populace is conscripted into the settlement's military forces. -50% happiness gain, +50% unrest gain, +2 military level in each settlement.</desc> <!-- Description of trait -->
@@ -12,10 +12,10 @@
 		<traits>
 			<li>heavyConscription</li>
 		</traits>
-	</FactionColonies.PolicyFCDef>
+	</FactionColonies.FCPolicyDef>
 	
 	
-	<FactionColonies.PolicyFCDef>
+	<FactionColonies.FCPolicyDef>
 		<defName>volunteerService</defName> <!--Name of Def -->
 		<label>Volunteer Service</label> <!--Lable of Def -->
 		<desc>The military force of your settlements is by volunteers only. +20% combat efficiency, -25% unrest gain, -25% loyalty lost.</desc> <!-- Description of trait -->
@@ -26,10 +26,10 @@
 		<traits>
 			<li>volunteerService</li>
 		</traits>
-	</FactionColonies.PolicyFCDef>
+	</FactionColonies.FCPolicyDef>
 	
 	
-	<FactionColonies.PolicyFCDef>
+	<FactionColonies.FCPolicyDef>
 		<defName>aFactionDisarmed</defName> <!--Name of Def -->
 		<label>A Faction Disarmed</label> <!--Lable of Def -->
 		<desc>There is very little, if any trained military forces in the faction. -40% combat efficiency, +10% tax gain.</desc> <!-- Description of trait -->
@@ -40,10 +40,10 @@
 		<traits>
 			<li>aFactionDisarmed</li>
 		</traits>
-	</FactionColonies.PolicyFCDef>
+	</FactionColonies.FCPolicyDef>
 	
 	
-	<FactionColonies.PolicyFCDef>
+	<FactionColonies.FCPolicyDef>
 		<defName>slaveArmy</defName> <!--Name of Def -->
 		<label>Slave Army</label> <!--Lable of Def -->
 		<desc>The majority of your settlements' military forces is comprised of slaves or those in forced servitude. -20% combat efficiency, +1 military level in each settlement.</desc> <!-- Description of trait -->
@@ -54,6 +54,6 @@
 		<traits>
 			<li>slaveArmy</li>
 		</traits>
-	</FactionColonies.PolicyFCDef>
+	</FactionColonies.FCPolicyDef>
 	
 </Defs>

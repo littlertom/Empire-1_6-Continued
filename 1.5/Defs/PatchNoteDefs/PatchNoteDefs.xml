@@ -29,6 +29,43 @@
 		<introStringBase>A new update for {0} has been released: v.{1}. The following changes have occurred:</introStringBase>
 	</FactionColonies.PatchNoteDef>
 
+		<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
+		<defName>0_43_1</defName>
+		<label>Dev Preview - Fixing policy errors.</label>
+		<description>This is a patch to fix policy errors.</description>
+
+		<major>0</major>
+		<minor>43</minor>
+		<patch>1</patch>
+
+		<releaseDay>21</releaseDay>
+		<releaseMonth>8</releaseMonth>
+		<releaseYear>2025</releaseYear>
+
+		<patchNoteType>Patch</patchNoteType>
+
+		<patchNoteLines>
+			<li>Dev preview - Fixing policy errors.</li>
+		</patchNoteLines>
+
+		<patchNoteImagePaths>
+			<li>PatchNoteImages/global/devpreview</li>
+		</patchNoteImagePaths>
+
+		<patchNoteImageDescriptions>
+			<li>NOT FOR PRODUCTION USE</li>
+			<li>Testing Purposes Only.</li>
+		</patchNoteImageDescriptions>
+
+		<additionalNotes>
+			<li>Please raise any issues you find on the Github page.</li>
+		</additionalNotes>
+
+		<authors>
+			<li>Epistatic</li>
+		</authors>
+	</FactionColonies.PatchNoteDef>
+
 	<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
 		<defName>0_43_0</defName>
 		<label>Initial Release for 1.6</label>
