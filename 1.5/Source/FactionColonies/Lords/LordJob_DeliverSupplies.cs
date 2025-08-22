@@ -10,7 +10,7 @@ namespace FactionColonies
 {
 	class LordJob_DeliverSupplies : LordJob
 	{
-		private IntVec3 fallbackLocation = IntVec3.Invalid;
+		public IntVec3 fallbackLocation = IntVec3.Invalid;
 		private IntVec3 defendPosition = IntVec3.Invalid;
 
 		public LordJob_DeliverSupplies()

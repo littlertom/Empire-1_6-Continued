@@ -17,30 +17,70 @@ namespace FactionColonies
         readonly FactionFC factionfc;
 
         private static readonly int offset = 8;
-
         private Vector2 scrollPosition = Vector2.zero;
-
         private static readonly int rowHeight = 90;
-        readonly int scrollHeight = 350;
+        
+        // Dynamic rectangles that will be calculated based on window size
+        Rect TopWindow;
+        Rect TopIcon;
+        Rect TopName;
+        Rect TopDescription;
 
-        Rect TopWindow = new Rect(0, 0, 400, 150);
-        Rect TopIcon = new Rect(15, 60, 64, 64);
-        Rect TopName = new Rect(15, 15, 370, 30);
-        Rect TopDescription = new Rect(95, 60, 305, 90);
-
-        public override Vector2 InitialSize => new Vector2(436f, 536f);
-
+        // Window size settings - add these fields
+        public float buildingWindowWidth = 450f;
+        public float buildingWindowHeight = 600f;
+        
+        // Static variables to remember window size during play session
+        private static Vector2 savedWindowSize = new Vector2(450f, 600f);
+        private static bool hasSavedSize = false;
+        
+        public override Vector2 InitialSize => new Vector2(
+            FactionColonies.Settings().buildingWindowWidth, 
+            FactionColonies.Settings().buildingWindowHeight
+        );
+        
+        // Override PreClose to save the current window size
+        public override void PreClose()
+        {
+            base.PreClose();
+            
+            // Save the current window size to settings
+            var settings = FactionColonies.Settings();
+            settings.buildingWindowWidth = windowRect.width;
+            settings.buildingWindowHeight = windowRect.height;
+            
+            // Write the settings to disk
+            LoadedModManager.GetMod<FactionColoniesMod>().WriteSettings();
+        }
+        
+        // Calculate dynamic layout based on current window size
+        private void CalculateLayout(Rect inRect)
+        {
+            float topWindowHeight = Math.Max(120f, inRect.height * 0.2f); // 20% of window height, minimum 120px
+            
+            TopWindow = new Rect(0, 0, inRect.width, topWindowHeight);
+            TopIcon = new Rect(15, topWindowHeight - 74, 64, 64);
+            TopName = new Rect(15, 15, inRect.width - 30, 30);
+            TopDescription = new Rect(95, topWindowHeight - 74, inRect.width - 110, 64);
+        }
 
         public override void DoWindowContents(Rect inRect)
         {
+            // Calculate dynamic layout
+            CalculateLayout(inRect);
+            
             //grab before anchor/font
             GameFont fontBefore = Text.Font;
             TextAnchor anchorBefore = Text.Anchor;
-            var outRect = new Rect(0f, 150f, inRect.width, inRect.height - 150f);
+            
+            // Dynamic scroll area that adjusts to window size
+            var outRect = new Rect(0f, TopWindow.height + 5f, inRect.width, inRect.height - TopWindow.height - 10f);
             var viewRect = new Rect(outRect.x, outRect.y, outRect.width - 16f, buildingList.Count * rowHeight);
+            
             Widgets.BeginScrollView(outRect, ref scrollPosition, viewRect);
             var ls = new Listing_Standard();
             ls.Begin(viewRect);
+            
             //Buildings
             for (int i = 0; i < buildingList.Count; i++)
             {
@@ -82,7 +122,6 @@ namespace FactionColonies
                                 buildingSlot = buildingSlot
                             };
 
-
                             int triggerTime = building.constructionDuration;
                             if (factionfc.hasPolicy(FCPolicyDefOf.isolationist))
                                 triggerTime /= 2;
@@ -99,12 +138,9 @@ namespace FactionColonies
                         }));
                     }
 
-
-
                     FloatMenu menu = new FloatMenu(list);
                     Find.WindowStack.Add(menu);
                 }
-
 
                 Widgets.DrawMenuSection(newBuildingWindow);
                 Widgets.DrawMenuSection(newBuildingIcon);
@@ -122,13 +158,14 @@ namespace FactionColonies
             ls.End();
             Widgets.EndScrollView();
 
-            //Top Window 
+            //Top Window - now using dynamic sizing
             Widgets.DrawMenuSection(TopWindow);
             Widgets.DrawHighlight(TopWindow);
             Widgets.DrawMenuSection(TopIcon);
             Widgets.DrawLightHighlight(TopIcon);
 
-            Widgets.DrawBox(new Rect(0, 0, 400, 500));
+            // Dynamic border that adjusts to window width
+            Widgets.DrawBox(new Rect(0, 0, inRect.width, TopWindow.height + 5));
             Widgets.ButtonImage(TopIcon, buildingDef.Icon);
 
             Widgets.ButtonTextSubtle(TopName, "");
@@ -136,17 +173,17 @@ namespace FactionColonies
             Text.Anchor = TextAnchor.UpperLeft;
             Widgets.Label(new Rect(TopName.x + 5, TopName.y, TopName.width, TopName.height), buildingDef.LabelCap);
 
-            Widgets.DrawMenuSection(new Rect(TopDescription.x - 5, TopDescription.y - 5, TopDescription.width, TopDescription.height));
+            Widgets.DrawMenuSection(new Rect(TopDescription.x - 5, TopDescription.y - 5, TopDescription.width + 10, TopDescription.height));
             Text.Font = GameFont.Small;
             Widgets.Label(TopDescription, buildingDef.desc);
 
-            Widgets.DrawLineHorizontal(0, TopWindow.y + TopWindow.height, 400);
+            // Dynamic horizontal line that spans the full width
+            Widgets.DrawLineHorizontal(0, TopWindow.y + TopWindow.height, inRect.width);
             
             //reset anchor/font
             Text.Font = fontBefore;
             Text.Anchor = anchorBefore;
         }
-
 
         public FCBuildingWindow(SettlementFC settlement, int buildingSlot)
         {
@@ -175,6 +212,7 @@ namespace FactionColonies
             draggable = true;
             doCloseX = true;
             preventCameraMotion = false;
+            resizeable = true;  // Enable window resizing
 
             this.settlement = settlement;
             this.buildingSlot = buildingSlot;

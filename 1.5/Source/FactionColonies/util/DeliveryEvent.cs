@@ -261,19 +261,41 @@ namespace FactionColonies.util
 				intVec3 = ValidLandingCell(new IntVec2(1, 1), map, true);
 			}
 
+			// Validate that we have a valid starting position
+			if (!intVec3.IsValid)
+			{
+				// Fallback to map center if we somehow got an invalid position
+				intVec3 = map.Center;
+			}
+
 			IntVec3 oldVec = intVec3;
 			for (int i = 0; i < 10; i++)
 			{
-				if (CellFinder.TryFindRandomReachableNearbyCell(intVec3, map, i, traverseParms, cell => map.thingGrid.ThingsAt(cell) == null, null, out intVec3))
+				// Additional validation before calling CellFinder
+				if (intVec3.IsValid && intVec3.InBounds(map))
 				{
-					break;
+					if (CellFinder.TryFindRandomReachableNearbyCell(intVec3, map, i, traverseParms, 
+						cell => cell.IsValid && cell.InBounds(map) && map.thingGrid.ThingsAt(cell) != null, 
+						null, out IntVec3 foundCell))
+					{
+						if (foundCell.IsValid)
+						{
+							intVec3 = foundCell;
+							break;
+						}
+					}
 				}
 
 				if (i == 9)
 				{
-					intVec3 = oldVec;
+					intVec3 = oldVec.IsValid ? oldVec : map.Center;
 				}
+			}
 
+			// Final validation
+			if (!intVec3.IsValid || !intVec3.InBounds(map))
+			{
+				intVec3 = map.Center;
 			}
 
 			return intVec3;
@@ -290,15 +312,22 @@ namespace FactionColonies.util
 
 			if (validCells.Count() == 0)
 			{
-				validCells = map.AllCells.Where(cell => !map.areaManager.Home.ActiveCells.Contains(cell));
+				validCells = map.AllCells.Where(cell => !map.areaManager.Home.ActiveCells.Contains(cell) && cell.Standable(map));
 			}
 
 			if (validCells.Count() == 0)
 			{
-				validCells = map.AllCells;
+				validCells = map.AllCells.Where(cell => cell.Standable(map));
 			}
 
-			return validCells.RandomElement();
+			// Final fallback - if we still have no valid cells, use map center
+			if (validCells.Count() == 0)
+			{
+				return map.Center;
+			}
+
+			IntVec3 result = validCells.RandomElement();
+			return result.IsValid ? result : map.Center;
 		}
 	}
 
@@ -311,3 +340,4 @@ namespace FactionColonies.util
 		Shuttle
 	}
 }
+
