@@ -1459,10 +1459,13 @@ namespace FactionColonies
         {
             if (Find.TickManager.TicksGame >= taxTimeDue) // taxTimeDue being used as set interval when skipping time
             {
-                while (Find.TickManager.TicksGame >= taxTimeDue) //while updating events
+                int maxIterations = 100; // Safety limit to prevent infinite loops
+                int iterations = 0;
+                
+                while (Find.TickManager.TicksGame >= taxTimeDue && iterations < maxIterations) //while updating events
                 {
+                    iterations++;
                     //update events in this order: regular events: tax events.
-
 
                     if (Find.TickManager.TicksGame > taxTimeDue)
                     {
@@ -1476,9 +1479,24 @@ namespace FactionColonies
                         //NOT WHERE FINAL UPDATE IS. Go to addTax Function
                     }
 
-                    taxTimeDue += LoadedModManager.GetMod<FactionColoniesMod>().GetSettings<FactionColonies>()
-                        .timeBetweenTaxes;
+                    int timeBetweenTaxes = LoadedModManager.GetMod<FactionColoniesMod>().GetSettings<FactionColonies>().timeBetweenTaxes;
+                    
+                    // Safety check: ensure timeBetweenTaxes is at least 1 day
+                    if (timeBetweenTaxes <= 0)
+                    {
+                        Log.Warning("Empire Mod - TaxTick: timeBetweenTaxes was " + timeBetweenTaxes + ", setting to 1 day minimum");
+                        timeBetweenTaxes = GenDate.TicksPerDay;
+                    }
+                    
+                    taxTimeDue += timeBetweenTaxes;
                     //Log.Message(Find.TickManager.TicksGame + " vs " + taxTimeDue + " - Taxing");
+                }
+                
+                if (iterations >= maxIterations)
+                {
+                    Log.Error("Empire Mod - TaxTick: Hit maximum iteration limit (" + maxIterations + "), breaking out of loop to prevent freeze. Current tick: " + Find.TickManager.TicksGame + ", taxTimeDue: " + taxTimeDue);
+                    // Force advance taxTimeDue to break the loop
+                    taxTimeDue = Find.TickManager.TicksGame + GenDate.TicksPerDay;
                 }
 
                 //if Autoresolve bills on, attempt to autoresolve

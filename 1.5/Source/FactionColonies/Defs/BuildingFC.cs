@@ -73,6 +73,7 @@ namespace FactionColonies
     public static class FCRoadsDef
     {
         public static RoadDef DirtRoad;
+        public static RoadDef DirtPath;        
 
         public static object RoadDef { get; internal set; }
     }
