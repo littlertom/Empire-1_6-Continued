@@ -8,22 +8,98 @@
 			<li>https://discord.gg/f3zFQqA</li>
 			<li>https://steamcommunity.com/sharedfiles/filedetails/?id=2571437524</li>
 			<li>https://rimworld-empire-mod.fandom.com/wiki/Rimworld-_Empire_Mod_Wiki</li>
+			<li>https://github.com/littlertom/Empire-1_6-Continued</li>
 		</links>
 
 		<linkButtonImagePaths>
 			<li>GUI/Buttons/discordlogo</li>
 			<li>GUI/Buttons/wikilogo</li>
 			<li>GUI/Buttons/nguilogo</li>
+			<li>GUI/Buttons/githublogo</li>
 		</linkButtonImagePaths>
 
 		<linkButtonToolTips>
 			<li>Join the Empire discord!</li>
 			<li>Check out the Empire Wiki!</li>
 			<li>The layout of this GUI was made using NesGUI, a tool for modders that helps with creating RimWorld GUI! Click to learn more.</li>
+			<li>Please raise any issues you find on the Github page.</li>
 		</linkButtonToolTips>
 
 		<authorStringBase>All of the code for this update has been developed by {0}.</authorStringBase>
 		<introStringBase>A new update for {0} has been released: v.{1}. The following changes have occurred:</introStringBase>
+	</FactionColonies.PatchNoteDef>
+
+		<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
+		<defName>0_43_1</defName>
+		<label>Dev Preview - Fixing policy errors.</label>
+		<description>This is a patch to fix policy errors.</description>
+
+		<major>0</major>
+		<minor>43</minor>
+		<patch>1</patch>
+
+		<releaseDay>21</releaseDay>
+		<releaseMonth>8</releaseMonth>
+		<releaseYear>2025</releaseYear>
+
+		<patchNoteType>Patch</patchNoteType>
+
+		<patchNoteLines>
+			<li>Dev preview - Fixing policy errors.</li>
+		</patchNoteLines>
+
+		<patchNoteImagePaths>
+			<li>PatchNoteImages/global/devpreview</li>
+		</patchNoteImagePaths>
+
+		<patchNoteImageDescriptions>
+			<li>NOT FOR PRODUCTION USE</li>
+			<li>Testing Purposes Only.</li>
+		</patchNoteImageDescriptions>
+
+		<additionalNotes>
+			<li>Please raise any issues you find on the Github page.</li>
+		</additionalNotes>
+
+		<authors>
+			<li>Epistatic</li>
+		</authors>
+	</FactionColonies.PatchNoteDef>
+
+	<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
+		<defName>0_43_0</defName>
+		<label>Initial Release for 1.6</label>
+		<description>We have released Empire for 1.6, this is an unstable release and may contain bugs and errors.</description>
+
+		<major>0</major>
+		<minor>43</minor>
+		<patch>0</patch>
+
+		<releaseDay>19</releaseDay>
+		<releaseMonth>8</releaseMonth>
+		<releaseYear>2025</releaseYear>
+
+		<patchNoteType>Patch</patchNoteType>
+
+		<patchNoteLines>
+			<li>Inital support for Odyssey.</li>
+		</patchNoteLines>
+
+		<patchNoteImagePaths>
+			<li>PatchNoteImages/0.43.00/1</li>
+		</patchNoteImagePaths>
+
+		<patchNoteImageDescriptions>
+			<li>This is the initial release for 1.6, it is an unstable release and may contain bugs and errors.</li>
+		</patchNoteImageDescriptions>
+
+		<additionalNotes>
+			<li>Please raise any issues you find on the Github page.</li>
+		</additionalNotes>
+
+		<authors>
+			<li>Epistatic</li>
+		</authors>
 	</FactionColonies.PatchNoteDef>
 
 	<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">

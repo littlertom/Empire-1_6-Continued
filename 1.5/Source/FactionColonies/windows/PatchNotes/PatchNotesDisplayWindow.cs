@@ -63,6 +63,9 @@ namespace FactionColonies
 		private Color orange = Color.Lerp(Color.yellow, Color.red, 0.5f);
 		private Rect toolTipRect;
 
+		// Add this field to the class
+		private Texture2D defaultImage;
+
 		/// <summary>
 		/// Constructs a PatchNotesDisplayWindow class and saves the current Text.Font, Text.Anchor and GUI.color
 		/// </summary>
@@ -266,13 +269,28 @@ namespace FactionColonies
 		/// <param name="reason"></param>
 		private void DrawImageContentMissing(string reason, Color reasonColor)
         {
-			Text.Anchor = TextAnchor.MiddleCenter;
-			Text.Font = GameFont.Medium;
-			GUI.color = reasonColor;
-
-			Widgets.DrawBoxSolid(PatchNotesImageRect, Color.black);
-			Widgets.Label(PatchNotesImageRect, reason);
-
+			if (DefaultImage != null)
+			{
+				// Draw the default image instead of text
+				GUI.DrawTexture(PatchNotesImageRect, DefaultImage, ScaleMode.ScaleToFit);
+				
+				// Optionally show the reason text below the image in the description area
+				Text.Anchor = TextAnchor.UpperCenter;
+				Text.Font = GameFont.Small;
+				GUI.color = reasonColor;
+				Widgets.Label(ImageDescRect.ContractedBy(commonMargin), reason);
+			}
+			else
+			{
+				// Fallback to original text display if image fails to load
+				Text.Anchor = TextAnchor.MiddleCenter;
+				Text.Font = GameFont.Medium;
+				GUI.color = reasonColor;
+				
+				Widgets.DrawBoxSolid(PatchNotesImageRect, Color.black);
+				Widgets.Label(PatchNotesImageRect, reason);
+			}
+			
 			displayedImage = -1;
 			ResetTextAndColor();
         }
@@ -397,6 +415,19 @@ namespace FactionColonies
 			//I don't really know why but this fixes all the issues I have
 			patchNotesScrollViewRect.height = float.MaxValue;
 			basePatchNoteRect = patchNotesScrollViewRect.TopPartPixels(45f);
+		}
+
+		private Texture2D DefaultImage
+		{
+			get
+			{
+				if (defaultImage == null)
+				{
+					defaultImage = ContentFinder<Texture2D>.Get("UI/Banners/Empire", false) ?? 
+								  ContentFinder<Texture2D>.Get("GUI/questionmark", false);
+				}
+				return defaultImage;
+			}
 		}
 	}
 }

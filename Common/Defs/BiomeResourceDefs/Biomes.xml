@@ -362,6 +362,148 @@
 			<li>1</li> <!-- Medicine -->
 		</BaseProductionMultiplicative>
 	</FactionColonies.BiomeResourceDef>
+
+	<!--Start Odyssey Biomes by Pecha -->
+	<FactionColonies.BiomeResourceDef>
+		<defName>GlacialPlain</defName>
+		<label>glacial plain</label>
+		<canSettle>true</canSettle>
+		<BaseProductionAdditive> <!-- 0 is default -->
+			<li>0.25</li> <!-- Food -->
+			<li>0.5</li> <!-- Weapons -->
+			<li>1</li> <!-- Apparel -->
+			<li>0.5</li> <!-- Animals -->
+			<li>0.25</li> <!-- Logging -->
+			<li>0.75</li> <!-- Mining -->
+			<li>1.5</li> <!-- Research -->
+			<li>0.75</li> <!-- Power -->
+			<li>.5</li> <!-- Medicine -->
+		</BaseProductionAdditive>
+		<BaseProductionMultiplicative> <!-- li is default -->
+			<li>1</li> <!-- Food -->
+			<li>1</li> <!-- Weapons -->
+			<li>1</li> <!-- Apparel -->
+			<li>1</li> <!-- Animals -->
+			<li>1</li> <!-- Logging -->
+			<li>1</li> <!-- Mining -->
+			<li>1</li> <!-- Research -->
+			<li>1</li> <!-- Power -->
+			<li>1</li> <!-- Medicine -->
+		</BaseProductionMultiplicative>
+	</FactionColonies.BiomeResourceDef>
+	
+	<FactionColonies.BiomeResourceDef>
+		<defName>Glowforest</defName>
+		<label>glowforest</label>
+		<canSettle>true</canSettle>
+		<BaseProductionAdditive> <!-- 0 is default -->
+			<li>0.75</li> <!-- Food -->
+			<li>1</li> <!-- Weapons -->
+			<li>1</li> <!-- Apparel -->
+			<li>0.5</li> <!-- Animals -->
+			<li>1</li> <!-- Logging -->
+			<li>1</li> <!-- Mining -->
+			<li>1.5</li> <!-- Research -->
+			<li>0</li> <!-- Power -->
+			<li>1.5</li> <!-- Medicine -->
+		</BaseProductionAdditive>
+		<BaseProductionMultiplicative> <!-- li is default -->
+			<li>1</li> <!-- Food -->
+			<li>1</li> <!-- Weapons -->
+			<li>1</li> <!-- Apparel -->
+			<li>1</li> <!-- Animals -->
+			<li>1</li> <!-- Logging -->
+			<li>1</li> <!-- Mining -->
+			<li>1</li> <!-- Research -->
+			<li>1</li> <!-- Power -->
+			<li>1</li> <!-- Medicine -->
+		</BaseProductionMultiplicative>
+	</FactionColonies.BiomeResourceDef>
+	
+	<FactionColonies.BiomeResourceDef>
+		<defName>Grasslands</defName>
+		<label>grassland</label>
+		<canSettle>true</canSettle>
+		<BaseProductionAdditive> <!-- 0 is default -->
+			<li>1.5</li> <!-- Food -->
+			<li>1</li> <!-- Weapons -->
+			<li>1</li> <!-- Apparel -->
+			<li>1.5</li> <!-- Animals -->
+			<li>0.25</li> <!-- Logging -->
+			<li>0.75</li> <!-- Mining -->
+			<li>1</li> <!-- Research -->
+			<li>1</li> <!-- Power -->
+			<li>1</li> <!-- Medicine -->
+		</BaseProductionAdditive>
+		<BaseProductionMultiplicative> <!-- li is default -->
+			<li>1</li> <!-- Food -->
+			<li>1</li> <!-- Weapons -->
+			<li>1</li> <!-- Apparel -->
+			<li>1</li> <!-- Animals -->
+			<li>1</li> <!-- Logging -->
+			<li>1</li> <!-- Mining -->
+			<li>1</li> <!-- Research -->
+			<li>1</li> <!-- Power -->
+			<li>1</li> <!-- Medicine -->
+		</BaseProductionMultiplicative>
+	</FactionColonies.BiomeResourceDef>
+	
+	<FactionColonies.BiomeResourceDef>
+		<defName>LavaField</defName>
+		<label>lava field</label>
+		<canSettle>true</canSettle>
+		<BaseProductionAdditive> <!-- 0 is default -->
+			<li>1.5</li> <!-- Food -->
+			<li>0.5</li> <!-- Weapons -->
+			<li>0.5</li> <!-- Apparel -->
+			<li>0.5</li> <!-- Animals -->
+			<li>1</li> <!-- Logging -->
+			<li>1.5</li> <!-- Mining -->
+			<li>1.75</li> <!-- Research -->
+			<li>2</li> <!-- Power -->
+			<li>1.5</li> <!-- Medicine -->
+		</BaseProductionAdditive>
+		<BaseProductionMultiplicative> <!-- li is default -->
+			<li>1</li> <!-- Food -->
+			<li>1</li> <!-- Weapons -->
+			<li>1</li> <!-- Apparel -->
+			<li>1</li> <!-- Animals -->
+			<li>1</li> <!-- Logging -->
+			<li>1</li> <!-- Mining -->
+			<li>1</li> <!-- Research -->
+			<li>1</li> <!-- Power -->
+			<li>1</li> <!-- Medicine -->
+		</BaseProductionMultiplicative>
+	</FactionColonies.BiomeResourceDef>
+	
+	<FactionColonies.BiomeResourceDef>
+		<defName>Scarlands</defName>
+		<label>scarlands</label>
+		<canSettle>true</canSettle>
+		<BaseProductionAdditive> <!-- 0 is default -->
+			<li>0.5</li> <!-- Food -->
+			<li>1.5</li> <!-- Weapons -->
+			<li>1.5</li> <!-- Apparel -->
+			<li>0.2</li> <!-- Animals -->
+			<li>0.2</li> <!-- Logging -->
+			<li>1</li> <!-- Mining -->
+			<li>1.5</li> <!-- Research -->
+			<li>1</li> <!-- Power -->
+			<li>0.5</li> <!-- Medicine -->
+		</BaseProductionAdditive>
+		<BaseProductionMultiplicative> <!-- li is default -->
+			<li>1</li> <!-- Food -->
+			<li>1</li> <!-- Weapons -->
+			<li>1</li> <!-- Apparel -->
+			<li>1</li> <!-- Animals -->
+			<li>1</li> <!-- Logging -->
+			<li>1</li> <!-- Mining -->
+			<li>1</li> <!-- Research -->
+			<li>1</li> <!-- Power -->
+			<li>1</li> <!-- Medicine -->
+		</BaseProductionMultiplicative>
+	</FactionColonies.BiomeResourceDef>
+	<!-- End Odyssey Biomes by Pecha -->
 	<!--Start Alpha Biomes by Pecha -->
 	<FactionColonies.BiomeResourceDef>				
 		<defName>AB_FeraliskInfestedJungle</defName>

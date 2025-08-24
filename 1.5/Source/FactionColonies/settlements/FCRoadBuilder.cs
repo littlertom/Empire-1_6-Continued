@@ -25,6 +25,13 @@ namespace FactionColonies
         {
         }
 
+        //DirtPath (priority: 10) - This is the lowest priority road, likely the basic dirt path
+        //DirtRoad (priority: 20) - This is the traditional dirt road
+        //StoneRoad (priority: 30)
+        //AncientAsphaltRoad (priority: 40)
+        //AncientAsphaltHighway (priority: 50)
+        // We could define our own and provide a roaddef for this, such as spacer / glitterworld tech level roads...
+
         public void ExposeData()
         {
             Scribe_Defs.Look<RoadDef>(ref roadDef, "roadDef");
@@ -60,8 +67,16 @@ namespace FactionColonies
 
         public void RoadTick()
         {
-            if (this.roadDef == null || !this.roadBuildingEnabled)
+            if (this.roadDef == null)
             {
+                // Log.Message("Empire Debug - RoadTick: roadDef is null, road building disabled");
+                this.wasRoadBuildingDisabled = true;
+                return;
+            }
+            
+            if (!this.roadBuildingEnabled)
+            {
+                // Log.Message("Empire Debug - RoadTick: roadBuildingEnabled is false, road building disabled");
                 this.wasRoadBuildingDisabled = true;
                 return;
             }
@@ -70,8 +85,18 @@ namespace FactionColonies
             // TODO: Make this a config option
             if(Find.TickManager.TicksGame % 20 == 0)
             {
+                // Log.Message($"Empire Debug - RoadTick: Processing road tick at game tick {Find.TickManager.TicksGame}");
+                
                 FactionFC faction = Find.World.GetComponent<FactionFC>();
                 FCPlanetRoadQueue queue = this.GetRoadQueue(Find.World.info.name);
+
+                if (queue == null)
+                {
+                    // Log.Message("Empire Debug - RoadTick: No road queue found for current planet");
+                    return;
+                }
+
+                // Log.Message($"Empire Debug - RoadTick: Found road queue for planet {Find.World.info.name}, nextRoadTick: {queue.nextRoadTick}, currentTick: {Find.TickManager.TicksGame}");
 
                 if (!roadBuilders && faction.hasTrait(FCPolicyDefOf.roadBuilders))
                 {
@@ -95,8 +120,12 @@ namespace FactionColonies
                     }
                 }
 
+                // Log.Message("Empire Debug - RoadTick: Processing one path...");
                 queue.ProcessOnePath();
-                queue.BuildRoadSegments();
+                
+                // Log.Message("Empire Debug - RoadTick: Attempting to build road segments...");
+                bool segmentBuilt = queue.BuildRoadSegments();
+                // Log.Message($"Empire Debug - RoadTick: BuildRoadSegments returned: {segmentBuilt}");
             }
         }
 
@@ -147,31 +176,46 @@ namespace FactionColonies
 
         public void CheckForTechChanges()
         {
+            // Log.Message("Empire Debug - CheckForTechChanges: Starting tech check...");
+            
             FactionFC faction = Find.World.GetComponent<FactionFC>();
             RoadDef def = this.roadDef;
+            RoadDef oldDef = def;
 
             if (DefDatabase<ResearchProjectDef>.GetNamed("FCRoadBuildingHighway", false).IsFinished)
             {
                 def = RoadDefOf.AncientAsphaltHighway;
+                // Log.Message("Empire Debug - CheckForTechChanges: Highway research complete, using AncientAsphaltHighway");
             }
             else if (DefDatabase<ResearchProjectDef>.GetNamed("FCRoadBuildingRoad", false).IsFinished)
             {
                 def = RoadDefOf.AncientAsphaltRoad;
-
+                // Log.Message("Empire Debug - CheckForTechChanges: Road research complete, using AncientAsphaltRoad");
             }
             else if (DefDatabase<ResearchProjectDef>.GetNamed("FCRoadBuildingDirt", false).IsFinished)
             {
-                def = FCRoadsDef.DirtRoad;
+                // Use DirtPath (priority 10) to match existing world-generated dirt paths
+                def = FCRoadsDef.DirtPath ?? DefDatabase<RoadDef>.GetNamed("DirtPath", false);
+                // Log.Message($"Empire Debug - CheckForTechChanges: Dirt road research complete, using {def?.defName ?? "null"}");
+            }
+            else
+            {
+                // Log.Message("Empire Debug - CheckForTechChanges: No road research completed yet");
             }
 
             if (this.roadDef != def)
             {
+                // Log.Message($"Empire Debug - CheckForTechChanges: Road type changed from {oldDef?.defName ?? "null"} to {def?.defName ?? "null"}");
                 this.roadDef = def;
 
                 foreach (FCPlanetRoadQueue queue in this.roadQueues)
                 {
                     queue.RoadDef = def;
                 }
+            }
+            else
+            {
+                // Log.Message($"Empire Debug - CheckForTechChanges: Road type unchanged: {this.roadDef?.defName ?? "null"}");
             }
         }
 
@@ -269,6 +313,14 @@ namespace FactionColonies
                 var mainPlanetLayer = Find.WorldGrid.PlanetLayers[0];
                 Find.World.renderer.SetDirty<WorldDrawLayer_Roads>(mainPlanetLayer);
                 Find.World.renderer.SetDirty<WorldDrawLayer_Paths>(mainPlanetLayer);
+                
+                // Send blue notification when roads are built
+                string roadTypeName = this.roadDef?.LabelCap ?? "Road";
+                Find.LetterStack.ReceiveLetter(
+                    "Roads Built", 
+                    $"Your Empire settlements have constructed new {roadTypeName} segments connecting your territories.", 
+                    LetterDefOf.PositiveEvent
+                );
             }
             return built;
         }

@@ -1252,6 +1252,14 @@ namespace FactionColonies
 
         public double updateVersion = 0;
 
+        // Window size settings - add these fields
+        public float buildingWindowWidth = 450f;
+        public float buildingWindowHeight = 600f;
+
+        // Static variables to remember window size during play session
+        private static Vector2 savedWindowSize = new Vector2(450f, 600f);
+        private static bool hasSavedSize = false;
+
         public override void ExposeData()
         {
             base.ExposeData();
@@ -1271,6 +1279,8 @@ namespace FactionColonies
             Scribe_Values.Look(ref minDaysTillRandomEvent, "minDaysTillRandomEvent", 0);
             Scribe_Values.Look(ref maxDaysTillRandomEvent, "maxDaysTillRandomEvent", 6);
             Scribe_Values.Look(ref updateVersion, "updateVersion");
+            Scribe_Values.Look(ref buildingWindowWidth, "buildingWindowWidth", 450f);
+            Scribe_Values.Look(ref buildingWindowHeight, "buildingWindowHeight", 600f);
         }
     }
 

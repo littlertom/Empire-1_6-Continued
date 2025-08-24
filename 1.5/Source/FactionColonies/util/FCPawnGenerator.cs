@@ -10,64 +10,110 @@ namespace FactionColonies.util
 		public Pawn defaultPawn;
 		public XenotypeDef xenotype;
 
-        private static readonly PawnGenerationRequest baseRequest = new PawnGenerationRequest
-		{
-			Context = PawnGenerationContext.NonPlayer,
-			Tile = -1,
-			ForceGenerateNewPawn = false,
-			AllowDead = false,
-			AllowDowned = false,
-			CanGeneratePawnRelations = true,
-			MustBeCapableOfViolence = false,
-			ColonistRelationChanceFactor = 0,
-			Inhabitant = false,
-			CertainlyBeenInCryptosleep = false,
-			ForceRedressWorldPawnIfFormerColonist = false,
-			WorldPawnFactionDoesntMatter = false,
-			BiocodeApparelChance = 0,
-			ExtraPawnForExtraRelationChance = null,
-			RelationWithExtraPawnChanceFactor = 0,
-			FixedBiologicalAge = Rand.Range(21, 50),
-
-		};
-
 		public static PawnGenerationRequest WorkerOrMilitaryRequest(PawnKindDef pawnKindDef = null, XenotypeDef xenotypeDef = null)
-
         {
-			PawnGenerationRequest request = baseRequest;
-
-			request.KindDef = pawnKindDef ?? FactionColonies.getPlayerColonyFaction()?.RandomPawnKind() ?? DefDatabase<FactionDef>.GetNamed("PColony").pawnGroupMakers.RandomElement().options.RandomElement().kind;
-			request.ForcedXenotype = xenotypeDef;
-            request.Faction = FactionColonies.getPlayerColonyFaction();
-			request.FixedBiologicalAge = request.KindDef.GetReasonableMercenaryAge();
-			request.MustBeCapableOfViolence = true;
-            return request;
-
+			var kindDef = pawnKindDef ?? FactionColonies.getPlayerColonyFaction()?.RandomPawnKind() ?? DefDatabase<FactionDef>.GetNamed("PColony").pawnGroupMakers.RandomElement().options.RandomElement().kind;
+			var faction = FactionColonies.getPlayerColonyFaction();
+			
+			return new PawnGenerationRequest(
+				kind: kindDef,
+				faction: faction,
+				context: PawnGenerationContext.NonPlayer,
+				tile: -1,
+				forceGenerateNewPawn: false,
+				allowDead: false,
+				allowDowned: false,
+				canGeneratePawnRelations: true,
+				mustBeCapableOfViolence: true,
+				colonistRelationChanceFactor: 0,
+				forceAddFreeWarmLayerIfNeeded: false,
+				allowGay: true,
+				allowFood: true,
+				allowAddictions: false,
+				inhabitant: false,
+				certainlyBeenInCryptosleep: false,
+				forceRedressWorldPawnIfFormerColonist: false,
+				worldPawnFactionDoesntMatter: false,
+				biocodeWeaponChance: 0,
+				extraPawnForExtraRelationChance: null,
+				relationWithExtraPawnChanceFactor: 0,
+				validatorPreGear: null,
+				validatorPostGear: null,
+				forcedTraits: null,
+				prohibitedTraits: null,
+				forcedXenotype: xenotypeDef,
+				fixedBiologicalAge: kindDef.GetReasonableMercenaryAge()
+			);
 		}
 
 		public static PawnGenerationRequest CivilianRequest(PawnKindDef pawnKindDef = null)
 		{
-			PawnGenerationRequest request = baseRequest;
-
-			request.KindDef = pawnKindDef ?? (FactionColonies.getPlayerColonyFaction()?.RandomPawnKind());
-			request.Faction = FactionColonies.getPlayerColonyFaction();
-
-			return request;
+			var kindDef = pawnKindDef ?? (FactionColonies.getPlayerColonyFaction()?.RandomPawnKind());
+			var faction = FactionColonies.getPlayerColonyFaction();
+			
+			return new PawnGenerationRequest(
+				kind: kindDef,
+				faction: faction,
+				context: PawnGenerationContext.NonPlayer,
+				tile: -1,
+				forceGenerateNewPawn: false,
+				allowDead: false,
+				allowDowned: false,
+				canGeneratePawnRelations: true,
+				mustBeCapableOfViolence: false,
+				colonistRelationChanceFactor: 0,
+				forceAddFreeWarmLayerIfNeeded: false,
+				allowGay: true,
+				allowFood: true,
+				allowAddictions: false,
+				inhabitant: false,
+				certainlyBeenInCryptosleep: false,
+				forceRedressWorldPawnIfFormerColonist: false,
+				worldPawnFactionDoesntMatter: false,
+				biocodeWeaponChance: 0,
+				extraPawnForExtraRelationChance: null,
+				relationWithExtraPawnChanceFactor: 0,
+				validatorPreGear: null,
+				validatorPostGear: null,
+				forcedTraits: null,
+				prohibitedTraits: null,
+				fixedBiologicalAge: kindDef.GetReasonableMercenaryAge()
+			);
 		}
 
 		public static PawnGenerationRequest AnimalRequest(PawnKindDef race)
 		{
-			PawnGenerationRequest request = baseRequest;
-
-			request.KindDef = race;
-			request.Faction = FactionColonies.getPlayerColonyFaction();
-			request.FixedBiologicalAge = request.KindDef.GetReasonableMercenaryAge();
-
-			return request;
+			var faction = FactionColonies.getPlayerColonyFaction();
+			
+			return new PawnGenerationRequest(
+				kind: race,
+				faction: faction,
+				context: PawnGenerationContext.NonPlayer,
+				tile: -1,
+				forceGenerateNewPawn: false,
+				allowDead: false,
+				allowDowned: false,
+				canGeneratePawnRelations: true,
+				mustBeCapableOfViolence: false,
+				colonistRelationChanceFactor: 0,
+				forceAddFreeWarmLayerIfNeeded: false,
+				allowGay: true,
+				allowFood: true,
+				allowAddictions: false,
+				inhabitant: false,
+				certainlyBeenInCryptosleep: false,
+				forceRedressWorldPawnIfFormerColonist: false,
+				worldPawnFactionDoesntMatter: false,
+				biocodeWeaponChance: 0,
+				extraPawnForExtraRelationChance: null,
+				relationWithExtraPawnChanceFactor: 0,
+				validatorPreGear: null,
+				validatorPostGear: null,
+				forcedTraits: null,
+				prohibitedTraits: null,
+				fixedBiologicalAge: race.GetReasonableMercenaryAge()
+			);
 		}
-		
-
-		}
-
 	}
+}
 

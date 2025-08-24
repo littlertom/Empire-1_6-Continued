@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-	<FactionColonies.PolicyFCDef>
+	<FactionColonies.FCPolicyDef>
 		<defName>onePeopleUnited</defName> <!--Name of Def -->
 		<label>One People United</label> <!--Lable of Def -->
 		<desc>A society united by common cause holds the strongest of wills for the hardest duties. +50% happiness gain, +1 military level on settlements, -10% basetax.</desc> <!-- Description of trait -->
@@ -12,10 +12,10 @@
 		<traits>
 			<li>onePeopleUnited</li>
 		</traits>
-	</FactionColonies.PolicyFCDef>
+	</FactionColonies.FCPolicyDef>
 	
 	
-	<FactionColonies.PolicyFCDef>
+	<FactionColonies.FCPolicyDef>
 		<defName>diversityWeEmbrace</defName> <!--Name of Def -->
 		<label>Diversity We Embrace</label> <!--Lable of Def -->
 		<desc>A diverse society has no unfilled cracks that could collapse itself. +15% basetax, +50% unrest gain, +.5 prosperity recovery.</desc> <!-- Description of trait -->
@@ -26,10 +26,10 @@
 		<traits>
 			<li>diversityWeEmbrace</li>
 		</traits>
-	</FactionColonies.PolicyFCDef>
+	</FactionColonies.FCPolicyDef>
 	
 	
-	<FactionColonies.PolicyFCDef>
+	<FactionColonies.FCPolicyDef>
 		<defName>royalHeritage</defName> <!--Name of Def -->
 		<label>Royal Heritage</label> <!--Lable of Def -->
 		<desc>A society under the command of a royal family is unified in its traditions. +$25 modifier to tithe taxes, -10% cost to build a new settlement, -500 silver cost to build a settlement.</desc> <!-- Description of trait -->
@@ -40,10 +40,10 @@
 		<traits>
 			<li>royalHeritage</li>
 		</traits>
-	</FactionColonies.PolicyFCDef>
+	</FactionColonies.FCPolicyDef>
 	
 	
-	<FactionColonies.PolicyFCDef>
+	<FactionColonies.FCPolicyDef>
 		<defName>companyUnion</defName> <!--Name of Def -->
 		<label>Company Union</label> <!--Lable of Def -->
 		<desc>A corporation that has struck out their create their own self-sufficient trade empire. -$10 to worker cost, +1 Max worker, +2 overmax workers.</desc> <!-- Description of trait -->
@@ -54,10 +54,10 @@
 		<traits>
 			<li>companyUnion</li>
 		</traits>
-	</FactionColonies.PolicyFCDef>
+	</FactionColonies.FCPolicyDef>
 	
 	
-	<FactionColonies.PolicyFCDef>
+	<FactionColonies.FCPolicyDef>
 		<defName>tradersFederation</defName> <!--Name of Def -->
 		<label>Trader's Federation</label> <!--Lable of Def -->
 		<desc>A society in which those of power are those with the wealth to spend. +10% tax, -$25 modifier for tithes, +$15 worker cost.</desc> <!-- Description of trait -->
@@ -68,10 +68,10 @@
 		<traits>
 			<li>tradersFederation</li>
 		</traits>
-	</FactionColonies.PolicyFCDef>
+	</FactionColonies.FCPolicyDef>
 	
 	
-	<FactionColonies.PolicyFCDef>
+	<FactionColonies.FCPolicyDef>
 		<defName>scienceFoundation</defName> <!--Name of Def -->
 		<label>Science Foundation</label> <!--Lable of Def -->
 		<desc>A society that values knowledge and exploring the unknown. +25% research production. -5% base tax.</desc> <!-- Description of trait -->
@@ -82,6 +82,6 @@
 		<traits>
 			<li>scienceFoundation</li>
 		</traits>
-	</FactionColonies.PolicyFCDef>
+	</FactionColonies.FCPolicyDef>
 	
 </Defs>
