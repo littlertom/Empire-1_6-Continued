@@ -8,23 +8,44 @@ using Verse;
 
 namespace FactionColonies
 {
+    public enum BuildingFilter
+    {
+        All,
+        Happiness,
+        Food,
+        Weapons,
+        Apparel,
+        Research,
+        Medicine,
+        Power,
+        Basetax,
+        Workers
+    }
+
     class FCBuildingWindow : Window
     {
         readonly SettlementFC settlement;
         readonly int buildingSlot;
         readonly BuildingFCDef buildingDef;
         readonly List<BuildingFCDef> buildingList;
+        readonly List<BuildingFCDef> filteredBuildingList;
         readonly FactionFC factionfc;
 
         private static readonly int offset = 8;
         private Vector2 scrollPosition = Vector2.zero;
         private static readonly int rowHeight = 90;
         
+        // Filter state
+        private BuildingFilter currentFilter = BuildingFilter.All;
+        private static readonly int filterButtonHeight = 25;
+        private static readonly int filterRowHeight = 30;
+        
         // Dynamic rectangles that will be calculated based on window size
         Rect TopWindow;
         Rect TopIcon;
         Rect TopName;
         Rect TopDescription;
+        Rect FilterArea;
 
         // Window size settings - add these fields
         public float buildingWindowWidth = 450f;
@@ -62,6 +83,166 @@ namespace FactionColonies
             TopIcon = new Rect(15, topWindowHeight - 74, 64, 64);
             TopName = new Rect(15, 15, inRect.width - 30, 30);
             TopDescription = new Rect(95, topWindowHeight - 74, inRect.width - 110, 64);
+            FilterArea = new Rect(5, topWindowHeight + 5, inRect.width - 10, filterRowHeight * 2 + 5);
+        }
+
+        private void DrawFilterButtons(Rect inRect)
+        {
+            // Define filter categories
+            var filters = new[]
+            {
+                BuildingFilter.All,
+                BuildingFilter.Happiness,
+                BuildingFilter.Food,
+                BuildingFilter.Weapons,
+                BuildingFilter.Apparel,
+                BuildingFilter.Research,
+                BuildingFilter.Medicine,
+                BuildingFilter.Power,
+                BuildingFilter.Basetax,
+                BuildingFilter.Workers
+            };
+
+            GameFont fontBefore = Text.Font;
+            TextAnchor anchorBefore = Text.Anchor;
+            Text.Font = GameFont.Tiny;
+
+            // Calculate button dimensions
+            int buttonsPerRow = 5;
+            float buttonWidth = (FilterArea.width - 10) / buttonsPerRow;
+            float buttonHeight = filterButtonHeight;
+
+            for (int i = 0; i < filters.Length; i++)
+            {
+                int row = i / buttonsPerRow;
+                int col = i % buttonsPerRow;
+                
+                Rect buttonRect = new Rect(
+                    FilterArea.x + 5 + (col * buttonWidth),
+                    FilterArea.y + 5 + (row * (buttonHeight + 5)),
+                    buttonWidth - 5,
+                    buttonHeight
+                );
+
+                bool isSelected = currentFilter == filters[i];
+                
+                // Draw button background
+                if (isSelected)
+                {
+                    // Draw selected state with blue background
+                    Widgets.DrawBoxSolid(buttonRect, new Color(0.2f, 0.5f, 0.8f, 0.8f));
+                    Widgets.DrawBox(buttonRect, 1);
+                }
+                else
+                {
+                    // Draw normal button background
+                    if (Widgets.ButtonInvisible(buttonRect))
+                    {
+                        currentFilter = filters[i];
+                        ApplyFilter();
+                    }
+                    Widgets.DrawAtlas(buttonRect, Widgets.ButtonBGAtlas);
+                }
+                
+                // Draw text manually with consistent centering
+                Text.Anchor = TextAnchor.MiddleCenter;
+                Color textColor = isSelected ? Color.white : Color.white;
+                GUI.color = textColor;
+                Widgets.Label(buttonRect, filters[i].ToString());
+                GUI.color = Color.white;
+                
+                // Handle click for selected buttons
+                if (isSelected && Widgets.ButtonInvisible(buttonRect))
+                {
+                    // Allow clicking selected button to deselect (go back to All)
+                    currentFilter = BuildingFilter.All;
+                    ApplyFilter();
+                }
+            }
+
+            Text.Font = fontBefore;
+            Text.Anchor = anchorBefore;
+        }
+
+        private void ApplyFilter()
+        {
+            filteredBuildingList.Clear();
+            
+            foreach (var building in buildingList)
+            {
+                if (ShouldShowBuilding(building))
+                {
+                    filteredBuildingList.Add(building);
+                }
+            }
+        }
+
+        private bool ShouldShowBuilding(BuildingFCDef building)
+        {
+            if (currentFilter == BuildingFilter.All)
+                return true;
+
+            // Get the building's traits
+            if (building.traits == null || building.traits.Count == 0)
+                return false;
+
+            foreach (var traitDefName in building.traits)
+            {
+                var traitDef = DefDatabase<FCTraitEffectDef>.GetNamedSilentFail(traitDefName.defName);
+                if (traitDef == null) continue;
+
+                switch (currentFilter)
+                {
+                    case BuildingFilter.Happiness:
+                        if (traitDef.happinessLostBase != 0 || traitDef.happinessGainedBase != 0 || 
+                            Math.Abs(traitDef.happinessLostMultiplier - 1.0) > 0.001 || 
+                            Math.Abs(traitDef.happinessGainedMultiplier - 1.0) > 0.001)
+                            return true;
+                        break;
+                    
+                    case BuildingFilter.Food:
+                        if (traitDef.productionBaseFood != 0 || Math.Abs(traitDef.productionMultiplierFood - 1.0) > 0.001)
+                            return true;
+                        break;
+                    
+                    case BuildingFilter.Weapons:
+                        if (traitDef.productionBaseWeapons != 0 || Math.Abs(traitDef.productionMultiplierWeapons - 1.0) > 0.001)
+                            return true;
+                        break;
+                    
+                    case BuildingFilter.Apparel:
+                        if (traitDef.productionBaseApparel != 0 || Math.Abs(traitDef.productionMultiplierApparel - 1.0) > 0.001)
+                            return true;
+                        break;
+                    
+                    case BuildingFilter.Research:
+                        if (traitDef.productionBaseResearch != 0 || Math.Abs(traitDef.productionMultiplierResearch - 1.0) > 0.001)
+                            return true;
+                        break;
+                    
+                    case BuildingFilter.Medicine:
+                        if (traitDef.productionBaseMedicine != 0 || Math.Abs(traitDef.productionMultiplierMedicine - 1.0) > 0.001)
+                            return true;
+                        break;
+                    
+                    case BuildingFilter.Power:
+                        if (traitDef.productionBasePower != 0 || Math.Abs(traitDef.productionMultiplierPower - 1.0) > 0.001)
+                            return true;
+                        break;
+                    
+                    case BuildingFilter.Basetax:
+                        if (traitDef.taxBasePercentage != 0 || traitDef.taxBaseRandomModifier != 0)
+                            return true;
+                        break;
+                    
+                    case BuildingFilter.Workers:
+                        if (traitDef.workerBaseMax != 0 || traitDef.workerBaseOverMax != 0 || traitDef.workerBaseCost != 0)
+                            return true;
+                        break;
+                }
+            }
+
+            return false;
         }
 
         public override void DoWindowContents(Rect inRect)
@@ -73,18 +254,22 @@ namespace FactionColonies
             GameFont fontBefore = Text.Font;
             TextAnchor anchorBefore = Text.Anchor;
             
-            // Dynamic scroll area that adjusts to window size
-            var outRect = new Rect(0f, TopWindow.height + 5f, inRect.width, inRect.height - TopWindow.height - 10f);
-            var viewRect = new Rect(outRect.x, outRect.y, outRect.width - 16f, buildingList.Count * rowHeight);
+            // Draw filter buttons
+            DrawFilterButtons(inRect);
+            
+            // Dynamic scroll area that adjusts to window size and accounts for filter area
+            var scrollAreaTop = FilterArea.y + FilterArea.height + 5;
+            var outRect = new Rect(0f, scrollAreaTop, inRect.width, inRect.height - scrollAreaTop);
+            var viewRect = new Rect(outRect.x, outRect.y, outRect.width - 16f, filteredBuildingList.Count * rowHeight);
             
             Widgets.BeginScrollView(outRect, ref scrollPosition, viewRect);
             var ls = new Listing_Standard();
             ls.Begin(viewRect);
             
             //Buildings
-            for (int i = 0; i < buildingList.Count; i++)
+            for (int i = 0; i < filteredBuildingList.Count; i++)
             {
-                BuildingFCDef building = buildingList[i];
+                BuildingFCDef building = filteredBuildingList[i];
                 var newBuildingWindow = ls.GetRect(rowHeight);
                 var newBuildingIcon = new Rect(newBuildingWindow.x + offset, newBuildingWindow.y + offset, 64, 64);
                 var newBuildingLabel = new Rect(newBuildingWindow.x + 80, newBuildingWindow.y + 5,
@@ -189,6 +374,8 @@ namespace FactionColonies
         {
             factionfc = Find.World.GetComponent<FactionFC>();
             buildingList = new List<BuildingFCDef>();
+            filteredBuildingList = new List<BuildingFCDef>();
+            
             foreach (BuildingFCDef building in DefDatabase<BuildingFCDef>.AllDefsListForReading.Where(def => def.RequiredModsLoaded))
             {
                 if(building.defName != "Empty" && building.defName != "Construction")
@@ -207,6 +394,9 @@ namespace FactionColonies
             }
 
             buildingList.Sort(FactionColonies.CompareBuildingDef);
+
+            // Initialize filtered list with all buildings
+            filteredBuildingList.AddRange(buildingList);
 
             forcePause = false;
             draggable = true;
