@@ -29,10 +29,58 @@
 		<introStringBase>A new update for {0} has been released: v.{1}. The following changes have occurred:</introStringBase>
 	</FactionColonies.PatchNoteDef>
 
-		<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
+	<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
+		<defName>0_43_2</defName>
+		<label>Building Menu Overhaul and Stability Fixes</label>
+		<description>Major improvements to the building menu system, expanded biome support, enhanced road functionality, and numerous critical bug fixes for improved stability.</description>
+
+		<major>0</major>
+		<minor>43</minor>
+		<patch>2</patch>
+
+		<releaseDay>25</releaseDay>
+		<releaseMonth>8</releaseMonth>
+		<releaseYear>2025</releaseYear>
+
+		<patchNoteType>Patch</patchNoteType>
+
+		<patchNoteLines>
+			<li>Building menu has had an overhaul, You can now resize and filter buildings</li>
+			<li>Alpha biomes support - Pecha</li>
+			<li>Neolithic Buildings - Pecha</li>
+			<li>Roads should be working much better now</li>
+			<li>New roads provide an alert when built</li>
+			<li>Fixed infinite loop crash in tax system with safety checks. Fixed PawnGen errors upon delivery + Safe delivery location coordinate error.</li>
+			<li>Fixed a stack overflow error when opening the Create Settlement screen caused by infinite recursion in IsInAnyShuttleRange</li>
+			<li>Fixed PawnGenerationRequest "incorrect constructor" errors in FCPawnGenerator</li>
+			<li>Fixed Critical XML Definition Errors - Policy System Repair</li>
+			<li>Fixed version tracking and red outline display issues</li>
+			<li>Enhanced patch notes window visual design</li>
+			<li>Improved code stability and asset loading</li>
+			<li>Better user experience with branded default imagery</li>
+		</patchNoteLines>
+
+		<patchNoteImagePaths>
+			<li>PatchNoteImages/global/empire</li>
+		</patchNoteImagePaths>
+
+		<patchNoteImageDescriptions>
+			<li>Fixing policy errors.</li>
+		</patchNoteImageDescriptions>
+
+		<additionalNotes>
+			<li>Please raise any issues you find on the Github page.</li>
+		</additionalNotes>
+
+		<authors>
+			<li>Epistatic</li>
+		</authors>
+	</FactionColonies.PatchNoteDef>
+
+	<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
 		<defName>0_43_1</defName>
-		<label>Dev Preview - Fixing policy errors.</label>
-		<description>This is a patch to fix policy errors.</description>
+		<label>Fixing policy errors.</label>
+		<description>This is a quick patch to fix policy errors.</description>
 
 		<major>0</major>
 		<minor>43</minor>
@@ -45,16 +93,15 @@
 		<patchNoteType>Patch</patchNoteType>
 
 		<patchNoteLines>
-			<li>Dev preview - Fixing policy errors.</li>
+			<li>Fixing policy errors.</li>
 		</patchNoteLines>
 
 		<patchNoteImagePaths>
-			<li>PatchNoteImages/global/devpreview</li>
+			<li>PatchNoteImages/global/empire</li>
 		</patchNoteImagePaths>
 
 		<patchNoteImageDescriptions>
-			<li>NOT FOR PRODUCTION USE</li>
-			<li>Testing Purposes Only.</li>
+			<li>Fixing policy errors.</li>
 		</patchNoteImageDescriptions>
 
 		<additionalNotes>

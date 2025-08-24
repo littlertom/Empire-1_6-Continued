@@ -131,4 +131,13 @@
 <archotechGenerator.label>Archotech Generator</archotechGenerator.label>
 <archotechGenerator.desc>An arcane generator that even the maintainers can't hope to understand, but have acquired. +100% power production. $1000 upkeep cost.</archotechGenerator.desc>
 
+<!-- Neolithic Buildings -->
+<barracks.label>Barracks</barracks.label>
+<tradingPost.label>Trading Post</tradingPost.label>
+<migrantHousing.label>Migrant Housing</migrantHousing.label>
+<quarry.label>Quarry</quarry.label>
+<trainingYard.label>Training Yard</trainingYard.label>
+<deforestationCamp.label>Deforestation Camp</deforestationCamp.label>
+<herbalMedicineFarm.label>Herbal Medicine Farm</herbalMedicineFarm.label>
+
 </LanguageData>

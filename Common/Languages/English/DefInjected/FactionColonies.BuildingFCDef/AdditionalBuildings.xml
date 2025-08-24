@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <!-- Neolithic Buildings -->
+  <cerealFarmland.label>Cereal Farmland</cerealFarmland.label>
+  <grainMill.label>Grain Mill</grainMill.label>
+  <granary.label>Granary</granary.label>
+  <fletcher.label>Fletcher</fletcher.label>
+  <stoneMason.label>Stone Mason</stoneMason.label>
+  <furrier.label>Furrier</furrier.label>
+  <huntersHut.label>Hunter's Hut</huntersHut.label>
+  <brewer.label>Brewer</brewer.label>
+  <carpenter.label>Carpenter</carpenter.label>
+  <apothecary.label>Apothecary</apothecary.label>
+  <alchemist.label>Alchemist</alchemist.label>
+  <ancientAcademy.label>Ancient Academy</ancientAcademy.label>
+  <slaveMarket.label>Slave Market</slaveMarket.label>
+  <balif.label>Balif</balif.label>
+  <militia.label>Militia</militia.label>
+
+</LanguageData>
