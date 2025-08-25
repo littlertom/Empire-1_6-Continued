@@ -305,16 +305,34 @@ namespace FactionColonies
                     case "settleNewColony":
                     {
                         //Settle new colony event
-                        //Log.Message(events[i].def.defName + " event triggered" + Find.TickManager.TicksGame)
                         faction.addExperienceToFactionLevel(10f);
-                        if (Find.World.info.name == evt.planetName)
+                        
+                        // Check if this is an orbital platform
+                        if (evt.isOrbitalPlatform)
                         {
-                            FactionColonies.createPlayerColonySettlement(evt.location, true, evt.planetName);
+                            // Create orbital platform
+                            if (Find.World.info.name == evt.planetName)
+                            {
+                                CreateOrbitalPlatformSettlement(evt.location, evt.orbitalTier, evt.planetName);
+                            }
+                            else
+                            {
+                                // Handle SoS2 orbital platforms if needed
+                                CreateOrbitalPlatformSettlement(evt.location, evt.orbitalTier, evt.planetName);
+                            }
                         }
                         else
                         {
-                            FactionColonies.createPlayerColonySettlement(evt.location, false, evt.planetName);
-                            faction.createSettlementQueue.Add(new SettlementSoS2Info(evt.planetName, evt.location));
+                            // Regular settlement creation
+                            if (Find.World.info.name == evt.planetName)
+                            {
+                                FactionColonies.createPlayerColonySettlement(evt.location, true, evt.planetName);
+                            }
+                            else
+                            {
+                                FactionColonies.createPlayerColonySettlement(evt.location, false, evt.planetName);
+                                faction.createSettlementQueue.Add(new SettlementSoS2Info(evt.planetName, evt.location));
+                            }
                         }
 
                         faction.settlementCaravansList.Remove(evt.location.ToString());
@@ -667,6 +685,210 @@ namespace FactionColonies
 
             faction.Bills.Remove(bill);
         }
+
+        private static void CreateOrbitalPlatformSettlement(int tile, OrbitalPlatformTier tier, string planetName)
+        {
+            try
+            {
+                // Create orbital platform settlement directly (bypass tile validation)
+                Faction playerFaction = FactionColonies.getPlayerColonyFaction();
+                FactionFC worldcomp = Find.World.GetComponent<FactionFC>();
+                
+                if (!worldcomp.settlements.Any())
+                {
+                    worldcomp.timeStart = Find.TickManager.TicksGame;
+                }
+
+                // Find an empty orbital tile instead of using the passed tile
+                PlanetTile orbitalTile = FindEmptyOrbitalTile();
+                
+                if (!orbitalTile.Valid)
+                {
+                    Log.Error("Could not find suitable orbital tile for orbital platform");
+                    Messages.Message("Could not find suitable space for orbital platform.", MessageTypeDefOf.RejectInput);
+                    return;
+                }
+
+                Log.Message($"Creating orbital platform at tile {orbitalTile.tileId} in layer {orbitalTile.Layer?.Def?.label ?? "unknown"}");
+
+                // Create settlement data using the orbital tile ID
+                string tierName = GetTierName(tier);
+                string platformName = $"{tierName} Platform";
+                SettlementFC settlementfc = new SettlementFC(platformName, orbitalTile.tileId);
+                
+                // Ensure the name is properly set
+                if (string.IsNullOrEmpty(settlementfc.name))
+                {
+                    settlementfc.name = platformName;
+                }
+                
+                // Set up as orbital platform
+                settlementfc.power.isTithe = true;
+                settlementfc.power.isTitheBool = true;
+                settlementfc.research.isTithe = true;
+                settlementfc.research.isTitheBool = true;
+                settlementfc.planetName = planetName;
+                
+                // Apply tier-specific bonuses
+                ApplyOrbitalTierBonuses(settlementfc, tier);
+                
+                // Apply policies
+                if (worldcomp.hasPolicy(FCPolicyDefOf.militaristic))
+                    settlementfc.constructBuilding(DefDatabase<BuildingFCDef>.GetNamed("barracks"), 0);
+                if (worldcomp.hasPolicy(FCPolicyDefOf.authoritarian))
+                    settlementfc.loyalty = 70;
+                if (worldcomp.hasPolicy(FCPolicyDefOf.egalitarian))
+                    settlementfc.happiness = 60;
+                if (worldcomp.hasPolicy(FCPolicyDefOf.expansionist) && settlementfc.settlementLevel == 1)
+                    settlementfc.upgradeSettlement();
+
+                worldcomp.addSettlement(settlementfc);
+                
+                // Create world object using orbital platform def
+                var orbitalDef = DefDatabase<WorldObjectDef>.GetNamed("FCOrbitalPlatform");
+                if (orbitalDef == null)
+                {
+                    Log.Error("FCOrbitalPlatform WorldObjectDef not found!");
+                    Messages.Message("Orbital platform definition missing.", MessageTypeDefOf.RejectInput);
+                    return;
+                }
+
+                WorldSettlementFC settlement = (WorldSettlementFC)WorldObjectMaker.MakeWorldObject(orbitalDef);
+                if (settlement == null)
+                {
+                    Log.Error("Failed to create WorldSettlementFC object!");
+                    return;
+                }
+
+                Log.Message($"Created WorldSettlementFC object successfully, setting tile to {orbitalTile.tileId}");
+                
+                settlement.Tile = orbitalTile; // Use the PlanetTile directly
+                settlement.SetFaction(playerFaction);
+
+                // Set the settlement property FIRST
+                if (settlement != null && settlementfc != null)
+                {
+                    settlement.settlement = settlementfc;
+                    settlementfc.worldSettlement = settlement; // Add this line to complete the bidirectional link
+                    Log.Message($"Settlement.settlement property linked successfully");
+                }
+                else
+                {
+                    Log.Error($"Cannot link settlement property: settlement={settlement != null}, settlementfc={settlementfc != null}");
+                }
+
+                // THEN set the name (which now works because settlement.settlement is set)
+                string finalName = platformName; // Use platformName directly as fallback
+                if (!string.IsNullOrEmpty(settlementfc?.name))
+                {
+                    finalName = settlementfc.name;
+                }
+
+                Log.Message($"Setting settlement name to: {finalName}");
+
+                if (settlement != null && !string.IsNullOrEmpty(finalName))
+                {
+                    settlement.Name = finalName;
+                    Log.Message($"Settlement name set successfully");
+                }
+                else
+                {
+                    Log.Error($"Cannot set settlement name: settlement={settlement != null}, finalName={finalName}");
+                }
+                
+                // Add to world objects
+                Log.Message($"Adding settlement to world objects...");
+                Find.WorldObjects.Add(settlement);
+                Log.Message($"Added orbital platform to world objects successfully");
+
+                // Force a world render update
+                Find.World.renderer.RegenerateAllLayersNow();
+                Log.Message($"Forced world renderer update");
+
+                Find.LetterStack.ReceiveLetter("Orbital Platform Complete", 
+                    $"The {tierName} Platform has been completed and is now operational!", 
+                    LetterDefOf.PositiveEvent);
+                
+                Log.Message($"Orbital platform created successfully at tile {orbitalTile.tileId} in layer {orbitalTile.Layer?.Def?.label ?? "unknown"}");
+                
+                // Debug: List all world objects to see if our platform was added
+                Log.Message($"Total world objects after creation: {Find.WorldObjects.AllWorldObjects.Count()}");
+                var orbitalObjects = Find.WorldObjects.AllWorldObjects.Where(wo => wo.def?.defName == "FCOrbitalPlatform").ToList();
+                Log.Message($"Orbital platforms in world: {orbitalObjects.Count}");
+                foreach (var obj in orbitalObjects)
+                {
+                    Log.Message($"  - Platform at tile {obj.Tile} with name {obj.Label}");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Log.Error($"Exception in CreateOrbitalPlatformSettlement: {ex.Message}\n{ex.StackTrace}");
+            }
+        }
+
+        private static string GetTierName(OrbitalPlatformTier tier)
+        {
+            switch (tier)
+            {
+                case OrbitalPlatformTier.Basic: return "Basic Orbital";
+                case OrbitalPlatformTier.Logistics: return "Logistics";
+                case OrbitalPlatformTier.Advanced: return "Advanced Orbital";
+                case OrbitalPlatformTier.ZeroG: return "Zero-G Manufacturing";
+                default: return "Orbital";
+            }
+        }
+
+        private static void ApplyOrbitalTierBonuses(SettlementFC settlement, OrbitalPlatformTier tier)
+        {
+            switch (tier)
+            {
+                case OrbitalPlatformTier.Logistics:
+                    // 50% faster tax delivery - modify settlement properties
+                    break;
+                case OrbitalPlatformTier.Advanced:
+                    // 25% lower construction cost, larger size
+                    settlement.upgradeSettlement(); // Start at level 2
+                    break;
+                case OrbitalPlatformTier.ZeroG:
+                    // Specialized production bonuses
+                    settlement.upgradeSettlement();
+                    // Add production bonuses
+                    break;
+            }
+        }
+
+        // Add the FindEmptyOrbitalTile method to the FCEventMaker class
+        private static PlanetTile FindEmptyOrbitalTile()
+        {
+            var worldGrid = Find.WorldGrid;
+            var existingObjectTiles = Find.WorldObjects.AllWorldObjects.Select(wo => wo.Tile).ToHashSet();
+            
+            // If Odyssey is active and orbit layer exists, try to find a tile in orbit first
+            if (ModsConfig.OdysseyActive && worldGrid.Orbit != null)
+            {
+                for (int attempts = 0; attempts < 1000; attempts++)
+                {
+                    int randomTileId = Rand.Range(0, worldGrid.Orbit.TilesCount);
+                    PlanetTile orbitalTile = new PlanetTile(randomTileId, worldGrid.Orbit);
+                    
+                    if (!existingObjectTiles.Contains(orbitalTile))
+                        return orbitalTile;
+                }
+            }
+            
+            // Fallback: find any empty surface tile (though this shouldn't happen for orbital platforms)
+            Log.Warning("Could not find orbital tile, falling back to surface tile");
+            for (int attempts = 0; attempts < 1000; attempts++)
+            {
+                int randomTileId = Rand.Range(0, worldGrid.TilesCount);
+                PlanetTile surfaceTile = new PlanetTile(randomTileId, worldGrid.Surface);
+                
+                if (!existingObjectTiles.Contains(surfaceTile))
+                    return surfaceTile;
+            }
+            
+            return PlanetTile.Invalid;
+        }
     }
 
     public class FCEvent : IExposable, ILoadReferenceable
@@ -762,6 +984,10 @@ namespace FactionColonies
             Scribe_References.Look(ref militaryForceDefendingFaction, "militaryForceDefendingFaction");
             Scribe_References.Look(ref settlementFCDefending, "SettlementFCDefending");
             Scribe_Values.Look(ref isMilitaryEvent, "isMilitaryEvent");
+
+            // Orbital Platform specific fields
+            Scribe_Values.Look(ref isOrbitalPlatform, "isOrbitalPlatform", false);
+            Scribe_Values.Look(ref orbitalTier, "orbitalTier", OrbitalPlatformTier.Basic);
         }
 
         public FCEventDef def = new FCEventDef();
@@ -827,30 +1053,9 @@ namespace FactionColonies
         public SettlementFC settlementFCDefending;
         public bool isMilitaryEvent;
 
-
-        public string GetUniqueLoadID()
-        {
-            return "FCEvent_" + loadID;
-        }
-
-        public void runAction()
-        {
-            if (!classToRun.NullOrEmpty() && !classMethodToRun.NullOrEmpty())
-            {
-                Type typ = null;
-                foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
-                {
-                    var type1 = a.GetType(classToRun);
-                    if (type1 != null)
-                        typ = type1;
-                }
-
-                var obj = Activator.CreateInstance(typ);
-                object[] paramArgu = passEventToClassMethodToRun ? new object[] {this} : new object[] { };
-
-                Traverse.Create(obj).Method(classMethodToRun, paramArgu).GetValue();
-            }
-        }
+        // Orbital Platform specific fields
+        public bool isOrbitalPlatform = false;
+        public OrbitalPlatformTier orbitalTier = OrbitalPlatformTier.Basic;
     }
 
 

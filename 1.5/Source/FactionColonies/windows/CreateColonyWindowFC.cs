@@ -5,6 +5,7 @@ using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 using FactionColonies.util;
+using System.Collections.Generic;
 
 namespace FactionColonies
 {
@@ -84,10 +85,157 @@ namespace FactionColonies
             DrawProduction();
             DrawCreateSettlementButton();
 
+            // Orbital Platform button (only show if research is complete)
+            if (CanCreateOrbitalPlatforms())
+            {
+                int orbitalBtnLength = 140;
+                if (Widgets.ButtonText(
+                        new Rect((InitialSize.x - 32 - orbitalBtnLength) / 2f, 535 - 38f, orbitalBtnLength, 32),
+                        "Create Orbital Platform"))
+                {
+                    Find.WindowStack.Add(new OrbitalPlatformCreationWindow());
+                }
+            }
+
             //reset anchor/font
             Text.Font = fontBefore;
             Text.Anchor = anchorBefore;
         }
+
+        private void SpawnOrbitalPlatformAboveSelectedTile()
+        {
+            // Resolve a tile even if none is selected
+            int targetTile = ResolveTargetTile();
+            currentTileSelected = targetTile; // keep your UI in sync
+
+            // Use our custom orbital platform definition
+            var orbitalWorldObjectDef = DefDatabase<WorldObjectDef>.GetNamedSilentFail("FCOrbitalPlatform");
+
+            if (orbitalWorldObjectDef == null)
+            {
+                Log.Warning("FCOrbitalPlatform WorldObjectDef not found. This mod may not be properly installed.");
+                Messages.Message("Could not find orbital platform definition. Check mod installation.", MessageTypeDefOf.RejectInput, false);
+                return;
+            }
+
+            Log.Message($"=== USING CUSTOM ORBITAL PLATFORM DEF ===");
+            Log.Message($"Using def: {orbitalWorldObjectDef.defName}");
+            Log.Message($"ExpandingIconTexture: {orbitalWorldObjectDef.expandingIconTexture}");
+
+            // DEBUG: Check if the texture actually loads
+            Log.Message($"=== TEXTURE DEBUG ===");
+            var testTexture = ContentFinder<Texture2D>.Get("World/WorldObjects/Expanding/SettlementPlatform", false);
+            Log.Message($"Can load SettlementPlatform texture: {testTexture != null}");
+
+            if (testTexture != null)
+            {
+                Log.Message($"SettlementPlatform texture name: {testTexture.name}");
+            }
+            else
+            {
+                Log.Warning("SettlementPlatform texture not found! Checking available textures...");
+                
+                // Test other known expanding textures
+                var availableTextures = new string[]
+                {
+                    "World/WorldObjects/Expanding/Settlement",
+                    "World/WorldObjects/Expanding/Site", 
+                    "World/WorldObjects/Expanding/Caravan",
+                    "World/WorldObjects/Expanding/AsteroidMine"
+                };
+                
+                foreach (var texPath in availableTextures)
+                {
+                    var tex = ContentFinder<Texture2D>.Get(texPath, false);
+                    Log.Message($"  {texPath}: {tex != null}");
+                }
+            }
+
+            // DEBUG: Check the def properties
+            Log.Message($"ExpandingIcon enabled: {orbitalWorldObjectDef.expandingIcon}");
+            Log.Message($"UseDynamicDrawer: {orbitalWorldObjectDef.useDynamicDrawer}");
+            Log.Message($"ExpandingIconDrawSize: {orbitalWorldObjectDef.expandingIconDrawSize}");
+            Log.Message($"FullyExpandedInSpace: {orbitalWorldObjectDef.fullyExpandedInSpace}");
+
+            // Find an empty orbital tile for the platform
+            PlanetTile orbitalTile = FindEmptyOrbitalTile();
+
+            if (!orbitalTile.Valid)
+            {
+                Messages.Message("Could not find suitable empty space for orbital platform.", MessageTypeDefOf.RejectInput, false);
+                return;
+            }
+
+            // Create the orbital platform using our custom def
+            MapParent orbitalPlatform = (MapParent)WorldObjectMaker.MakeWorldObject(orbitalWorldObjectDef);
+            orbitalPlatform.Tile = orbitalTile;  // Use orbital tile, not target tile
+            orbitalPlatform.SetFaction(Faction.OfPlayer);
+
+            // Set the name
+            try
+            {
+                int platformCount = Find.WorldObjects.AllWorldObjects.Count(wo => wo.Label?.Contains("Orbital Platform") == true) + 1;
+                string platformName = $"Orbital Platform {platformCount}";
+                
+                var labelField = orbitalPlatform.GetType().GetField("labelInt", 
+                    System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                if (labelField != null)
+                {
+                    labelField.SetValue(orbitalPlatform, platformName);
+                    Log.Message($"Set platform name to: {platformName}");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Log.Warning($"Could not set orbital platform name: {ex.Message}");
+            }
+
+            // Add it to the world
+            Find.WorldObjects.Add(orbitalPlatform);
+
+            // DON'T generate a map - just show success message
+            string layerName = Find.WorldGrid[targetTile].Layer?.Def?.label ?? "space";
+            Messages.Message($"Orbital platform created in {layerName}. Click on it to visit when needed.", 
+                MessageTypeDefOf.PositiveEvent, false);
+
+            // Optional: Switch world view to show the new platform
+            if (Find.WorldSelector != null)
+            {
+                Find.WorldSelector.ClearSelection();
+                Find.WorldSelector.Select(orbitalPlatform);
+            }
+
+            Log.Message($"=== ORBITAL PLATFORM CREATION COMPLETE ===");
+        }
+
+        private int ResolveTargetTile()
+        {
+            // If you already have a selection, use it
+            if (currentTileSelected >= 0)
+                return currentTileSelected;
+
+            // Prefer the player’s current map tile (if in a map)
+            var map = Find.CurrentMap;
+            if (map != null)
+                return map.Tile;
+
+            // Fallback: your faction capital (if set)
+            if (faction != null && faction.capitalLocation >= 0)
+                return faction.capitalLocation;
+
+            // Fallback: any player home map
+            var home = Find.Maps.FirstOrDefault(m => m.IsPlayerHome);
+            if (home != null)
+                return home.Tile;
+
+            // Last resort: pick a random valid settlement tile
+            if (TileFinder.TryFindNewSiteTile(out PlanetTile randomTile))
+                return randomTile;
+
+            // Ultra fallback: tile 0 (should be safe in most seeds)
+            return 0;
+        }
+
 
         private void GetTileData()
         {
@@ -246,6 +394,66 @@ namespace FactionColonies
 
             //Bottom Text - Gamers Rise Up
             Widgets.Label(new Rect(rect.x, rect.y + rect.height / 2, rect.width, rect.height / 2f), text2);
+        }
+
+        private PlanetTile FindEmptyOrbitalTile()
+        {
+            var worldGrid = Find.WorldGrid;
+            var existingObjectTiles = Find.WorldObjects.AllWorldObjects.Select(wo => wo.Tile).ToHashSet();
+            
+            // If Odyssey is active and orbit layer exists, try to find a tile in orbit first
+            if (ModsConfig.OdysseyActive && worldGrid.Orbit != null)
+            {
+                for (int attempts = 0; attempts < 1000; attempts++)
+                {
+                    int randomTileId = Rand.Range(0, worldGrid.Orbit.TilesCount);
+                    PlanetTile orbitalTile = new PlanetTile(randomTileId, worldGrid.Orbit);
+                    
+                    if (!existingObjectTiles.Contains(orbitalTile))
+                        return orbitalTile;
+                }
+            }
+            
+            // Fallback: find any empty surface tile
+            for (int attempts = 0; attempts < 1000; attempts++)
+            {
+                int randomTileId = Rand.Range(0, worldGrid.TilesCount);
+                PlanetTile surfaceTile = new PlanetTile(randomTileId, worldGrid.Surface);
+                
+                if (!existingObjectTiles.Contains(surfaceTile))
+                    return surfaceTile;
+            }
+            
+            return PlanetTile.Invalid;
+        }
+
+        private bool CanCreateOrbitalPlatforms()
+        {
+            var research = DefDatabase<ResearchProjectDef>.GetNamedSilentFail("OrbitalConstruction");
+            return research != null && research.IsFinished;
+        }
+
+        private OrbitalPlatformTier GetHighestOrbitalTier()
+        {
+            var tiers = new System.Collections.Generic.List<OrbitalPlatformTier>();
+            if (DefDatabase<ResearchProjectDef>.GetNamed("ZeroGManufacturing").IsFinished)
+                tiers.Add(OrbitalPlatformTier.ZeroG);
+            if (DefDatabase<ResearchProjectDef>.GetNamed("AdvancedOrbitalEngineering").IsFinished)
+                tiers.Add(OrbitalPlatformTier.Advanced);
+            if (DefDatabase<ResearchProjectDef>.GetNamed("OrbitalLogistics").IsFinished)
+                return OrbitalPlatformTier.Logistics;
+            if (DefDatabase<ResearchProjectDef>.GetNamed("OrbitalConstruction").IsFinished)
+                tiers.Add(OrbitalPlatformTier.Basic);
+            return OrbitalPlatformTier.None;
+        }
+
+        public enum OrbitalPlatformTier
+        {
+            None,
+            Basic,
+            Logistics,
+            Advanced,
+            ZeroG
         }
     }
 }

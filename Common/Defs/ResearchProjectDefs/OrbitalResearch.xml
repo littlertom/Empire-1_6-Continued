@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ResearchProjectDef>
+		<defName>OrbitalConstruction</defName>
+		<label>Orbital Construction</label>
+		<description>Learn the basics of constructing habitable structures in the void of space. Unlocks basic space station construction capabilities.</description>
+		<baseCost>8000</baseCost>
+		<techLevel>Spacer</techLevel>
+		<tab>FCEmpire</tab>
+		<prerequisites>
+			<li>ShipBasics</li>
+			<li>Fabrication</li>
+		</prerequisites>
+		<researchViewX>4.00</researchViewX>
+		<researchViewY>1.00</researchViewY>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>AdvancedOrbitalEngineering</defName>
+		<label>Advanced Orbital Engineering</label>
+		<description>Master advanced techniques for constructing larger and more efficient orbital installations. Reduces orbital platform construction costs by 25%.</description>
+		<baseCost>12000</baseCost>
+		<techLevel>Ultra</techLevel>
+		<tab>FCEmpire</tab>
+		<prerequisites>
+			<li>OrbitalConstruction</li>
+		</prerequisites>
+		<researchViewX>4.00</researchViewX>
+		<researchViewY>2.00</researchViewY>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>OrbitalLogistics</defName>
+		<label>Orbital Logistics</label>
+		<description>Develop efficient systems for moving resources between orbital platforms and planetary surfaces. Reduces tax delivery time by 50% and unlocks special space station buildings.</description>
+		<baseCost>6000</baseCost>
+		<techLevel>Ultra</techLevel>
+		<tab>FCEmpire</tab>
+		<prerequisites>
+			<li>TransportPod</li>
+			<li>OrbitalConstruction</li>
+		</prerequisites>
+		<researchViewX>5.00</researchViewX>
+		<researchViewY>1.50</researchViewY>
+	</ResearchProjectDef>
+
+	<ResearchProjectDef>
+		<defName>ZeroGManufacturing</defName>
+		<label>Zero-G Manufacturing</label>
+		<description>Harness the unique properties of zero gravity to create specialized production facilities that operate with incredible efficiency in space.</description>
+		<baseCost>10000</baseCost>
+		<techLevel>Ultra</techLevel>
+		<tab>FCEmpire</tab>
+		<prerequisites>
+			<li>AdvancedOrbitalEngineering</li>
+		</prerequisites>
+		<researchViewX>4.00</researchViewX>
+		<researchViewY>3.00</researchViewY>
+	</ResearchProjectDef>
+</Defs>
