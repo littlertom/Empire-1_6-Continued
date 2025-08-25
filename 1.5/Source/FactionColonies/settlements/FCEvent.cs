@@ -769,7 +769,7 @@ namespace FactionColonies
                 if (settlement != null && settlementfc != null)
                 {
                     settlement.settlement = settlementfc;
-                    settlementfc.worldSettlement = settlement; // Add this line to complete the bidirectional link
+                    settlementfc.worldSettlement = settlement; // Add this line
                     Log.Message($"Settlement.settlement property linked successfully");
                 }
                 else
@@ -1056,6 +1056,30 @@ namespace FactionColonies
         // Orbital Platform specific fields
         public bool isOrbitalPlatform = false;
         public OrbitalPlatformTier orbitalTier = OrbitalPlatformTier.Basic;
+
+        public string GetUniqueLoadID()
+        {
+            return "FCEvent_" + loadID;
+        }
+
+        public void runAction()
+        {
+            if (!classToRun.NullOrEmpty() && !classMethodToRun.NullOrEmpty())
+            {
+                Type typ = null;
+                foreach (var a in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    var type1 = a.GetType(classToRun);
+                    if (type1 != null)
+                        typ = type1;
+                }
+
+                var obj = Activator.CreateInstance(typ);
+                object[] paramArgu = passEventToClassMethodToRun ? new object[] {this} : new object[] { };
+
+                Traverse.Create(obj).Method(classMethodToRun, paramArgu).GetValue();
+            }
+        }
     }
 
 
