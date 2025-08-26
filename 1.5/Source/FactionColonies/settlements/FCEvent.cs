@@ -728,6 +728,9 @@ namespace FactionColonies
                 settlementfc.research.isTithe = true;
                 settlementfc.research.isTitheBool = true;
                 settlementfc.planetName = planetName;
+
+                // Ensure orbital platforms start in a good state
+                settlementfc.isUnderAttack = false;
                 
                 // Apply tier-specific bonuses
                 ApplyOrbitalTierBonuses(settlementfc, tier);
@@ -840,21 +843,105 @@ namespace FactionColonies
 
         private static void ApplyOrbitalTierBonuses(SettlementFC settlement, OrbitalPlatformTier tier)
         {
+            // Create fake biome/hilliness data for orbital platforms with random values
+            var orbitalBiomeDef = new BiomeResourceDef();
+            var orbitalHillinessDef = new BiomeResourceDef();
+            
+            // Initialize the lists
+            orbitalBiomeDef.BaseProductionAdditive = new List<double>();
+            orbitalBiomeDef.BaseProductionMultiplicative = new List<double>();
+            orbitalHillinessDef.BaseProductionAdditive = new List<double>();
+            orbitalHillinessDef.BaseProductionMultiplicative = new List<double>();
+            
+            // Generate random values for each resource type (9 resources)
+            for (int i = 0; i < ResourceUtils.resourceTypes.Length; i++)
+            {
+                // Base production additive: 0.5 to 1.5, weighted toward common values
+                double additiveValue = GetWeightedRandomAdditive();
+                orbitalBiomeDef.BaseProductionAdditive.Add(Math.Round(additiveValue, 1));
+                orbitalHillinessDef.BaseProductionAdditive.Add(0.0); // Keep hilliness additive at 0
+                
+                // Base production multiplicative: 0.5 to 1.7, weighted toward common values
+                double multiplicativeValue = GetWeightedRandomMultiplicative();
+                orbitalBiomeDef.BaseProductionMultiplicative.Add(Math.Round(multiplicativeValue, 1));
+                orbitalHillinessDef.BaseProductionMultiplicative.Add(1.0); // Keep hilliness multiplier at 1
+            }
+            
+            // Override the settlement's biome and hilliness definitions
+            settlement.biomeDef = orbitalBiomeDef;
+            settlement.hillinessDef = orbitalHillinessDef;
+            settlement.biome = "OrbitalSpace";
+            settlement.hilliness = "Orbital";
+            
+            // Reinitialize base production with the new fake biome data
+            settlement.initBaseProduction();
+            
+            // Apply tier-specific bonuses (rounded to 1 decimal)
             switch (tier)
             {
                 case OrbitalPlatformTier.Logistics:
-                    // 50% faster tax delivery - modify settlement properties
+                    // 50% faster tax delivery + 10% production boost
+                    foreach (ResourceType resourceType in ResourceUtils.resourceTypes)
+                    {
+                        ResourceFC resource = settlement.getResource(resourceType);
+                        resource.baseProductionMultiplier = Math.Round(resource.baseProductionMultiplier * 1.1, 1);
+                    }
                     break;
                 case OrbitalPlatformTier.Advanced:
-                    // 25% lower construction cost, larger size
+                    // 25% lower construction cost, larger size + 15% production boost
                     settlement.upgradeSettlement(); // Start at level 2
+                    foreach (ResourceType resourceType in ResourceUtils.resourceTypes)
+                    {
+                        ResourceFC resource = settlement.getResource(resourceType);
+                        resource.baseProductionMultiplier = Math.Round(resource.baseProductionMultiplier * 1.15, 1);
+                    }
                     break;
                 case OrbitalPlatformTier.ZeroG:
-                    // Specialized production bonuses
+                    // Specialized production bonuses + 25% production boost
                     settlement.upgradeSettlement();
-                    // Add production bonuses
+                    foreach (ResourceType resourceType in ResourceUtils.resourceTypes)
+                    {
+                        ResourceFC resource = settlement.getResource(resourceType);
+                        resource.baseProductionMultiplier = Math.Round(resource.baseProductionMultiplier * 1.25, 1);
+                    }
                     break;
             }
+            
+            // Update production calculations
+            settlement.updateProduction();
+            
+            // Ensure orbital platforms are not flagged as under attack
+            settlement.isUnderAttack = false;
+        }
+
+        // Helper method for weighted random additive values (0.5-1.5 range)
+        private static double GetWeightedRandomAdditive()
+        {
+            float roll = Rand.Value;
+            
+            if (roll < 0.25f) return 1.0; // 25% chance for 1.0
+            if (roll < 0.40f) return 0.8; // 15% chance for 0.8  
+            if (roll < 0.55f) return 0.5; // 15% chance for 0.5
+            if (roll < 0.70f) return 1.2; // 15% chance for 1.2
+            if (roll < 0.85f) return 1.5; // 15% chance for 1.5
+            
+            // 15% chance for other random values, rounded to 1 decimal
+            return Math.Round(Rand.Range(0.6f, 1.4f), 1);
+        }
+
+        // Helper method for weighted random multiplicative values (0.5-1.7 range)
+        private static double GetWeightedRandomMultiplicative()
+        {
+            float roll = Rand.Value;
+            
+            if (roll < 0.25f) return 1.0; // 25% chance for 1.0
+            if (roll < 0.40f) return 0.8; // 15% chance for 0.8
+            if (roll < 0.55f) return 0.5; // 15% chance for 0.5
+            if (roll < 0.70f) return 1.2; // 15% chance for 1.2
+            if (roll < 0.85f) return 1.5; // 15% chance for 1.5
+            
+            // 15% chance for other random values, rounded to 1 decimal
+            return Math.Round(Rand.Range(0.6f, 1.6f), 1);
         }
 
         // Add the FindEmptyOrbitalTile method to the FCEventMaker class

@@ -405,26 +405,8 @@ namespace FactionColonies
                 case ResourceType.Logging:
                     if (settlement != null && ResourceUtils.IsOrbitalPlatform(settlement))
                     {
-                        // Gravtech production for orbital platforms - produces Gravlite Panels
-                        var gravlitePanelDef = DefDatabase<ThingDef>.GetNamedSilentFail("GravlitePanel");
-                        if (gravlitePanelDef != null)
-                        {
-                            filter.SetAllow(gravlitePanelDef, true);
-                        }
-                        
-                        // Also allow Gravcore if available
-                        var gravcoreDef = DefDatabase<ThingDef>.GetNamedSilentFail("Gravcore");
-                        if (gravcoreDef != null)
-                        {
-                            filter.SetAllow(gravcoreDef, true);
-                        }
-                        
-                        // Allow shuttle engines too
-                        var shuttleEngineDef = DefDatabase<ThingDef>.GetNamedSilentFail("ShuttleEngine");
-                        if (shuttleEngineDef != null)
-                        {
-                            filter.SetAllow(shuttleEngineDef, true);
-                        }
+                        filter.SetAllow(ThingDefOf.GravlitePanel, true);
+                    
                     }
                     else
                     {
@@ -472,7 +454,7 @@ namespace FactionColonies
                 case ResourceType.Power:
                     break;
                 default:
-                    List<ThingDef> things = debugGenerateTithe(resourceType);
+                    List<ThingDef> things = debugGenerateTithe(resourceType, settlement);
                     foreach (var thing in things.Where(thing => !FactionColonies.canCraftItem(thing)))
                     {
                         filter.SetAllow(thing, false);
@@ -484,6 +466,43 @@ namespace FactionColonies
 
         public static List<ThingDef> debugGenerateTithe(ResourceType resourceType)
         {
+            return debugGenerateTithe(resourceType, null);
+        }
+
+        public static List<ThingDef> debugGenerateTithe(ResourceType resourceType, SettlementFC settlement)
+        {
+            // Special handling for orbital platforms - override specific resource types. Can I improve this?
+            if (settlement != null && ResourceUtils.IsOrbitalPlatform(settlement))
+            {
+                if (resourceType == ResourceType.Animals)
+                {
+                    // Return Chemfuel for Animals on orbital platforms
+                    List<ThingDef> chemfuelList = new List<ThingDef>();
+                    chemfuelList.Add(ThingDefOf.Chemfuel);
+                    return chemfuelList;
+                }
+                
+                if (resourceType == ResourceType.Logging)
+                {
+                    // Return Gravlite Panels for Logging on orbital platforms
+                    Log.Message($"Processing Logging case for orbital platform");
+                    List<ThingDef> GravliteList = new List<ThingDef>();
+                    
+                    if (ThingDefOf.GravlitePanel != null)
+                    {
+                        GravliteList.Add(ThingDefOf.GravlitePanel);
+                        Log.Message($"Added GravlitePanel to list, returning {GravliteList.Count} items");
+                    }
+                    else
+                    {
+                        Log.Message($"ERROR: ThingDefOf.GravlitePanel is null!");
+                    }
+                    
+                    return GravliteList;
+                }
+            }
+            
+            // Regular handling for all other cases
             FactionFC faction = Find.World.GetComponent<FactionFC>();
             ThingSetMaker thingSetMaker = resourceType == ResourceType.Animals
                 ? (ThingSetMaker) new ThingSetMaker_Animal()
@@ -495,7 +514,7 @@ namespace FactionColonies
             param.techLevel = faction.techLevel;
             param.countRange = new IntRange(1, 1);
 
-            filterResource(param.filter, resourceType, faction.techLevel, null); // Add null for settlement since this is debug
+            filterResource(param.filter, resourceType, faction.techLevel, settlement);
 
             things = thingSetMaker.AllGeneratableThingsDebug(param).ToList();
 

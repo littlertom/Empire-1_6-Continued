@@ -171,11 +171,15 @@ namespace FactionColonies
                 })
             };
 
-            List<ThingDef> things = PaymentUtil.debugGenerateTithe(resourceType);
+            List<ThingDef> things = PaymentUtil.debugGenerateTithe(resourceType, settlement);
 
             foreach (ThingDef thing in things.Where(thing => thing.race?.animalType != AnimalType.Dryad))
             {
-                if (!FactionColonies.canCraftItem(thing))
+                // Skip craftability check for orbital platform items (GravlitePanel, Chemfuel)
+                // I'm not sure if this is the best way to do this, but it works for now. Can't say I'm proud of it.
+                bool isOrbitalItem = (thing == ThingDefOf.GravlitePanel) && ResourceUtils.IsOrbitalPlatform(settlement);
+                
+                if (!isOrbitalItem && !FactionColonies.canCraftItem(thing))
                 {
                     resource.filter.SetAllow(thing, false);
                     continue;
