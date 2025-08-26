@@ -376,6 +376,9 @@ namespace FactionColonies
             buildingList = new List<BuildingFCDef>();
             filteredBuildingList = new List<BuildingFCDef>();
             
+            // Check if this is an orbital platform
+            bool isOrbitalPlatform = ResourceUtils.IsOrbitalPlatform(settlement);
+            
             foreach (BuildingFCDef building in DefDatabase<BuildingFCDef>.AllDefsListForReading.Where(def => def.RequiredModsLoaded))
             {
                 if(building.defName != "Empty" && building.defName != "Construction")
@@ -387,7 +390,27 @@ namespace FactionColonies
                         if (building.applicableBiomes.Count == 0 || building.applicableBiomes.Any() 
                             && building.applicableBiomes.Contains(settlement.biome)){
                             //If building meets the biome requirements
-                            buildingList.Add(building);
+                            
+                            // Check settlement type restrictions
+                            bool meetsSettlementTypeRequirement = true;
+                            switch (building.settlementTypeRestriction)
+                            {
+                                case SettlementTypeRestriction.SurfaceOnly:
+                                    meetsSettlementTypeRequirement = !isOrbitalPlatform;
+                                    break;
+                                case SettlementTypeRestriction.OrbitalOnly:
+                                    meetsSettlementTypeRequirement = isOrbitalPlatform;
+                                    break;
+                                case SettlementTypeRestriction.None:
+                                default:
+                                    meetsSettlementTypeRequirement = true;
+                                    break;
+                            }
+                            
+                            if (meetsSettlementTypeRequirement)
+                            {
+                                buildingList.Add(building);
+                            }
                         }
                     }
                 }

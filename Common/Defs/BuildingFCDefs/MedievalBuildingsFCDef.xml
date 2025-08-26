@@ -11,6 +11,7 @@
 		<traits>
 			<li>slavePlantation</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/SlavePlantation</iconPath>
 	</FactionColonies.BuildingFCDef>
 
@@ -24,6 +25,7 @@
 		<traits>
 			<li>adventurersGuild</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>250</upkeep>
 		<iconPath>GUI/Buildings/AdventurersGuild</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -38,6 +40,7 @@
 		<traits>
 			<li>publicMarket</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/PublicMarket</iconPath>
 	</FactionColonies.BuildingFCDef>
 	
@@ -51,6 +54,7 @@
 		<traits>
 			<li>jailhouse</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/JailHouse</iconPath>
 	</FactionColonies.BuildingFCDef>
 	
@@ -64,6 +68,7 @@
 		<traits>
 			<li>wildernessGuild</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/WildernessGuild</iconPath>
 	</FactionColonies.BuildingFCDef>
 
@@ -77,6 +82,7 @@
 		<traits>
 			<li>apparelSweatshop</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/ApparelSweatshop</iconPath>
 	</FactionColonies.BuildingFCDef>
 	
@@ -90,6 +96,7 @@
 		<traits>
 			<li>loggingCamp</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/LoggingCamp</iconPath>
 	</FactionColonies.BuildingFCDef>
 
@@ -107,6 +114,7 @@
 		<traits>
 			<li>RedlightDistrict</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>0</upkeep>
 		<iconPath>GUI/Buildings/AdventurersGuild</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -130,6 +138,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>0</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/Smithy</iconPath>
@@ -154,6 +163,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>0</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/UndergroundMine</iconPath>
@@ -178,6 +188,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>300</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/Mills</iconPath>
@@ -202,6 +213,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>250</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/Servant</iconPath>

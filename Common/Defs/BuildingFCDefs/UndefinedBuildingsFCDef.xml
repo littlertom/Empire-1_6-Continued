@@ -10,6 +10,7 @@
 		<traits>
 			<li>barracks</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>150</upkeep>
 		<iconPath>GUI/Buildings/Barracks</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -24,6 +25,7 @@
 		<traits>
 			<li>tradingPost</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/TradingPost</iconPath>
 	</FactionColonies.BuildingFCDef>
 	
@@ -37,6 +39,7 @@
 		<traits>
 			<li>migrantHousing</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/MigrantHousing</iconPath>
 	</FactionColonies.BuildingFCDef>
 	
@@ -50,6 +53,7 @@
 		<traits>
 			<li>quarry</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/Quarry</iconPath>
 	</FactionColonies.BuildingFCDef>
 	
@@ -63,6 +67,7 @@
 		<traits>
 			<li>trainingYard</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/TrainingYard</iconPath>
 	</FactionColonies.BuildingFCDef>
 
@@ -80,6 +85,7 @@
 		<traits>
 			<li>FurHunterCamp</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/WildernessGuild</iconPath>
 	</FactionColonies.BuildingFCDef>
 
@@ -97,6 +103,7 @@
 		<traits>
 			<li>FlintStorage</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/Quarry</iconPath>
 	</FactionColonies.BuildingFCDef>
 
@@ -114,6 +121,7 @@
 		<traits>
 			<li>SlavePit</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/ForcedWorkCamps</iconPath>
 	</FactionColonies.BuildingFCDef>
 
@@ -136,6 +144,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>0</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/Farmland</iconPath>
@@ -160,6 +169,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>0</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/AmmoMines</iconPath>
@@ -184,6 +194,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>0</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/Tanning</iconPath>
@@ -208,6 +219,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>0</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/DrugDen</iconPath>
@@ -232,6 +244,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>0</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/HamsterWheel</iconPath>

@@ -10,6 +10,7 @@
 		<traits>
 			<li>intergalacticMarket</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/IntergalacticMarket</iconPath>
 	</FactionColonies.BuildingFCDef>
 	
@@ -23,6 +24,7 @@
 		<traits>
 			<li>glitterworldResearchFacility</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>400</upkeep>
 		<iconPath>GUI/Buildings/GlitterworldResearchFacility</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -37,6 +39,7 @@
 		<traits>
 			<li>automatedDefenseSystems</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>400</upkeep>
 		<iconPath>GUI/Buildings/AutomatedDefenseSystems</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -60,6 +63,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>400</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/TastyPaste</iconPath>
@@ -84,6 +88,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>0</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/MechSalvage</iconPath>
@@ -108,6 +113,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>0</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/Printer</iconPath>
@@ -132,6 +138,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>0</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/Vinyl</iconPath>
@@ -156,6 +163,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>0</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/Magnet</iconPath>
@@ -180,6 +188,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>400</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/WorkerBots</iconPath>
@@ -204,6 +213,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>400</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/TheyLive</iconPath>
@@ -228,6 +238,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>400</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/CloningLab</iconPath>

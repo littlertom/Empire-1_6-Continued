@@ -173,8 +173,21 @@ namespace FactionColonies.util
 			evt.goods.ForEach(thing => PaymentUtil.placeThing(thing));
 		}
 
-		public static TaxDeliveryMode TaxDeliveryModeForSettlement(bool canUseShuttle)
+		// Check if the source settlement is an orbital platform
+		private static bool IsOrbitalPlatformSettlement(int sourceTile)
+		{
+			var settlement = Find.World.GetComponent<FactionFC>().settlements.FirstOrFallback(s => s.mapLocation == sourceTile);
+			return settlement?.worldSettlement?.def?.defName == "FCOrbitalPlatform";
+		}
+
+		public static TaxDeliveryMode TaxDeliveryModeForSettlement(bool canUseShuttle, int sourceTile = -1)
 		{ 
+			// Force drop pods for orbital platform settlements
+			if (sourceTile != -1 && IsOrbitalPlatformSettlement(sourceTile))
+			{
+				return TaxDeliveryMode.DropPod;
+			}
+			
 			if (FactionColonies.Settings().forcedTaxDeliveryMode != default)
 			{
 				return FactionColonies.Settings().forcedTaxDeliveryMode;
@@ -195,7 +208,7 @@ namespace FactionColonies.util
 		{
 			try
 			{
-				TaxDeliveryMode taxDeliveryMode = TaxDeliveryModeForSettlement(canUseShuttle);
+				TaxDeliveryMode taxDeliveryMode = TaxDeliveryModeForSettlement(canUseShuttle, evt.source);
 
 				switch (taxDeliveryMode)
 				{

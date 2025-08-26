@@ -17,6 +17,7 @@
 		<applicableBiomes> <!-- If the building requires it to be in a biome, put it here-->
 			<li>Flat</li>
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>0</upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/cerealFarmland</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -41,6 +42,7 @@
 		</traits>
 		<applicableBiomes> <!-- If the building requires it to be in a biome, put it here-->
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>25</upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/grainMill</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -64,6 +66,7 @@
 		</traits>
 		<applicableBiomes> <!-- If the building requires it to be in a biome, put it here-->
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>75</upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/granary</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -87,6 +90,7 @@
 		</traits>
 		<applicableBiomes> <!-- If the building requires it to be in a biome, put it here-->
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep></upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/fletcher</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -111,6 +115,7 @@
 		</traits>
 		<applicableBiomes> <!-- If the building requires it to be in a biome, put it here-->
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>100</upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/stoneMason</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -137,6 +142,7 @@
 			<li>TemperateForest</li>
 			<li>TropicalRainforest</li>
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep></upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/furrier</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -164,6 +170,7 @@
 			<li>TemperateForest</li>
 			<li>TropicalRainforest</li>
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>50</upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/huntersHut</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -188,6 +195,7 @@
 		</traits>
 		<applicableBiomes> <!-- If the building requires it to be in a biome, put it here-->
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>150</upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/brewer</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -212,6 +220,7 @@
 		</traits>
 		<applicableBiomes> <!-- If the building requires it to be in a biome, put it here-->
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep></upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/carpenter</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -236,6 +245,7 @@
 		</traits>
 		<applicableBiomes> <!-- If the building requires it to be in a biome, put it here-->
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>50</upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/apothecary</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -260,6 +270,7 @@
 		</traits>
 		<applicableBiomes> <!-- If the building requires it to be in a biome, put it here-->
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep></upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/alchemist</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -284,6 +295,7 @@
 		</traits>
 		<applicableBiomes> <!-- If the building requires it to be in a biome, put it here-->
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>200</upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/ancientAcademy</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -308,6 +320,7 @@
 		</traits>
 		<applicableBiomes> <!-- If the building requires it to be in a biome, put it here-->
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep></upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/slaveMarket</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -333,6 +346,7 @@
 		</traits>
 		<applicableBiomes> <!-- If the building requires it to be in a biome, put it here-->
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>-50</upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/bailiff</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -357,6 +371,7 @@
 		</traits>
 		<applicableBiomes> <!-- If the building requires it to be in a biome, put it here-->
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep></upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/militia</iconPath>
 	</FactionColonies.BuildingFCDef>

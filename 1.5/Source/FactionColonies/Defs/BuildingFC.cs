@@ -21,6 +21,7 @@ namespace FactionColonies
             Scribe_Values.Look(ref requiresRoyality, "requiresRoyality");
             Scribe_Values.Look(ref requiresIdeology, "requiresIdeology");
             Scribe_Collections.Look(ref requiredModsID, "requiredMods", LookMode.Value);
+            Scribe_Values.Look(ref settlementTypeRestriction, "settlementTypeRestriction", SettlementTypeRestriction.None);
         }
 
         public string desc;
@@ -36,6 +37,7 @@ namespace FactionColonies
         public bool requiresRoyality = false;
         public bool requiresIdeology = false;
         public List<string> requiredModsID = new List<string>();
+        public SettlementTypeRestriction settlementTypeRestriction = SettlementTypeRestriction.None;
         //public required research
 
         public Texture2D Icon
@@ -58,6 +60,13 @@ namespace FactionColonies
         }
 
         public bool RequiredModsLoaded => (ModsConfig.RoyaltyActive || !requiresRoyality) && (ModsConfig.IdeologyActive || !requiresIdeology) && requiredModsID.TrueForAll(mod => ModsConfig.IsActive(mod));
+    }
+
+    public enum SettlementTypeRestriction
+    {
+        None,           // Available to all settlement types
+        SurfaceOnly,    // Only available to surface settlements
+        OrbitalOnly     // Only available to orbital platforms
     }
 
     [DefOf]

@@ -11,6 +11,7 @@
 		<traits>
 			<li>researchLabs</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>150</upkeep>
 		<iconPath>GUI/Buildings/ResearchLab</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -25,6 +26,7 @@
 		<traits>
 			<li>indoorHydroponics</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/IndoorHydroponics</iconPath>
 	</FactionColonies.BuildingFCDef>
 	
@@ -38,6 +40,7 @@
 		<traits>
 			<li>firearmsFactory</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/FirearmsFactory</iconPath>
 	</FactionColonies.BuildingFCDef>
 	
@@ -51,6 +54,7 @@
 		<traits>
 			<li>rimazonWarehouse</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/RimazonWarehouse</iconPath>
 	</FactionColonies.BuildingFCDef>
 	
@@ -64,6 +68,7 @@
 		<traits>
 			<li>inhouseMercCompany</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>200</upkeep>
 		<iconPath>GUI/Buildings/InHouseMercCompany</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -78,6 +83,7 @@
 		<traits>
 			<li>adultEntertainmentCentre</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/AdultEntertainmentCentre</iconPath>
 	</FactionColonies.BuildingFCDef>
 	
@@ -91,6 +97,7 @@
 		<traits>
 			<li>forcedWorkCamps</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<iconPath>GUI/Buildings/ForcedWorkCamps</iconPath>
 	</FactionColonies.BuildingFCDef>
 	
@@ -104,6 +111,7 @@
 		<traits>
 			<li>artilleryOutpost</li>
 		</traits>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>300</upkeep>
 		<iconPath>GUI/Buildings/ArtilleryOutpost</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -127,6 +135,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>400</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/JunkFood</iconPath>
@@ -151,6 +160,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>250</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/TextileFactory</iconPath>
@@ -175,6 +185,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>350</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/Zoo</iconPath>
@@ -200,6 +211,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>0</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/TreeFarm</iconPath>
@@ -224,6 +236,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>550</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/IMED</iconPath>
@@ -242,6 +255,7 @@
 		<applicableBiomes> <!-- If the building requires it to be in a biome, put it here-->
 			<li>Scarlands</li>
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>200</upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/soilFixer</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -266,6 +280,7 @@
 			<li>AB_PyroclasticConflagration</li>
 			<li>LavaField</li>
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>100</upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/lavaPlant</iconPath>
 	</FactionColonies.BuildingFCDef>
@@ -290,6 +305,7 @@
 			<li>AB_PyroclasticConflagration</li>
 			<li>LavaField</li>
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>100</upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/lavaLab</iconPath>
 	</FactionColonies.BuildingFCDef>

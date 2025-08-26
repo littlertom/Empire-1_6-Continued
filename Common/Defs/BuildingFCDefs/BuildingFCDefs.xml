@@ -14,6 +14,7 @@
 		<applicableBiomes> <!-- If the building requires it to be in a biome, put it here-->
 		
 		</applicableBiomes>
+		<settlementTypeRestriction></settlementTypeRestriction>
 		<upkeep></upkeep> <!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/Empty</iconPath>
 	</FactionColonies.BuildingFCDef>

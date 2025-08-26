@@ -1319,6 +1319,26 @@ namespace FactionColonies
                 }
             }
 
+            // Check settlement type restrictions
+            bool isOrbitalPlatform = ResourceUtils.IsOrbitalPlatform(settlement);
+            switch (building.settlementTypeRestriction)
+            {
+                case SettlementTypeRestriction.SurfaceOnly:
+                    if (isOrbitalPlatform)
+                    {
+                        valid = false;
+                        Messages.Message("BuildingSurfaceOnly".Translate(), MessageTypeDefOf.RejectInput);
+                    }
+                    break;
+                case SettlementTypeRestriction.OrbitalOnly:
+                    if (!isOrbitalPlatform)
+                    {
+                        valid = false;
+                        Messages.Message("BuildingOrbitalOnly".Translate(), MessageTypeDefOf.RejectInput);
+                    }
+                    break;
+            }
+
             return valid;
         }
 

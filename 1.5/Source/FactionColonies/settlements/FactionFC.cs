@@ -697,8 +697,9 @@ namespace FactionColonies
 
         public void setStartTime()
         {
-            taxTimeDue = Find.TickManager.TicksGame + LoadedModManager.GetMod<FactionColoniesMod>()
-                .GetSettings<FactionColonies>().timeBetweenTaxes;
+            int timeBetweenTaxes = LoadedModManager.GetMod<FactionColoniesMod>().GetSettings<FactionColonies>().timeBetweenTaxes;
+            Log.Message($"Empire Mod - setStartTime: Using timeBetweenTaxes: {timeBetweenTaxes} ticks ({timeBetweenTaxes / 60000} days)");
+            taxTimeDue = Find.TickManager.TicksGame + timeBetweenTaxes;
             dailyTimer = Find.TickManager.TicksGame + 2000;
         }
 
@@ -1480,6 +1481,7 @@ namespace FactionColonies
                     }
 
                     int timeBetweenTaxes = LoadedModManager.GetMod<FactionColoniesMod>().GetSettings<FactionColonies>().timeBetweenTaxes;
+                    // Log.Message($"Empire Mod - TaxTick: Using timeBetweenTaxes: {timeBetweenTaxes} ticks ({timeBetweenTaxes / 60000} days)");
                     
                     // Safety check: ensure timeBetweenTaxes is at least 1 day
                     if (timeBetweenTaxes <= 0)

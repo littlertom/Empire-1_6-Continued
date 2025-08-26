@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<FactionColonies.BuildingFCDef>
+		<defName>orbitalFuelDepot</defName>
+		<label>Orbital Fuel Depot</label>
+		<desc>Stores and processes fuel for spacecraft. Essential for maintaining orbital operations and supporting space travel. +0.5 power production, +0.3 chemfuel production. $400 upkeep cost.</desc>
+		<cost>2000</cost>
+		<techLevel>Spacer</techLevel>
+		<constructionDuration>300000</constructionDuration>
+		<traits>
+			<li>orbitalFuelDepot</li>
+		</traits>
+		<applicableBiomes>
+		
+		</applicableBiomes>
+		<settlementTypeRestriction>OrbitalOnly</settlementTypeRestriction>
+		<upkeep>400</upkeep>
+		<iconPath>GUI/Buildings/OrbitalFuelDepot</iconPath>
+	</FactionColonies.BuildingFCDef>
+	
+	<FactionColonies.FCTraitEffectDef>
+		<defName>orbitalFuelDepot</defName>
+		<label>Orbital Fuel Depot</label>
+		<desc></desc>
+		<productionBasePower>0.5</productionBasePower>
+        <!-- Currently we override Animals to be Chemfuel -->
+		<productionBaseAnimals>0.3</productionBaseAnimals>
+        <!-- Currently we override Logging to be Gravtech -->
+		<productionBaseLogging>0</productionBaseLogging>
+	</FactionColonies.FCTraitEffectDef>
+
+</Defs>

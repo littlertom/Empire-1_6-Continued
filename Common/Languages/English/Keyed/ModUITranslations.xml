@@ -97,6 +97,8 @@
     <Destroy>Destroy</Destroy>
     <Build>Build</Build>
     <WillBeConstructedIn>will be constructed in</WillBeConstructedIn>
+    <BuildingSurfaceOnly>This building can only be constructed on surface settlements</BuildingSurfaceOnly>
+    <BuildingOrbitalOnly>This building can only be constructed on orbital platforms</BuildingOrbitalOnly>
 
     <!-- listFactionPolicyFC -->
     <Enact>Enact</Enact>

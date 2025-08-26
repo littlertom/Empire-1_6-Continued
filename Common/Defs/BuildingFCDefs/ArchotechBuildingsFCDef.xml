@@ -20,6 +20,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>4000</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/LightConverter</iconPath>
@@ -44,6 +45,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>1000</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/BaconBeacon</iconPath>
@@ -68,6 +70,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>2000</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/HAL9000</iconPath>
@@ -92,6 +95,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>1000</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/CapitalismSucks</iconPath>
@@ -116,6 +120,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>1000</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/CFinder</iconPath>
@@ -140,6 +145,7 @@
 			<!-- If the building requires it to be in a biome, put it here-->
 
 		</applicableBiomes>
+		<settlementTypeRestriction>SurfaceOnly</settlementTypeRestriction>
 		<upkeep>0</upkeep>
 		<!-- cost per week for the building -->
 		<iconPath>GUI/Buildings/NetherPortal</iconPath>
