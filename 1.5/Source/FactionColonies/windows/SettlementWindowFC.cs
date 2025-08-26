@@ -370,11 +370,38 @@ namespace FactionColonies
 
             //Draw town location flabor text
             Text.Font = GameFont.Tiny;
-            Widgets.Label(new Rect(55, 40, 470, 20),
-                "Located".Translate() + " " +
-                Find.WorldGrid[settlement.mapLocation].hilliness.GetLabel() + " " +
-                "LandOf".Translate() + " " +
-                Find.WorldGrid[settlement.mapLocation].PrimaryBiome.LabelCap.ToLower()); //returnSettlement().title);
+
+            // Check if this is an orbital platform and show appropriate location text
+            // Techdebt - Language support for this would be nice
+            string locationText;
+            if (ResourceUtils.IsOrbitalPlatform(settlement))
+            {
+                // Space-themed location text for orbital platforms - use deterministic selection based on settlement ID
+                // Techdebt - Language support for this would be nice
+                string[] spaceLocations = { 
+                    "Orbiting in deep space", 
+                    "Stationed in low orbit", 
+                    "Floating in the emptiness of space", 
+                    "Anchored in orbit",
+                    "Positioned in low orbit",
+                    "Suspended above the surface",
+                    "Deployed in orbital space"
+                };
+                
+                // Use the settlement's loadID to deterministically select a location text
+                int locationIndex = Math.Abs(settlement.loadID) % spaceLocations.Length;
+                locationText = spaceLocations[locationIndex];
+            }
+            else
+            {
+                // Regular location text for surface settlements
+                locationText = "Located".Translate() + " " +
+                    Find.WorldGrid[settlement.mapLocation].hilliness.GetLabel() + " " +
+                    "LandOf".Translate() + " " +
+                    Find.WorldGrid[settlement.mapLocation].PrimaryBiome.LabelCap.ToLower();
+            }
+
+            Widgets.Label(new Rect(55, 40, 470, 20), locationText);
 
             //Draw header Settings button
             if (Widgets.ButtonImage(new Rect(495, 5, 20, 20), TexLoad.iconCustomize))

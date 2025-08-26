@@ -1174,6 +1174,9 @@ namespace FactionColonies
                 case "ExtremeDesert":
                     description = "FCDescExtremeDesert".Translate();
                     break;
+                case "OrbitalSpace":
+                    description = "FCDescOrbitalSpace".Translate();
+                    break;
                 default:
                     description = "FCDescUnknown".Translate();
                     break;
