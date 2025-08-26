@@ -1053,18 +1053,35 @@ namespace FactionColonies
                 Type typ = returnUnknownTypeFromName("SaveOurShip2.WorldSwitchUtility");
                 Type typ2 = returnUnknownTypeFromName("SaveOurShip2.WorldFactionList");
 
-                var mainclass = Traverse.CreateWithType(typ.ToString());
-                var dict = mainclass.Property("PastWorldTracker").Field("WorldFactions").GetValue();
+                // Check if SoS2 classes were found
+                // Preview debug - Remove once confirmed ok!
+                if (typ == null || typ2 == null)
+                {
+                    Log.Warning("Empire - SoS2 compatibility: Could not find required SoS2 classes. SoS2 may not be loaded or has a different version.");
+                }
+                else
+                {
+                    try
+                    {
+                        var mainclass = Traverse.CreateWithType(typ.ToString());
+                        var dict = mainclass.Property("PastWorldTracker").Field("WorldFactions").GetValue();
 
-                var planetfactiondict = Traverse.Create(dict);
-                var unknownclass = planetfactiondict.Property("Item", new object[] {Find.World.info.name}).GetValue();
+                        var planetfactiondict = Traverse.Create(dict);
+                        var unknownclass = planetfactiondict.Property("Item", new object[] {Find.World.info.name}).GetValue();
 
-                var factionlist = Traverse.Create(unknownclass);
-                var list = factionlist.Field("myFactions").GetValue();
-                List<String> modifiedlist = (List<String>) list;
-                modifiedlist.Add(faction.GetUniqueLoadID());
-                factionlist.Field("myFactions").SetValue(modifiedlist);
-                //Log.Message("Added faction to world list");
+                        var factionlist = Traverse.Create(unknownclass);
+                        var list = factionlist.Field("myFactions").GetValue();
+                        List<String> modifiedlist = (List<String>) list;
+                        modifiedlist.Add(faction.GetUniqueLoadID());
+                        factionlist.Field("myFactions").SetValue(modifiedlist);
+                        //Log.Message("Added faction to world list");
+                    // Preview debug - Remove once confirmed ok!
+                    } 
+                    catch (Exception ex)
+                    {
+                        Log.Warning("Empire - SoS2 compatibility: Error adding faction to SoS2 world list: " + ex.Message);
+                    }
+                }
 
                 foreach (Faction other in Find.FactionManager.AllFactionsVisibleInViewOrder)
                 {
