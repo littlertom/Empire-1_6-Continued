@@ -34,15 +34,15 @@ namespace FactionColonies
 
         public ResourceFC(double baseProduction, ResourceType type, SettlementFC settlement = null)
         {
-            name = type.ToString().ToLower();
-            label = type.ToString();
+            this.settlement = settlement;
+            name = ResourceUtils.GetResourceDisplayName(type, settlement);
+            label = ResourceUtils.GetResourceDisplayLabel(type, settlement);
             this.baseProduction = baseProduction;
             endProduction = baseProduction;
             amount = 0;
             baseProductionMultiplier = 1;
             baseProductionAdditives.Add(new ProductionAdditive("", 0, ""));
             baseProductionMultipliers.Add(new ProductionMultiplier("", 0, ""));
-            this.settlement = settlement;
             filter = new ThingFilter();
             if (settlement != null)
             {
@@ -78,7 +78,8 @@ namespace FactionColonies
 
         public Texture2D getIcon()
         {
-            return (from texture in TexLoad.textures where texture.Key == name select texture.Value).FirstOrDefault();
+            string displayName = ResourceUtils.GetResourceDisplayName(ResourceUtils.getTypeFromName(name), settlement);
+            return (from texture in TexLoad.textures where texture.Key == displayName select texture.Value).FirstOrDefault();
         }
 
 

@@ -263,29 +263,6 @@ namespace FactionColonies
             return things;
         }
 
-        public static void resetThingFilter(in SettlementFC settlement, ResourceType resourceType)
-        {
-            //Log.Message(resourceID.ToString());
-            FactionFC faction = Find.World.GetComponent<FactionFC>();
-            ThingFilter filter = settlement.getResource(resourceType).filter;
-            filterResource(filter, resourceType, faction.techLevel);
-
-            switch (resourceType)
-            {
-                case ResourceType.Research:
-                case ResourceType.Power:
-                    break;
-                default:
-                    List<ThingDef> things = debugGenerateTithe(resourceType);
-                    foreach (var thing in things.Where(thing => !FactionColonies.canCraftItem(thing)))
-                    {
-                        filter.SetAllow(thing, false);
-                    }
-
-                    break;
-            }
-        }
-
         private static void filterResource(ThingFilter filter, ResourceType resourceType, TechLevel techLevel)
         {
             switch (resourceType)
@@ -420,6 +397,91 @@ namespace FactionColonies
             }
         }
 
+        // New overloaded method that takes settlement context
+        private static void filterResource(ThingFilter filter, ResourceType resourceType, TechLevel techLevel, SettlementFC settlement)
+        {
+            switch (resourceType)
+            {
+                case ResourceType.Logging:
+                    if (settlement != null && ResourceUtils.IsOrbitalPlatform(settlement))
+                    {
+                        // Gravtech production for orbital platforms - produces Gravlite Panels
+                        var gravlitePanelDef = DefDatabase<ThingDef>.GetNamedSilentFail("GravlitePanel");
+                        if (gravlitePanelDef != null)
+                        {
+                            filter.SetAllow(gravlitePanelDef, true);
+                        }
+                        
+                        // Also allow Gravcore if available
+                        var gravcoreDef = DefDatabase<ThingDef>.GetNamedSilentFail("Gravcore");
+                        if (gravcoreDef != null)
+                        {
+                            filter.SetAllow(gravcoreDef, true);
+                        }
+                        
+                        // Allow shuttle engines too
+                        var shuttleEngineDef = DefDatabase<ThingDef>.GetNamedSilentFail("ShuttleEngine");
+                        if (shuttleEngineDef != null)
+                        {
+                            filter.SetAllow(shuttleEngineDef, true);
+                        }
+                    }
+                    else
+                    {
+                        // Regular logging for planetary settlements
+                        filter.SetAllow(ThingDefOf.WoodLog, true);
+                        filter.SetAllow(StuffCategoryDefOf.Woody, true);
+                    }
+                    break;
+                case ResourceType.Animals:
+                    if (settlement != null && ResourceUtils.IsOrbitalPlatform(settlement))
+                    {
+                        // Chemfuel production for orbital platforms
+                        filter.SetAllow(ThingDefOf.Chemfuel, true);
+                    }
+                    else
+                    {
+                        // Regular animals for planetary settlements
+                        List<PawnKindDef> allAnimalDefs = DefDatabase<PawnKindDef>.AllDefsListForReading;
+                        foreach (PawnKindDef def in allAnimalDefs)
+                        {
+                            if (def.IsAnimalAndAllowed())
+                            {
+                                filter.SetAllow(def.race, true);
+                            }
+                        }
+                    }
+                    break;
+                default:
+                    // Use the original method for all other resource types
+                    filterResource(filter, resourceType, techLevel);
+                    break;
+            }
+        }
+
+        public static void resetThingFilter(in SettlementFC settlement, ResourceType resourceType)
+        {
+            //Log.Message(resourceID.ToString());
+            FactionFC faction = Find.World.GetComponent<FactionFC>();
+            ThingFilter filter = settlement.getResource(resourceType).filter;
+            filterResource(filter, resourceType, faction.techLevel, settlement);
+
+            switch (resourceType)
+            {
+                case ResourceType.Research:
+                case ResourceType.Power:
+                    break;
+                default:
+                    List<ThingDef> things = debugGenerateTithe(resourceType);
+                    foreach (var thing in things.Where(thing => !FactionColonies.canCraftItem(thing)))
+                    {
+                        filter.SetAllow(thing, false);
+                    }
+
+                    break;
+            }
+        }
+
         public static List<ThingDef> debugGenerateTithe(ResourceType resourceType)
         {
             FactionFC faction = Find.World.GetComponent<FactionFC>();
@@ -433,7 +495,7 @@ namespace FactionColonies
             param.techLevel = faction.techLevel;
             param.countRange = new IntRange(1, 1);
 
-            filterResource(param.filter, resourceType, faction.techLevel);
+            filterResource(param.filter, resourceType, faction.techLevel, null); // Add null for settlement since this is debug
 
             things = thingSetMaker.AllGeneratableThingsDebug(param).ToList();
 

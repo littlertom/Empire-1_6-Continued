@@ -9,7 +9,7 @@ namespace FactionColonies
         Weapons,
         Apparel,
         Animals,
-        Logging,
+        Logging, // This will be "Gravtech" for orbital platforms, "Logging" for regular settlements
         Mining,
         Research,
         Power,
@@ -31,6 +31,40 @@ namespace FactionColonies
             }
 
             return resourceTypes[index];
+        }
+        
+        // Check if orbital platform
+        public static bool IsOrbitalPlatform(SettlementFC settlement)
+        {
+            return settlement?.worldSettlement?.def?.defName == "FCOrbitalPlatform";
+        }
+        
+        // New method to get the display name for a resource type based on settlement type
+        public static string GetResourceDisplayName(ResourceType resourceType, SettlementFC settlement)
+        {
+            if (resourceType == ResourceType.Logging && IsOrbitalPlatform(settlement))
+            {
+                return "gravtech";
+            }
+            if (resourceType == ResourceType.Animals && IsOrbitalPlatform(settlement))
+            {
+                return "chemfuel";
+            }
+            return resourceType.ToString().ToLower();
+        }
+        
+        // New method to get the display label for a resource type based on settlement type
+        public static string GetResourceDisplayLabel(ResourceType resourceType, SettlementFC settlement)
+        {
+            if (resourceType == ResourceType.Logging && IsOrbitalPlatform(settlement))
+            {
+                return "Gravtech";
+            }
+            if (resourceType == ResourceType.Animals && IsOrbitalPlatform(settlement))
+            {
+                return "Chemfuel";
+            }
+            return resourceType.ToString();
         }
     }
 }

@@ -226,9 +226,8 @@ namespace FactionColonies
             if (Widgets.ButtonImage(new Rect(x + 45, scroll + y + 75 + (int)resourceType * (45 + spacing), 30, 30), resource.getIcon()))
             {
                 Find.WindowStack.Add(new DescWindowFc("SettlementProductionOf".Translate() + ": "
-                    + resource.label,
-                    char.ToUpper(resource.label[0])
-                    + resource.label.Substring(1)));
+                    + ResourceUtils.GetResourceDisplayLabel(resourceType, settlement),
+                    ResourceUtils.GetResourceDisplayLabel(resourceType, settlement)));
             }
         }
 
