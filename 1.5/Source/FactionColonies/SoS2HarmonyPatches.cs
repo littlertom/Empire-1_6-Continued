@@ -60,16 +60,31 @@ namespace FactionColonies
             Type typ = FactionColonies.returnUnknownTypeFromName("SaveOurShip2.WorldSwitchUtility");
             Type typ2 = FactionColonies.returnUnknownTypeFromName("SaveOurShip2.WorldFactionList");
 
-            var mainclass = Traverse.CreateWithType(typ.ToString());
-            var dict = mainclass.Property("PastWorldTracker").Field("Factions").GetValue();
+            // Check if SoS2 classes were found
+            if (typ == null || typ2 == null)
+            {
+                Log.Warning("Empire - SoS2 compatibility: Could not find required SoS2 classes for returnPlanetFactionLoadIds. Returning empty list.");
+                return new List<string>();
+            }
 
-            var planetfactiondict = Traverse.Create(dict);
-            var unknownclass = planetfactiondict.Property("Item", new object[] { Find.World.info.name }).GetValue();
+            try
+            {
+                var mainclass = Traverse.CreateWithType(typ.ToString());
+                var dict = mainclass.Property("PastWorldTracker").Field("Factions").GetValue();
 
-            var factionlist = Traverse.Create(unknownclass);
-            var list = factionlist.Field("myFactions").GetValue();
-            List<String> modifiedlist = (List<String>)list;
-            return modifiedlist;
+                var planetfactiondict = Traverse.Create(dict);
+                var unknownclass = planetfactiondict.Property("Item", new object[] { Find.World.info.name }).GetValue();
+
+                var factionlist = Traverse.Create(unknownclass);
+                var list = factionlist.Field("myFactions").GetValue();
+                List<String> modifiedlist = (List<String>)list;
+                return modifiedlist;
+            }
+            catch (Exception ex)
+            {
+                Log.Warning("Empire - SoS2 compatibility: Error in returnPlanetFactionLoadIds: " + ex.Message);
+                return new List<string>();
+            }
         }
 
         public static bool checkOnPlanet(Faction faction)
@@ -177,7 +192,25 @@ namespace FactionColonies
             Type typ = FactionColonies.returnUnknownTypeFromName("SaveOurShip2.WorldSwitchUtility");
             Type typ2 = FactionColonies.returnUnknownTypeFromName("SaveOurShip2.FixOutdoorTemp");
 
+            // Debug: List all available SoS2 classes
+            if (typ == null || typ2 == null)
+            {
+                Log.Warning("Empire - SoS2 compatibility: Could not find required SoS2 classes. Debugging available classes...");
+                DebugListSoS2Classes();
+            }
 
+            // Check if SoS2 classes were found
+            if (typ == null)
+            {
+                Log.Warning("Empire - SoS2 compatibility: Could not find SaveOurShip2.WorldSwitchUtility class. SoS2 may not be loaded or has a different version.");
+                return;
+            }
+
+            if (typ2 == null)
+            {
+                Log.Warning("Empire - SoS2 compatibility: Could not find SaveOurShip2.FixOutdoorTemp class. SoS2 may not be loaded or has a different version.");
+                return;
+            }
 
             //Get type inside of type
             Type[] types = typ2.GetNestedTypes(BindingFlags.Public | BindingFlags.Static);
@@ -197,7 +230,18 @@ namespace FactionColonies
             MethodInfo originalpost = typ.GetMethod("DoWorldSwitch", BindingFlags.Static | BindingFlags.NonPublic);
             // MethodInfo originalpost2 = typ2.GetMethod("Replace", BindingFlags.Static | BindingFlags.Public);
 
+            // Check if methods were found
+            if (originalpre == null)
+            {
+                Log.Warning("Empire - SoS2 compatibility: Could not find KillAllColonistsNotInCrypto method in SaveOurShip2.WorldSwitchUtility.");
+                return;
+            }
 
+            if (originalpost == null)
+            {
+                Log.Warning("Empire - SoS2 compatibility: Could not find DoWorldSwitch method in SaveOurShip2.WorldSwitchUtility.");
+                return;
+            }
 
             var prefix = typeof(SoS2HarmonyPatches).GetMethod("Prefix");
             var postfix = typeof(SoS2HarmonyPatches).GetMethod("Postfix");
@@ -205,6 +249,95 @@ namespace FactionColonies
             harmony.Patch(originalpost, postfix: new HarmonyMethod(postfix));
             // harmony.Patch(originalpost2, postfix: new HarmonyMethod(postfix));
             Log.Message("Finished patching Empire and SoS2");
+        }
+
+        private static void DebugListSoS2Classes()
+        {
+            try
+            {
+                Log.Message("Empire - SoS2 Debug: Searching for SoS2 classes...");
+                int sos2ClassCount = 0;
+                
+                foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                {
+                    try
+                    {
+                        var sos2Types = assembly.GetTypes().Where(t => t.FullName != null && t.FullName.StartsWith("SaveOurShip2.")).ToList();
+                        if (sos2Types.Any())
+                        {
+                            Log.Message($"Empire - SoS2 Debug: Found {sos2Types.Count} SoS2 classes in assembly: {assembly.GetName().Name}");
+                            
+                            // Look for classes that might be the new versions of what we need
+                            var worldSwitchClasses = sos2Types.Where(t => t.FullName.ToLower().Contains("world") && t.FullName.ToLower().Contains("switch")).ToList();
+                            var factionClasses = sos2Types.Where(t => t.FullName.ToLower().Contains("faction")).ToList();
+                            var utilityClasses = sos2Types.Where(t => t.FullName.ToLower().Contains("utility")).ToList();
+                            
+                            if (worldSwitchClasses.Any())
+                            {
+                                Log.Message($"Empire - SoS2 Debug: Found {worldSwitchClasses.Count} potential world switch classes:");
+                                foreach (var type in worldSwitchClasses)
+                                {
+                                    Log.Message($"  - {type.FullName}");
+                                }
+                            }
+                            
+                            if (factionClasses.Any())
+                            {
+                                Log.Message($"Empire - SoS2 Debug: Found {factionClasses.Count} potential faction classes:");
+                                foreach (var type in factionClasses.Take(5))
+                                {
+                                    Log.Message($"  - {type.FullName}");
+                                }
+                                if (factionClasses.Count > 5)
+                                {
+                                    Log.Message($"  ... and {factionClasses.Count - 5} more faction classes");
+                                }
+                            }
+                            
+                            if (utilityClasses.Any())
+                            {
+                                Log.Message($"Empire - SoS2 Debug: Found {utilityClasses.Count} potential utility classes:");
+                                foreach (var type in utilityClasses.Take(5))
+                                {
+                                    Log.Message($"  - {type.FullName}");
+                                }
+                                if (utilityClasses.Count > 5)
+                                {
+                                    Log.Message($"  ... and {utilityClasses.Count - 5} more utility classes");
+                                }
+                            }
+                            
+                            // Show first 10 general classes
+                            foreach (var type in sos2Types.Take(10))
+                            {
+                                Log.Message($"  - {type.FullName}");
+                                sos2ClassCount++;
+                            }
+                            if (sos2Types.Count > 10)
+                            {
+                                Log.Message($"  ... and {sos2Types.Count - 10} more classes");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Ignore assembly access errors
+                    }
+                }
+                
+                if (sos2ClassCount == 0)
+                {
+                    Log.Warning("Empire - SoS2 Debug: No SoS2 classes found in any assembly. SoS2 may not be properly loaded.");
+                }
+                else
+                {
+                    Log.Message($"Empire - SoS2 Debug: Total SoS2 classes found: {sos2ClassCount}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Empire - SoS2 Debug: Error while searching for SoS2 classes: " + ex.Message);
+            }
         }
         //
 

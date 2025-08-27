@@ -29,6 +29,46 @@
 		<introStringBase>A new update for {0} has been released: v.{1}. The following changes have occurred:</introStringBase>
 	</FactionColonies.PatchNoteDef>
 
+		<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
+		<defName>0_43_3</defName>
+		<label>SOS2 Support and updating Conflicting Textures</label>
+		<description>This is a hotfix to update SOS2 support and address conflicting textures.</description>
+
+		<major>0</major>
+		<minor>43</minor>
+		<patch>3</patch>
+
+		<releaseDay>27</releaseDay>
+		<releaseMonth>8</releaseMonth>
+		<releaseYear>2025</releaseYear>
+
+		<patchNoteType>Hotfix</patchNoteType>
+
+		<patchNoteLines>
+			<li>SOS2 support has been updated.</li>
+			<li>Be advised, make sure Vehicle Framework is up to date as this point of time as it's spewing errors.</li>
+			<li>Some building textures were removed and replaced with placeholders whilst we work on new textures.</li>
+		</patchNoteLines>
+
+		<patchNoteImagePaths>
+			<li>PatchNoteImages/global/empire</li>
+		</patchNoteImagePaths>
+
+		<patchNoteImageDescriptions>
+			<li>SOS2 support has been updated.</li>
+			<li>Be advised, make sure Vehicle Framework is up to date as this point of time as it's spewing errors.</li>
+			<li>Conflicting textures removed.</li>
+		</patchNoteImageDescriptions>
+
+		<additionalNotes>
+			<li>Please raise any issues you find on the Github page.</li>
+		</additionalNotes>
+
+		<authors>
+			<li>Epistatic</li>
+		</authors>
+	</FactionColonies.PatchNoteDef>
+
 	<FactionColonies.PatchNoteDef ParentName="EmpirePatchBase">
 		<defName>0_43_2</defName>
 		<label>Building Menu Overhaul and Stability Fixes</label>
