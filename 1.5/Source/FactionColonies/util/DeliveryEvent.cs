@@ -351,7 +351,8 @@ namespace FactionColonies.util
 				}
 			}
 			
-			// Add guard animals (like wolves) for protection - always add at least 2
+			// Add guard animals (like wolves) for protection - always add at least 2 as it's good protection! Keep your highmate-only faction safe!!
+			// This protects deliveries by keeping it immersive, adhering to xenotype preferences. Bears and wargs are problematic. 
 			var guardAnimals = DefDatabase<PawnKindDef>.AllDefsListForReading
 				.Where(def => def.race.race.Animal && 
 							def.RaceProps.trainability != null && 
@@ -361,7 +362,8 @@ namespace FactionColonies.util
 							!def.race.tradeTags.NullOrEmpty() &&
 							!def.race.tradeTags.Contains("AnimalMonster") &&
 							!def.race.tradeTags.Contains("AnimalGenetic") &&
-							!def.label.ToLower().Contains("bear")) // Exclude bears
+							!def.label.ToLower().Contains("bear") && // Exclude bears
+							!def.label.ToLower().Contains("warg")) // Exclude wargs
 				.OrderByDescending(def => def.combatPower)
 				.Take(5); // Take more options to ensure we can get 2 guards
 
@@ -423,7 +425,8 @@ namespace FactionColonies.util
 						var humanPawn = lord.ownedPawns.FirstOrDefault(p => !p.RaceProps.Animal);
 						if (humanPawn != null)
 						{
-							guard.mindState.duty = new PawnDuty(DutyDefOf.Follow, humanPawn);
+							// let's make sure the guard animal stays close to the caravan 
+							guard.mindState.duty = new PawnDuty(DutyDefOf.Follow, humanPawn, 3f); // 3 tile radius
 						}
 					}
 				}
