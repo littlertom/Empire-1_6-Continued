@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using Verse;
+using Verse.AI;
 using Verse.AI.Group;
 
 namespace FactionColonies.util
@@ -143,18 +144,256 @@ namespace FactionColonies.util
 
 			MakeDeliveryLetterAndMessage(evt);
 			List<Pawn> pawns = new List<Pawn>();
-			while (evt.goods.Count() > 0)
+			List<Pawn> securityGuards = new List<Pawn>();
+			
+			var factionFC = Find.World.GetComponent<FactionFC>();
+			
+			// Generate delivery pawns using allowed xenotypes first
+			int maxAttempts = 100; // Prevent infinite loops
+			int attempts = 0;
+			
+			while (evt.goods.Count() > 0 && attempts < maxAttempts)
 			{
-				Pawn pawn = PawnGenerator.GeneratePawn(FCPawnGenerator.WorkerOrMilitaryRequest());
-				Thing next = evt.goods.First();
-
-				if (pawn.carryTracker.innerContainer.TryAdd(next))
+				attempts++;
+				try
 				{
-					evt.goods.Remove(next);
-				}
+					Pawn deliveryPawn = null;
+					
+					// First, try to generate a pawn using allowed xenotypes
+					if (factionFC?.xenotypeFilter?.AllowedXenotypes?.Any() == true)
+					{
+						// Randomly select from allowed xenotypes to get variety
+						var availableXenotypes = factionFC.xenotypeFilter.AllowedXenotypes.ToList();
+						var shuffledXenotypes = availableXenotypes.OrderBy(x => Rand.Value).ToList();
+						
+						// Try each allowed xenotype until we find one that works
+						foreach (var xenotype in shuffledXenotypes)
+						{
+							try
+							{
+								// Create request that allows ANY xenotype (including non-violent ones)
+								var request = new PawnGenerationRequest(
+									kind: PawnKindDefOf.Colonist,
+									faction: FactionColonies.getPlayerColonyFaction(),
+									context: PawnGenerationContext.NonPlayer,
+									tile: -1,
+									forceGenerateNewPawn: false,
+									allowDead: false,
+									allowDowned: false,
+									canGeneratePawnRelations: true,
+									mustBeCapableOfViolence: false, // Always allow non-violent xenotypes
+									colonistRelationChanceFactor: 0,
+									forceAddFreeWarmLayerIfNeeded: false,
+									allowGay: true,
+									allowFood: true,
+									allowAddictions: false,
+									inhabitant: false,
+									certainlyBeenInCryptosleep: false,
+									forceRedressWorldPawnIfFormerColonist: false,
+									worldPawnFactionDoesntMatter: false,
+									biocodeWeaponChance: 0,
+									extraPawnForExtraRelationChance: null,
+									relationWithExtraPawnChanceFactor: 0,
+									validatorPreGear: null,
+									validatorPostGear: null,
+									forcedTraits: null,
+									prohibitedTraits: null,
+									forcedXenotype: xenotype
+								);
+								
+								deliveryPawn = PawnGenerator.GeneratePawn(request);
+								if (deliveryPawn != null)
+								{
+									Log.Message($"Empire: Successfully generated delivery pawn with xenotype: {xenotype.label}");
+									break;
+								}
+							}
+							catch (Exception ex)
+							{
+								Log.Warning($"Empire: Failed to generate pawn with xenotype {xenotype.label}: {ex.Message}");
+								continue;
+							}
+						}
+					}
+					
+					// If no xenotype worked, try a simple civilian request
+					if (deliveryPawn == null)
+					{
+						Log.Warning("Empire: Failed to generate pawn with allowed xenotypes, trying simple civilian request");
+						deliveryPawn = PawnGenerator.GeneratePawn(FCPawnGenerator.SimpleDeliveryRequest());
+					}
+					
+					// If still no pawn, fall back to animals (like wolves)
+					if (deliveryPawn == null)
+					{
+						Log.Warning("Empire: Failed to generate human pawn, falling back to animals");
+						var availableAnimals = DefDatabase<PawnKindDef>.AllDefsListForReading
+							.Where(def => def.race.race.Animal && 
+										def.RaceProps.trainability != null && 
+										def.RaceProps.trainability.intelligenceOrder >= TrainabilityDefOf.Intermediate.intelligenceOrder &&
+										def.combatPower > 30f && // Combat-capable animals
+										!def.race.tradeTags.NullOrEmpty() &&
+										!def.race.tradeTags.Contains("AnimalMonster") &&
+										!def.race.tradeTags.Contains("AnimalGenetic"))
+							.OrderByDescending(def => def.combatPower)
+							.Take(5)
+							.ToList();
 
-				pawns.Add(pawn);
+						if (availableAnimals.Any())
+						{
+							var animalRequest = FCPawnGenerator.AnimalRequest(availableAnimals.RandomElement());
+							deliveryPawn = PawnGenerator.GeneratePawn(animalRequest);
+						}
+					}
+					
+					if (deliveryPawn == null)
+					{
+						Log.Error("Empire: Could not generate any pawn for delivery, skipping item");
+						evt.goods.RemoveAt(0); // Remove the item we can't deliver
+						continue;
+					}
+
+					Thing next = evt.goods.First();
+
+					if (deliveryPawn.carryTracker.innerContainer.TryAdd(next))
+					{
+						evt.goods.Remove(next);
+					}
+
+					pawns.Add(deliveryPawn);
+				}
+				catch (Exception ex)
+				{
+					Log.Error($"Empire: Error generating pawn for delivery: {ex.Message}");
+					evt.goods.RemoveAt(0); // Remove the problematic item
+				}
 			}
+			
+			if (attempts >= maxAttempts)
+			{
+				Log.Warning("Empire: Reached maximum attempts for generating delivery pawns, some items may not be delivered");
+			}
+			
+			// Always add at least one guard animal for protection, plus extra if caravan is small
+			Log.Message("Empire: Adding guard animals for delivery caravan protection");
+			
+			// Add extra capable pawns using allowed xenotypes if caravan is small
+			if (pawns.Count < 3)
+			{
+				int extraPawnsNeeded = 3 - pawns.Count;
+				for (int i = 0; i < extraPawnsNeeded; i++)
+				{
+					try
+					{
+						Pawn extraPawn = null;
+						
+						// Try allowed xenotypes first
+						if (factionFC?.xenotypeFilter?.AllowedXenotypes?.Any() == true)
+						{
+							// Randomly select from allowed xenotypes to get variety
+							var availableXenotypes = factionFC.xenotypeFilter.AllowedXenotypes.ToList();
+							var shuffledXenotypes = availableXenotypes.OrderBy(x => Rand.Value).ToList();
+							
+							foreach (var xenotype in shuffledXenotypes)
+							{
+								try
+								{
+									var request = new PawnGenerationRequest(
+										kind: PawnKindDefOf.Colonist,
+										faction: FactionColonies.getPlayerColonyFaction(),
+										context: PawnGenerationContext.NonPlayer,
+										tile: -1,
+										forceGenerateNewPawn: false,
+										allowDead: false,
+										allowDowned: false,
+										canGeneratePawnRelations: true,
+										mustBeCapableOfViolence: false, // Always allow non-violent xenotypes
+										colonistRelationChanceFactor: 0,
+										forceAddFreeWarmLayerIfNeeded: false,
+										allowGay: true,
+										allowFood: true,
+										allowAddictions: false,
+										inhabitant: false,
+										certainlyBeenInCryptosleep: false,
+										forceRedressWorldPawnIfFormerColonist: false,
+										worldPawnFactionDoesntMatter: false,
+										biocodeWeaponChance: 0,
+										extraPawnForExtraRelationChance: null,
+										relationWithExtraPawnChanceFactor: 0,
+										validatorPreGear: null,
+										validatorPostGear: null,
+										forcedTraits: null,
+										prohibitedTraits: null,
+										forcedXenotype: xenotype
+									);
+									extraPawn = PawnGenerator.GeneratePawn(request);
+									if (extraPawn != null) break;
+								}
+								catch { continue; }
+							}
+						}
+						
+						// Fallback to simple request
+						if (extraPawn == null)
+						{
+							extraPawn = PawnGenerator.GeneratePawn(FCPawnGenerator.SimpleDeliveryRequest());
+						}
+						
+						if (extraPawn != null)
+						{
+							pawns.Add(extraPawn);
+						}
+					}
+					catch (Exception ex)
+					{
+						Log.Warning($"Empire: Failed to spawn extra pawn: {ex.Message}");
+					}
+				}
+			}
+			
+			// Add guard animals (like wolves) for protection - always add at least 2
+			var guardAnimals = DefDatabase<PawnKindDef>.AllDefsListForReading
+				.Where(def => def.race.race.Animal && 
+							def.RaceProps.trainability != null && 
+							def.RaceProps.trainability.intelligenceOrder >= TrainabilityDefOf.Intermediate.intelligenceOrder &&
+							def.race.race.predator &&
+							def.combatPower > 50f && // Strong combat animals
+							!def.race.tradeTags.NullOrEmpty() &&
+							!def.race.tradeTags.Contains("AnimalMonster") &&
+							!def.race.tradeTags.Contains("AnimalGenetic") &&
+							!def.label.ToLower().Contains("bear")) // Exclude bears
+				.OrderByDescending(def => def.combatPower)
+				.Take(5); // Take more options to ensure we can get 2 guards
+
+			// Log available guard animals for debugging
+			var availableGuardAnimals = guardAnimals.ToList();
+			if (availableGuardAnimals.Any())
+			{
+				Log.Message($"Empire: Available guard animals: {string.Join(", ", availableGuardAnimals.Select(a => $"{a.label} (Combat: {a.combatPower:F0})"))}");
+			}
+
+			int guardsAdded = 0;
+			foreach (var guardAnimal in guardAnimals)
+			{
+				try
+				{
+					Pawn guard = PawnGenerator.GeneratePawn(FCPawnGenerator.AnimalRequest(guardAnimal));
+					if (guard != null)
+					{
+						securityGuards.Add(guard);
+						guardsAdded++;
+						Log.Message($"Empire: Added guard animal: {guardAnimal.label} (Combat Power: {guardAnimal.combatPower:F0})");
+						if (guardsAdded >= 2) break; // Always add at least 2 guards
+					}
+				}
+				catch (Exception ex)
+				{
+					Log.Warning($"Empire: Failed to spawn security guard {guardAnimal.label}: {ex.Message}");
+				}
+			}
+
+			// Combine all pawns
+			pawns.AddRange(securityGuards);
 
 			PawnsArrivalModeWorker_EdgeWalkIn pawnsArrivalModeWorker = new PawnsArrivalModeWorker_EdgeWalkIn();
 			IncidentParms parms = StorytellerUtility.DefaultParmsNow(IncidentCategoryDefOf.Misc, playerHomeMap);
@@ -163,7 +402,32 @@ namespace FactionColonies.util
 			RCellFinder.TryFindRandomPawnEntryCell(out parms.spawnCenter, playerHomeMap, CellFinder.EdgeRoadChance_Friendly);
 
 			pawnsArrivalModeWorker.Arrive(pawns, parms);
-			LordMaker.MakeNewLord(FCPawnGenerator.WorkerOrMilitaryRequest().Faction, new LordJob_DeliverSupplies(parms.spawnCenter), playerHomeMap, pawns);
+			
+			// Create the lord and ensure all pawns (including animals) are properly assigned
+			var lord = LordMaker.MakeNewLord(FCPawnGenerator.WorkerOrMilitaryRequest().Faction, new LordJob_DeliverSupplies(parms.spawnCenter), playerHomeMap, pawns);
+			
+			// Ensure all guard animals are properly assigned to the lord and will follow the caravan
+			foreach (var guard in securityGuards)
+			{
+				if (guard != null && guard.Map == playerHomeMap)
+				{
+					// Make sure the animal is assigned to the lord
+					if (guard.GetLord() != lord)
+					{
+						lord.AddPawn(guard);
+					}
+					
+					// Ensure the animal will leave with the caravan by setting it to follow a human pawn
+					if (guard.mindState != null)
+					{
+						var humanPawn = lord.ownedPawns.FirstOrDefault(p => !p.RaceProps.Animal);
+						if (humanPawn != null)
+						{
+							guard.mindState.duty = new PawnDuty(DutyDefOf.Follow, humanPawn);
+						}
+					}
+				}
+			}
 
 		}
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using Verse;
@@ -54,26 +55,41 @@ namespace FactionColonies
 
         public void checkMilitaryUtilForErrors()
         {
-            if (blankUnit == null)
-                blankUnit = new MilUnitFC(true);
-            //Log.Message("checking for errors" + Find.TickManager.TicksGame);
-            foreach (MilSquadFC squad in squads)
+            try
             {
-                bool changed = false;
-                for (int count = 0; count < 30; count++)
+                if (blankUnit == null)
                 {
-                    if (squad.units[count] != null &&
-                        (units.Contains(squad.units[count]) || squad.units[count] == blankUnit)) continue;
-                    squad.units[count] = blankUnit;
-                    changed = true;
+                    blankUnit = new MilUnitFC(true);
                 }
+                
+                if (squads == null) return;
+                
+                //Log.Message("checking for errors" + Find.TickManager.TicksGame);
+                foreach (MilSquadFC squad in squads)
+                {
+                    if (squad?.units == null) continue;
+                    
+                    bool changed = false;
+                    for (int count = 0; count < 30 && count < squad.units.Count; count++)
+                    {
+                        if (squad.units[count] != null &&
+                            (units.Contains(squad.units[count]) || squad.units[count] == blankUnit)) continue;
+                        squad.units[count] = blankUnit;
+                        changed = true;
+                    }
 
-                if (!changed) continue;
-                foreach (var squadMerc in mercenarySquads.Where(squadMerc =>
-                    squadMerc.outfit != null && squadMerc.outfit == squad))
-                {
-                    squadMerc.OutfitSquad(squad);
+                    if (!changed) continue;
+                    foreach (var squadMerc in mercenarySquads.Where(squadMerc =>
+                        squadMerc.outfit != null && squadMerc.outfit == squad))
+                    {
+                        squadMerc.OutfitSquad(squad);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Empire: Error in checkMilitaryUtilForErrors: {ex.Message}");
+                return;
             }
 
             foreach (MercenarySquadFC squad in mercenarySquads)

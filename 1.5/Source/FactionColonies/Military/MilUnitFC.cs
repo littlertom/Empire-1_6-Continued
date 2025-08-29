@@ -33,8 +33,36 @@ namespace FactionColonies
             isBlank = blank;
             equipmentTotalCost = 0;
 
-            pawnKind = FactionColonies.getPlayerColonyFaction()?.RandomPawnKind() ?? DefDatabase<FactionDef>.GetNamed("PColony").pawnGroupMakers.RandomElement().options.RandomElement().kind;
-            generateDefaultPawn();
+            try
+            {
+                var playerFaction = FactionColonies.getPlayerColonyFaction();
+                if (playerFaction != null && playerFaction.def.pawnGroupMakers.Any() && 
+                    playerFaction.def.pawnGroupMakers.Any(pgm => pgm.options?.Any() == true))
+                {
+                    pawnKind = playerFaction.RandomPawnKind();
+                }
+                else
+                {
+                    // Fallback to PColony faction
+                    var pColonyDef = DefDatabase<FactionDef>.GetNamed("PColony");
+                    if (pColonyDef?.pawnGroupMakers?.Any(pgm => pgm.options?.Any() == true) == true)
+                    {
+                        pawnKind = pColonyDef.pawnGroupMakers.RandomElement().options.RandomElement().kind;
+                    }
+                    else
+                    {
+                        // Ultimate fallback to any colonist pawn kind
+                        pawnKind = PawnKindDefOf.Colonist;
+                    }
+                }
+                generateDefaultPawn();
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Empire: Error creating MilUnitFC: {ex.Message}");
+                pawnKind = PawnKindDefOf.Colonist;
+                generateDefaultPawn();
+            }
         }
 
         public string GetUniqueLoadID()

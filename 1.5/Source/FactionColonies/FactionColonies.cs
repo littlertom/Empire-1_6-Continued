@@ -35,7 +35,12 @@ namespace FactionColonies
             FactionFC factionFC = Find.World.GetComponent<FactionFC>();
             PatchNoteSettings patchNoteSettings = LoadedModManager.GetMod<PatchNoteMod>().GetSettings<PatchNoteSettings>();
 
-            Log.Message("Updating Empire to Latest Version");
+            // Only log once when first setting up
+            if (!factionFC.updateProcessed)
+            {
+                Log.Message("Updating Empire to Latest Version");
+                factionFC.updateProcessed = true;
+            }
             //NEW PLACE FOR UPDATE VERSIONS
 
             //I think this does things necessary for SOS so I'm gonna keep it
@@ -51,15 +56,24 @@ namespace FactionColonies
 
                 factionFC.capitalPlanet = Find.World.info.name;
 
+                if (!factionFC.updateProcessed)
+                {
+                    Log.Message("Resetting faction leaders");
+                    factionFC.updateProcessed = true;
+                }
                 SoS2HarmonyPatches.ResetFactionLeaders();
             }
 
-            Log.Message("Empire - Testing for traits with no tie");
-            verifyTraits();
+            // Only run verification once
+            if (!factionFC.updateProcessed)
+            {
+                Log.Message("Empire - Testing for traits with no tie");
+                verifyTraits();
+            
+                MessagePlayerAboutConfigErrors(factionFC);
 
-            MessagePlayerAboutConfigErrors(factionFC);
-
-            Log.Message("Empire - Testing for update change");
+                Log.Message("Empire - Testing for update change");
+            }
 
             if (Settings().updateVersion < 0.370)
             {

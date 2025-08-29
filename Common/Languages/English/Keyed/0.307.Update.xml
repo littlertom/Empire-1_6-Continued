@@ -44,6 +44,9 @@
 <CurrentResearchLevel>Your current tech level is {0}. To reach the next tech level you must research {1}</CurrentResearchLevel>
 <AllowedRaces>Allowed Races</AllowedRaces>
 <CannotHaveLessThanOneRace>Cannot have less than one race in your faction</CannotHaveLessThanOneRace>
+<AllowedXenotypes>Allowed Xenotypes</AllowedXenotypes>
+<CannotHaveLessThanOneXenotype>Cannot have less than one xenotype in your faction</CannotHaveLessThanOneXenotype>
+<SecurityGuardsIncluded>Security guards will be provided for non-violent xenotypes</SecurityGuardsIncluded>
 <SettlementNotBeingAttacked>Settlement is not under attack</SettlementNotBeingAttacked>
 <MedievalTechOnly>Medieval Tech Only</MedievalTechOnly>
 <ForeignMilitarySwitch>The military forces of {0} have been sent to defend {1}. They have an effective force of {2}</ForeignMilitarySwitch>

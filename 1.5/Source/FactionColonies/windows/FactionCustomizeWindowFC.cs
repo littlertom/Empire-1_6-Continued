@@ -206,37 +206,46 @@ namespace FactionColonies
                 Find.WindowStack.Add(menu);
             }
 
-            if (Widgets.ButtonTextSubtle(buttonAllowedRaces, "AllowedRaces".Translate()))
+            if (Widgets.ButtonTextSubtle(buttonAllowedRaces, "AllowedXenotypes".Translate()))
             {
                 List<FloatMenuOption> list = new List<FloatMenuOption>
                 {
-                    new FloatMenuOption("Enable All", delegate { faction.resetRaceFilter(); })
+                    new FloatMenuOption("Enable All", delegate { faction.resetXenotypeFilter(); })
                 };
-                List<string> races = new List<string>();
-                foreach (PawnKindDef def in DefDatabase<PawnKindDef>.AllDefsListForReading.Where(def => def.IsHumanlikeWithLabelRace() && !races.Contains(def.race.label)))
+                List<string> xenotypes = new List<string>();
+                foreach (XenotypeDef def in DefDatabase<XenotypeDef>.AllDefsListForReading.Where(def => def.IsXenotypeWithLabel() && !xenotypes.Contains(def.label)))
                 {
-                    if (def.race.label == "Human" && def.LabelCap != "Colonist") continue;
-                    races.Add(def.race.label);
+                    xenotypes.Add(def.label);
+                    string statusText = faction.xenotypeFilter.Allows(def) ? "Allowed" : "Disallowed";
+                    
+                    // Add security guard info for xenotypes that need it
+                    var securityGuards = faction.xenotypeFilter.GetSecurityGuardsForXenotype(def);
+                    string securityInfo = "";
+                    if (securityGuards.Any())
+                    {
+                        securityInfo = " (Security: " + string.Join(", ", securityGuards.Select(g => g.label.CapitalizeFirst())) + ")";
+                    }
+                    
                     list.Add(new FloatMenuOption(
-                        def.race.label.CapitalizeFirst() + " - Allowed: " + faction.raceFilter.Allows(def.race),
+                        def.label.CapitalizeFirst() + " - " + statusText + securityInfo,
                         delegate
                         {
-                            if (faction.raceFilter.AllowedThingDefs.Count() == 1 && faction.raceFilter.Allows(def.race))
+                            if (faction.xenotypeFilter.AllowedXenotypeCount == 1 && faction.xenotypeFilter.Allows(def))
                             {
-                                Messages.Message("CannotHaveLessThanOneRace".Translate(), MessageTypeDefOf.RejectInput);
+                                Messages.Message("CannotHaveLessThanOneXenotype".Translate(), MessageTypeDefOf.RejectInput);
                             }
-                            else if (faction.raceFilter.AllowedThingDefs.Count() > 0)
+                            else if (faction.xenotypeFilter.AllowedXenotypeCount > 0)
                             {
-                                if (!faction.raceFilter.SetAllow(def.race, !faction.raceFilter.Allows(def.race)))
+                                if (!faction.xenotypeFilter.SetAllow(def, !faction.xenotypeFilter.Allows(def)))
                                 {
                                     Messages.Message(new Message("InvalidFaction".Translate(), MessageTypeDefOf.RejectInput));
                                 }
                             }
                             else
                             {
-                                Log.Message("Empire Error - Zero races available for faction - Report this");
-                                Log.Message("Resetting race filter");
-                                faction.resetRaceFilter();
+                                Log.Message("Empire Error - Zero xenotypes available for faction - Report this");
+                                Log.Message("Resetting xenotype filter");
+                                faction.resetXenotypeFilter();
                             }
                         }));
                 }

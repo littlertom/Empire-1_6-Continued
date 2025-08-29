@@ -48,6 +48,7 @@ namespace FactionColonies
         public Map taxMap;
         public TechLevel techLevel = TechLevel.Undefined;
         private bool firstTick = true;
+        public bool updateProcessed = false;
         public Texture2D factionIcon = TexLoad.factionIcons[0];
         public string factionIconPath = TexLoad.factionIcons[0].name;
 
@@ -68,7 +69,8 @@ namespace FactionColonies
         public List<FCPolicy> policies = new List<FCPolicy>();
         public List<FCTraitEffectDef> traits = new List<FCTraitEffectDef>();
         public List<int> militaryTargets = new List<int>();
-        public RaceThingFilter raceFilter;
+        public RaceThingFilter raceFilter; // Deprecated, keeping for backwards compatibility
+        public XenotypeFilter xenotypeFilter;
 
         //Faction resources
         public ResourceFC food = new ResourceFC(0, ResourceType.Food);
@@ -253,6 +255,9 @@ namespace FactionColonies
             //Faction Def
             Scribe_Deep.Look(ref factionDef, "factionDef");
             Scribe_Deep.Look(ref raceFilter, "raceFilter");
+            Scribe_Deep.Look(ref xenotypeFilter, "xenotypeFilter");
+            Scribe_Values.Look(ref updateProcessed, "updateProcessed", false);
+            Scribe_Deep.Look(ref xenotypeFilter, "xenotypeFilter");
 
             //Update
             Scribe_Values.Look(ref nextSettlementFCID, "nextSettlementFCID");
@@ -323,6 +328,14 @@ namespace FactionColonies
                 raceFilter = new RaceThingFilter(this);
             }
             raceFilter.FinalizeInit(this);
+
+            // Initialize xenotype filter
+            if (xenotypeFilter == null)
+            {
+                Log.Message("Null xenotypeFilter detected - Creating new one");
+                xenotypeFilter = new XenotypeFilter(this);
+            }
+            xenotypeFilter.FinalizeInit(this);
         }
 
         [DebugAction("Empire", "Send Pawn To Settlement", allowedGameStates = AllowedGameStates.PlayingOnMap)]
@@ -790,6 +803,7 @@ namespace FactionColonies
                 factionDef.techLevel = TechLevel.Medieval;
                 Log.Message("Medieval");
                 raceFilter.FinalizeInit(this);
+                xenotypeFilter.FinalizeInit(this);
             }
             else
             {
@@ -798,6 +812,7 @@ namespace FactionColonies
                     Log.Message("Neolithic");
                     techLevel = TechLevel.Neolithic;
                     raceFilter.FinalizeInit(this);
+                    xenotypeFilter.FinalizeInit(this);
                 }
             }
 
@@ -987,6 +1002,12 @@ namespace FactionColonies
         {
             raceFilter = new RaceThingFilter(this);
             raceFilter.FinalizeInit(this);
+        }
+
+        public void resetXenotypeFilter()
+        {
+            xenotypeFilter = new XenotypeFilter(this);
+            xenotypeFilter.FinalizeInit(this);
         }
 
         public void updateAverages()
